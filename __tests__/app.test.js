@@ -21,3 +21,15 @@ describe('ALL invalid endpoint', () => {
         expect(body.msg).toBe('endpoint not found');
     });
 });
+
+describe('GET /api', () => {
+    it('200: should return details of endpoints', async () => {
+        const endpoints = require('../endpoints.json');
+
+        const { body } = await request(app)
+        .get('/api')
+        .expect(200);
+
+        expect(body).toEqual(endpoints);
+    });
+});
