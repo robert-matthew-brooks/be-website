@@ -33,3 +33,24 @@ describe('GET /api', () => {
         expect(body).toEqual(endpoints);
     });
 });
+
+describe('GET /api/projects', () => {
+    it('200: should return an array of projects with correct properties', async () => {
+        const expectedObject = {
+            project_id: expect.any(Number),
+            created_at: expect.any(String),
+            title: expect.any(String),
+            img_url: expect.any(String),
+            video_url: expect.any(String),
+            body_url: expect.any(String),
+        };
+
+        const { body } = await request(app)
+        .get('/api/projects')
+        .expect(200);
+
+        for(const project of body) {
+            expect(project).toMatchObject(expectedObject);
+        }
+    });
+});
