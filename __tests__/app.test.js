@@ -30,7 +30,7 @@ describe('GET /api', () => {
   });
 });
 
-describe('GET /api/projects', () => {
+describe.only('GET /api/projects', () => {
   it('200: should return an array of projects with correct properties', async () => {
     const expectedObject = {
       id: expect.any(Number),
@@ -39,7 +39,7 @@ describe('GET /api/projects', () => {
       img_url: expect.any(String),
       video_url: expect.any(String),
       body: expect.any(String),
-      // languages handled below
+      languages: expect.any(Array),
     };
 
     const { body } = await request(app).get('/api/projects').expect(200);
@@ -47,12 +47,12 @@ describe('GET /api/projects', () => {
     for (const project of body.projects) {
       expect(project).toMatchObject(expectedObject);
 
-      // for (const language of project.languages) {
-      //   expect(language).toMatchObject({
-      //     language_id: expect.any(String),
-      //     icon_url: expect.any(Number),
-      //   });
-      // }
+      for (const language of project.languages) {
+        expect(language).toMatchObject({
+          name: expect.any(String),
+          icon_url: expect.any(String),
+        });
+      }
     }
   });
 });

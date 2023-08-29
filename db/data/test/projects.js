@@ -137,7 +137,7 @@ const projectData = [
     img_url: 'some_image_20.jpg',
     video_url: 'some_url.com/video_20',
     body: 'some text describing project 20',
-    language_ids: [8, 9, 10],
+    language_ids: [],
   },
 ];
 
