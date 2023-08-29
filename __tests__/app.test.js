@@ -15,7 +15,6 @@ afterAll(() => {
 describe('ALL invalid endpoint', () => {
   it('404: should return correct error message', async () => {
     const { body } = await request(app).get('/api/not_an_endpoint').expect(404);
-
     expect(body.msg).toBe('endpoint not found');
   });
 });
@@ -23,9 +22,7 @@ describe('ALL invalid endpoint', () => {
 describe('GET /api', () => {
   it('200: should return details of endpoints', async () => {
     const endpoints = require('../endpoints.json');
-
     const { body } = await request(app).get('/api').expect(200);
-
     expect(body).toEqual(endpoints);
   });
 });
