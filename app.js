@@ -1,7 +1,7 @@
 const app = require('express')();
 const cors = require('cors');
-const apiController = require('./controllers/api-controller.js');
-const projectsController = require('./controllers/projects-controller.js');
+const apiController = require('./controllers/api-controller');
+const projectsController = require('./controllers/projects-controller');
 
 const allowedUrls = ['http://localhost:5173'];
 

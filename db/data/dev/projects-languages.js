@@ -1,4 +1,4 @@
-const { projectData } = require('./projects.js');
+const { projectData } = require('./projects');
 
 const projectLanguageData = [];
 

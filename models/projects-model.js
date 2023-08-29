@@ -1,4 +1,4 @@
-const db = require('../db/connection.js');
+const db = require('../db/connection');
 
 async function getProjects() {
   const { rows } = await db.query('SELECT * FROM projects;');

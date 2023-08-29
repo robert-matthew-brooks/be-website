@@ -1,5 +1,5 @@
-const { projectData } = require('./projects.js');
-const { languageData } = require('./languages.js');
-const { projectLanguageData } = require('./projects-languages.js');
+const { projectData } = require('./projects');
+const { languageData } = require('./languages');
+const { projectLanguageData } = require('./projects-languages');
 
 module.exports = { projectData, languageData, projectLanguageData };

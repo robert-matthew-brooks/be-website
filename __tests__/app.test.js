@@ -1,8 +1,8 @@
 const request = require('supertest');
-const app = require('../app.js');
-const db = require('../db/connection.js');
-const seed = require('../db/seed.js');
-const testData = require('../db/data/test/index.js');
+const app = require('../app');
+const db = require('../db/connection');
+const seed = require('../db/seed');
+const testData = require('../db/data/test');
 
 beforeEach(async () => {
   await seed(testData);

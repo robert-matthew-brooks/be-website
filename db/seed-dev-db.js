@@ -1,5 +1,5 @@
-const db = require('./connection.js');
-const seed = require('./seed.js');
+const db = require('./connection');
+const seed = require('./seed');
 const data = require('./data/dev');
 
 async function runSeed() {

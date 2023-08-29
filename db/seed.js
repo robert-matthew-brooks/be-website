@@ -1,5 +1,5 @@
-const db = require('./connection.js');
 const format = require('pg-format');
+const db = require('./connection');
 
 // #1:
 // create databases first with create-dbs.sql
