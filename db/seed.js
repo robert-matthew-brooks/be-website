@@ -16,36 +16,41 @@ const format = require('pg-format');
 // `$ npm run seed-dev-db`
 
 async function seed({ projectData }) {
-    await db.query('DROP TABLE IF EXISTS projects;');
+  await db.query('DROP TABLE IF EXISTS projects;');
 
-    await db.query(`
-        CREATE TABLE projects (
-            project_id SERIAL PRIMARY KEY,
-            created_at TIMESTAMP DEFAULT NOW(),
-            title VARCHAR,
-            img_url VARCHAR,
-            video_url VARCHAR,
-            body_url VARCHAR
-        );
-    `);
+  // CREATE tables
 
-    const insertProjectsQueryStr = format(`
+  await db.query(`
+    CREATE TABLE projects (
+      project_id SERIAL PRIMARY KEY,
+      created_at TIMESTAMP DEFAULT NOW(),
+      title VARCHAR,
+      img_url VARCHAR,
+      video_url VARCHAR,
+      body VARCHAR
+    );
+  `);
+
+  // INSERT INTO tables
+
+  const insertProjectsQueryStr = format(
+    `
         INSERT INTO projects (
             title,
             img_url,
             video_url,
-            body_url
+            body
         )
         VALUES %L;`,
-        projectData.map(project => [
-            project.title,
-            project.img_url,
-            project.video_url,
-            project.body_url
-        ])
-    );
+    projectData.map((project) => [
+      project.title,
+      project.img_url,
+      project.video_url,
+      project.body,
+    ])
+  );
 
-    await db.query(insertProjectsQueryStr);
+  await db.query(insertProjectsQueryStr);
 }
 
 module.exports = seed;
