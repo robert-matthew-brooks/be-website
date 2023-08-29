@@ -33,7 +33,7 @@ describe('GET /api', () => {
 describe('GET /api/projects', () => {
   it('200: should return an array of projects with correct properties', async () => {
     const expectedObject = {
-      project_id: expect.any(Number),
+      id: expect.any(Number),
       created_at: expect.any(String),
       title: expect.any(String),
       img_url: expect.any(String),

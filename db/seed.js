@@ -24,7 +24,7 @@ async function seed({ projectData, languageData, projectLanguageData }) {
 
   await db.query(`
     CREATE TABLE projects (
-      project_id SERIAL PRIMARY KEY,
+      id SERIAL PRIMARY KEY,
       created_at TIMESTAMP DEFAULT NOW(),
       title VARCHAR,
       img_url VARCHAR,
@@ -35,7 +35,7 @@ async function seed({ projectData, languageData, projectLanguageData }) {
 
   await db.query(`
     CREATE TABLE languages (
-      language_id SERIAL PRIMARY KEY,
+      id SERIAL PRIMARY KEY,
       name VARCHAR,
       icon_url VARCHAR
     );
@@ -43,9 +43,9 @@ async function seed({ projectData, languageData, projectLanguageData }) {
 
   await db.query(`
     CREATE TABLE projects_languages (
-      project_language_id SERIAL PRIMARY KEY,
-      project_id INT REFERENCES projects(project_id),
-      language_id INT REFERENCES languages(language_id)
+      id SERIAL PRIMARY KEY,
+      project_id INT REFERENCES projects(id),
+      language_id INT REFERENCES languages(id)
     );
   `);
 

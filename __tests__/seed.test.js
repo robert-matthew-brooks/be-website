@@ -18,7 +18,7 @@ describe('projects table', () => {
 
   it('should return projects with correct properties', async () => {
     const expectedObject = {
-      project_id: expect.any(Number),
+      id: expect.any(Number),
       created_at: expect.any(Object),
       title: expect.any(String),
       img_url: expect.any(String),
@@ -42,7 +42,7 @@ describe('languages table', () => {
 
   it('should return languages with correct properties', async () => {
     const expectedObject = {
-      language_id: expect.any(Number),
+      id: expect.any(Number),
       name: expect.any(String),
       icon_url: expect.any(String),
     };
@@ -63,7 +63,7 @@ describe('projects-languages junction table', () => {
 
   it('should return a junction data with correct properties', async () => {
     const expectedObject = {
-      project_language_id: expect.any(Number),
+      id: expect.any(Number),
       project_id: expect.any(Number),
       language_id: expect.any(Number),
     };
