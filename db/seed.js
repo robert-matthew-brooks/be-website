@@ -43,7 +43,7 @@ async function seed({ projectData, languageData, projectLanguageData }) {
 
   await db.query(`
     CREATE TABLE projects_languages (
-      projects_languages_id SERIAL PRIMARY KEY,
+      project_language_id SERIAL PRIMARY KEY,
       project_id INT REFERENCES projects(project_id),
       language_id INT REFERENCES languages(language_id)
     );
