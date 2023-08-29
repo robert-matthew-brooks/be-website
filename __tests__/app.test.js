@@ -39,12 +39,20 @@ describe('GET /api/projects', () => {
       img_url: expect.any(String),
       video_url: expect.any(String),
       body: expect.any(String),
+      // languages
     };
 
     const { body } = await request(app).get('/api/projects').expect(200);
 
     for (const project of body) {
       expect(project).toMatchObject(expectedObject);
+
+      for (const language of project.languages) {
+        expect(language).toMatchObject({
+          language_id: expect.any(String),
+          icon_url: expect.any(Number),
+        });
+      }
     }
   });
 });
