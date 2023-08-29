@@ -46,6 +46,7 @@ describe.only('GET /api/projects', () => {
 
       for (const language of project.languages) {
         expect(language).toMatchObject({
+          id: expect.any(Number),
           name: expect.any(String),
           icon_url: expect.any(String),
         });

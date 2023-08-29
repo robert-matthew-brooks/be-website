@@ -9,12 +9,7 @@ async function getProjects() {
       p.img_url,
       p.video_url,
       p.body,
-      ARRAY_AGG(
-        JSON_BUILD_OBJECT(
-          'name', l.name,
-          'icon_url', l.icon_url
-        )
-      ) AS languages
+      JSON_AGG(l) AS languages
     FROM projects p
     INNER JOIN projects_languages pl
     ON p.id = pl.project_id
