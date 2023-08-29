@@ -1,6 +1,12 @@
 const { Pool } = require('pg');
+const dotenv = require('dotenv');
 
-// TODO: use DOTENV to allow database to change to DEVELOPMENT or PRODUCTION
-// the connection pool is only currently using the TEST database
+const ENV = process.env.NODE_ENV || 'development';
 
-module.exports = new Pool({database: 'be_website_test'});
+dotenv.config({ path: `${__dirname}/../.env.${ENV}` });
+
+if (!process.env.PGDATABASE) {
+  throw new Error('Database not found');
+}
+
+module.exports = new Pool();
