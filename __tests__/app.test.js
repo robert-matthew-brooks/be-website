@@ -83,6 +83,7 @@ describe('GET /api/languages', () => {
       id: expect.any(Number),
       name: expect.any(String),
       icon_url: expect.any(String),
+      project_count: expect.any(Number),
     };
     const { body } = await request(app).get('/api/languages').expect(200);
 
@@ -93,6 +94,7 @@ describe('GET /api/languages', () => {
 
   it('200: should provide all (10) results', async () => {
     const { body } = await request(app).get('/api/languages').expect(200);
+    console.log(body.languages);
     expect(body.languages).toHaveLength(10);
   });
 });

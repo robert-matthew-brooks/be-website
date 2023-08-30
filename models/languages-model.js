@@ -2,8 +2,18 @@ const db = require('../db/connection');
 
 async function getLanguages() {
   const { rows: languages } = await db.query(`
-    SELECT *
-    FROM languages;
+    SELECT
+      l.id,
+      l.name,
+      l.icon_url,
+      COUNT(*)::int AS project_count
+    FROM languages l
+    INNER JOIN projects_languages pl
+    ON l.id = pl.language_id
+    GROUP BY l.id
+    ORDER BY
+      project_count DESC,
+      l.name ASC;
   `);
 
   return languages;
