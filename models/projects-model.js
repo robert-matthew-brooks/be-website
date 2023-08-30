@@ -5,15 +5,14 @@ const {
   rejectIfNotInTable,
 } = require('./validate');
 
-async function getProjects(language_id = '%', limit = 6, page = 1) {
+async function getProjects(language = '%', limit = 6, page = 1) {
   const validationTests = [
     rejectIfNotNumber({ limit, page }),
     rejectIfLessThan({ limit, page }, 1),
   ];
 
-  if (language_id !== '%') {
-    validationTests.push(rejectIfNotNumber({ language_id }));
-    validationTests.push(rejectIfNotInTable(language_id, 'id', 'languages'));
+  if (language !== '%') {
+    validationTests.push(rejectIfNotInTable(language, 'name', 'languages'));
   }
 
   await Promise.all(validationTests);
@@ -33,7 +32,7 @@ async function getProjects(language_id = '%', limit = 6, page = 1) {
     ON p.id = pl.project_id
     INNER JOIN languages l
     ON l.id = pl.language_id
-    WHERE pl.language_id::VARCHAR LIKE '${language_id}'
+    WHERE l.name LIKE '${language}'
     GROUP BY p.id
     ORDER BY ${orderBy}
     LIMIT ${limit} OFFSET ${offset};
@@ -48,7 +47,7 @@ async function getProjects(language_id = '%', limit = 6, page = 1) {
       ON p.id = pl.project_id
       INNER JOIN languages l
       ON l.id = pl.language_id
-      WHERE pl.language_id::VARCHAR LIKE '${language_id}'
+      WHERE l.name LIKE '${language}'
       GROUP BY p.id
     ) t;
   `);

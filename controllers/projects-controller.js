@@ -1,11 +1,11 @@
 const projectsModel = require('../models/projects-model');
 
 async function getProjects(req, res, next) {
-  const { language_id, limit, page } = req.query;
+  const { language, limit, page } = req.query;
 
   try {
     const { projects, project_count } = await projectsModel.getProjects(
-      language_id,
+      language,
       limit,
       page
     );
