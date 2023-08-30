@@ -1,5 +1,25 @@
 {
-    "GET /api": {
-      "description": "responds with a json object containing details of each endpoint"
+  "GET /api": {
+    "description": "returns a json object containing details of each endpoint"
+  },
+  "GET /api/projects": {
+    "description": "returns a paginated list of projects with details to populate the website portfolio list, and a total number of projects before pagination",
+    "examplResponse": {
+      "project_count": 1,
+      "projects": [
+        {
+          "id": 1,
+          "title": "Building A Website Backend",
+          "img_url": "https://images.pexels.com/photos/1117452/pexels-photo-1117452.jpeg",
+          "languages": [
+            {
+              "id": 1,
+              "name": "JavaScript",
+              "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+            }
+          ]
+        }
+      ]
     }
+  }
 }
