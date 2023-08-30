@@ -31,11 +31,8 @@ describe('GET /api/projects', () => {
   it('200: should return an array of projects with correct properties', async () => {
     const expectedObject = {
       id: expect.any(Number),
-      created_at: expect.any(String),
       title: expect.any(String),
       img_url: expect.any(String),
-      video_url: expect.any(String),
-      body: expect.any(String),
       languages: expect.any(Array),
     };
 

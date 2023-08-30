@@ -9,11 +9,8 @@ async function getProjects(limit = 6, p = 1) {
   const { rows: projects } = await db.query(`
     SELECT
       p.id,
-      p.created_at,
       p.title,
       p.img_url,
-      p.video_url,
-      p.body,
       JSON_AGG(l) AS languages
     FROM projects p
     INNER JOIN projects_languages pl
