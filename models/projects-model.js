@@ -6,6 +6,8 @@ const {
 } = require('./validate');
 
 async function getProjects(language = '%', limit = 6, page = 1) {
+  language = language.toLowerCase();
+
   const validationTests = [
     rejectIfNotNumber({ limit, page }),
     rejectIfLessThan({ limit, page }, 1),
@@ -32,7 +34,7 @@ async function getProjects(language = '%', limit = 6, page = 1) {
     ON p.id = pl.project_id
     INNER JOIN languages l
     ON l.id = pl.language_id
-    WHERE l.name LIKE '${language}'
+    WHERE LOWER(l.name) LIKE '${language}'
     GROUP BY p.id
     ORDER BY ${orderBy}
     LIMIT ${limit} OFFSET ${offset};
@@ -47,7 +49,7 @@ async function getProjects(language = '%', limit = 6, page = 1) {
       ON p.id = pl.project_id
       INNER JOIN languages l
       ON l.id = pl.language_id
-      WHERE l.name LIKE '${language}'
+      WHERE LOWER(l.name) LIKE '${language}'
       GROUP BY p.id
     ) t;
   `);
