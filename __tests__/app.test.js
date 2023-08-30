@@ -51,28 +51,64 @@ describe('GET /api/projects', () => {
     }
   });
 
-  it('200: should return 6 results by default', async () => {
-    const { body } = await request(app).get('/api/projects').expect(200);
-    expect(body.projects).toHaveLength(6);
+  describe('pagination', () => {
+    it('200: should return 6 results by default', async () => {
+      const { body } = await request(app).get('/api/projects').expect(200);
+      expect(body.projects).toHaveLength(6);
+    });
+
+    it('200: should return specified number of results', async () => {
+      const { body: results5 } = await request(app)
+        .get('/api/projects?limit=5')
+        .expect(200);
+      expect(results5.projects).toHaveLength(5);
+
+      const { body: results15 } = await request(app)
+        .get('/api/projects?limit=15')
+        .expect(200);
+      expect(results15.projects).toHaveLength(15);
+    });
   });
 
-  it('200: should return specified number of results', async () => {
-    const { body: results5 } = await request(app)
-      .get('/api/projects?limit=5')
-      .expect(200);
-    expect(results5.projects).toHaveLength(5);
+  describe('filtering', () => {
+    it('200: should filter by specified language_id', async () => {
+      const { body: results9 } = await request(app).get(
+        '/api/projects?language_id=9'
+      );
 
-    const { body: results15 } = await request(app)
-      .get('/api/projects?limit=15')
-      .expect(200);
-    expect(results15.projects).toHaveLength(15);
+      expect(results9.projects).toHaveLength(5);
+
+      for (const project of results9.projects) {
+        for (const language of project.languages) {
+          expect(language.id).toBe(9);
+        }
+      }
+    });
   });
 
   describe('error handling', () => {
-    it('500: should provide an error when projects table not found', async () => {
+    it('500: should return correct error message when projects table not found', async () => {
       await db.query('DROP TABLE projects CASCADE;');
       const { body } = await request(app).get('/api/projects').expect(500);
       expect(body.msg).toBe('undefined table');
+    });
+
+    // invalid limit
+
+    // invalid p
+
+    it('404: should return correct error message when language_id is not a number', async () => {
+      const { body } = await request(app)
+        .get('/api/projects?language_id=a')
+        .expect(400);
+      expect(body.msg).toBe('invalid language_id');
+    });
+
+    it('404: should return correct error message when language_id is not in table', async () => {
+      const { body } = await request(app)
+        .get('/api/projects?language_id=999')
+        .expect(404);
+      expect(body.msg).toBe('specified id not found in languages table');
     });
   });
 });
@@ -99,7 +135,7 @@ describe('GET /api/languages', () => {
   });
 
   describe('error handling', () => {
-    it('500: should provide an error when languages table not found', async () => {
+    it('500: should return correct error message when languages table not found', async () => {
       await db.query('DROP TABLE languages CASCADE;');
       const { body } = await request(app).get('/api/languages').expect(500);
       expect(body.msg).toBe('undefined table');

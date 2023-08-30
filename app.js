@@ -2,7 +2,11 @@ const app = require('express')();
 const cors = require('cors');
 const { getProjects } = require('./controllers/projects-controller');
 const { getLanguages } = require('./controllers/languages-controller');
-const { psqlErrorHandler, serverErrorHandler } = require('./error-handlers');
+const {
+  customErrorHandler,
+  psqlErrorHandler,
+  serverErrorHandler,
+} = require('./error-handlers');
 const endpoints = require('./endpoints.json');
 
 const allowedUrls = ['http://localhost:5173'];
@@ -44,6 +48,7 @@ app.all('*', (req, res, next) => {
   res.status(404).send({ msg: 'endpoint not found' });
 });
 
+app.use(customErrorHandler);
 app.use(psqlErrorHandler);
 app.use(serverErrorHandler);
 

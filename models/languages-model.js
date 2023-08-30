@@ -6,7 +6,7 @@ async function getLanguages() {
       l.id,
       l.name,
       l.icon_url,
-      COUNT(*)::int AS project_count
+      COUNT(*)::INT AS project_count
     FROM languages l
     INNER JOIN projects_languages pl
     ON l.id = pl.language_id

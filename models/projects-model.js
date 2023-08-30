@@ -1,7 +1,17 @@
 const db = require('../db/connection');
+const { rejectIfNotNumber, rejectIfNotInTable } = require('./validate');
 
-async function getProjects(limit = 6, p = 1) {
+async function getProjects(language_id = '%', limit = 6, p = 1) {
   // validate inputs
+  const validationTests = [];
+
+  if (language_id !== '%') {
+    validationTests.push(rejectIfNotNumber({ language_id }));
+    validationTests.push(rejectIfNotInTable(language_id, 'id', 'languages'));
+  }
+
+  await Promise.all(validationTests);
+
   const orderBy = 'created_at';
 
   const offset = limit * (p - 1);
@@ -17,6 +27,7 @@ async function getProjects(limit = 6, p = 1) {
     ON p.id = pl.project_id
     INNER JOIN languages l
     ON l.id = pl.language_id
+    WHERE pl.language_id::VARCHAR LIKE '${language_id}'
     GROUP BY p.id
     ORDER BY ${orderBy}
     LIMIT ${limit} OFFSET ${offset};
