@@ -69,8 +69,11 @@ describe('GET /api/projects', () => {
   });
 
   describe('error handling', () => {
-    // no projects found
-    // invalid limit
+    it('500: should provide an error when projects table not found', async () => {
+      await db.query('DROP TABLE projects CASCADE;');
+      const { body } = await request(app).get('/api/projects').expect(500);
+      expect(body.msg).toBe('undefined table');
+    });
   });
 });
 
@@ -82,6 +85,7 @@ describe('GET /api/languages', () => {
       icon_url: expect.any(String),
       project_count: expect.any(Number),
     };
+
     const { body } = await request(app).get('/api/languages').expect(200);
 
     for (const language of body.languages) {
@@ -91,7 +95,14 @@ describe('GET /api/languages', () => {
 
   it('200: should provide all (10) results', async () => {
     const { body } = await request(app).get('/api/languages').expect(200);
-    console.log(body.languages);
     expect(body.languages).toHaveLength(10);
+  });
+
+  describe('error handling', () => {
+    it('500: should provide an error when languages table not found', async () => {
+      await db.query('DROP TABLE languages CASCADE;');
+      const { body } = await request(app).get('/api/languages').expect(500);
+      expect(body.msg).toBe('undefined table');
+    });
   });
 });
