@@ -71,5 +71,8 @@ describe('GET /api/projects', () => {
     expect(results12.projects).toHaveLength(12);
   });
 
-  describe('error handling', () => {});
+  describe('error handling', () => {
+    // no projects found
+    // invalid limit
+  });
 });
