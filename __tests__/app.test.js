@@ -87,24 +87,44 @@ describe('GET /api/projects', () => {
   });
 
   describe('error handling', () => {
-    it('500: should return correct error message when projects table not found', async () => {
+    it('500: should return an error when projects table not found', async () => {
       await db.query('DROP TABLE projects CASCADE;');
       const { body } = await request(app).get('/api/projects').expect(500);
       expect(body.msg).toBe('undefined table');
     });
 
-    // invalid limit
+    it('400: should return correct error when limit is not a number', async () => {
+      const { body } = await request(app)
+        .get('/api/projects?limit=a')
+        .expect(400);
+      expect(body.msg).toBe('invalid limit');
+    });
 
-    // invalid p
+    it('400: should return correct error when limit is less than 1', async () => {
+      const { body } = await request(app)
+        .get('/api/projects?limit=0')
+        .expect(400);
+      expect(body.msg).toBe('invalid limit');
+    });
 
-    it('404: should return correct error message when language_id is not a number', async () => {
+    it('400: should return correct error when p is not a number', async () => {
+      const { body } = await request(app).get('/api/projects?p=a').expect(400);
+      expect(body.msg).toBe('invalid p');
+    });
+
+    it('400: should return correct error when p is less than 1', async () => {
+      const { body } = await request(app).get('/api/projects?p=0').expect(400);
+      expect(body.msg).toBe('invalid p');
+    });
+
+    it('404: should return an error when language_id is not a number', async () => {
       const { body } = await request(app)
         .get('/api/projects?language_id=a')
         .expect(400);
       expect(body.msg).toBe('invalid language_id');
     });
 
-    it('404: should return correct error message when language_id is not in table', async () => {
+    it('404: should return an error when language_id is not in table', async () => {
       const { body } = await request(app)
         .get('/api/projects?language_id=999')
         .expect(404);
@@ -135,7 +155,7 @@ describe('GET /api/languages', () => {
   });
 
   describe('error handling', () => {
-    it('500: should return correct error message when languages table not found', async () => {
+    it('500: should return an error when languages table not found', async () => {
       await db.query('DROP TABLE languages CASCADE;');
       const { body } = await request(app).get('/api/languages').expect(500);
       expect(body.msg).toBe('undefined table');

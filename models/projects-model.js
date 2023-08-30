@@ -1,9 +1,15 @@
 const db = require('../db/connection');
-const { rejectIfNotNumber, rejectIfNotInTable } = require('./validate');
+const {
+  rejectIfNotNumber,
+  rejectIfLessThan,
+  rejectIfNotInTable,
+} = require('./validate');
 
 async function getProjects(language_id = '%', limit = 6, p = 1) {
-  // validate inputs
-  const validationTests = [];
+  const validationTests = [
+    rejectIfNotNumber({ limit, p }),
+    rejectIfLessThan({ limit, p }, 1),
+  ];
 
   if (language_id !== '%') {
     validationTests.push(rejectIfNotNumber({ language_id }));

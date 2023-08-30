@@ -9,6 +9,14 @@ function rejectIfNotNumber(values) {
   }
 }
 
+function rejectIfLessThan(values, lowestValue) {
+  for (const key in values) {
+    if (values[key] < lowestValue) {
+      return Promise.reject({ status: 400, msg: `invalid ${key}` });
+    }
+  }
+}
+
 async function rejectIfNotInTable(value, column, table) {
   const queryStr = format(
     `SELECT *
@@ -29,4 +37,4 @@ async function rejectIfNotInTable(value, column, table) {
   }
 }
 
-module.exports = { rejectIfNotNumber, rejectIfNotInTable };
+module.exports = { rejectIfNotNumber, rejectIfLessThan, rejectIfNotInTable };
