@@ -21,13 +21,13 @@ async function rejectIfNotInTable(value, column, table) {
   const queryStr = format(
     `SELECT *
     FROM %s
-    WHERE %s = $1;
+    WHERE LOWER(%s) = $1;
     `,
     table,
     column
   );
 
-  const { rows } = await db.query(queryStr, [value]);
+  const { rows } = await db.query(queryStr, [value.toLowerCase()]);
 
   if (rows.length === 0) {
     return Promise.reject({

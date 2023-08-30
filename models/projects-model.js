@@ -34,8 +34,8 @@ async function getProjects(language = '%', limit = 6, page = 1) {
     ON p.id = pl.project_id
     INNER JOIN languages l
     ON l.id = pl.language_id
-    WHERE LOWER(l.name) LIKE '${language}'
     GROUP BY p.id
+    HAVING BOOL_OR(LOWER(l.name) LIKE '${language}')
     ORDER BY ${orderBy}
     LIMIT ${limit} OFFSET ${offset};
   `);

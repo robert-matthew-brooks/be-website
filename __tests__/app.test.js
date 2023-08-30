@@ -93,9 +93,11 @@ describe('GET /api/projects', () => {
       expect(results9.projects).toHaveLength(5);
 
       for (const project of results9.projects) {
+        let foundLanguage = false;
         for (const language of project.languages) {
-          expect(language.id).toBe(9);
+          if (language.id === 9) foundLanguage = true;
         }
+        expect(foundLanguage).toBeTruthy();
       }
     });
   });
