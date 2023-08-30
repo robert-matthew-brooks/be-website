@@ -3,7 +3,7 @@
     "description": "returns a json object containing details of each endpoint"
   },
   "GET /api/projects": {
-    "description": "returns a paginated list of projects with details to populate the website portfolio list, and a total number of projects before pagination",
+    "description": "returns a paginated array of projects with details to populate the website portfolio list, and a total number of projects before pagination",
     "examplResponse": {
       "project_count": 1,
       "projects": [
@@ -18,6 +18,19 @@
               "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
             }
           ]
+        }
+      ]
+    }
+  },
+  "GET /api/languages": {
+    "description": "returns an array of programming languages used in projects, including a count of projects featuring each language and an icon URL",
+    "exampleResponse": {
+      "languages": [
+        {
+          "id": 1,
+          "name": "JavaScript",
+          "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+          "project_count": 5
         }
       ]
     }
