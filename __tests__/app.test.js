@@ -54,9 +54,9 @@ describe('GET /api/projects', () => {
     }
   });
 
-  it('200: should provide 10 results by default', async () => {
+  it('200: should provide 12 results by default', async () => {
     const { body } = await request(app).get('/api/projects').expect(200);
-    expect(body.projects).toHaveLength(10);
+    expect(body.projects).toHaveLength(12);
   });
 
   it('200: should fetch specified number of results', async () => {
@@ -65,10 +65,10 @@ describe('GET /api/projects', () => {
       .expect(200);
     expect(results5.projects).toHaveLength(5);
 
-    const { body: results12 } = await request(app)
-      .get('/api/projects?limit=12')
+    const { body: results15 } = await request(app)
+      .get('/api/projects?limit=15')
       .expect(200);
-    expect(results12.projects).toHaveLength(12);
+    expect(results15.projects).toHaveLength(15);
   });
 
   describe('error handling', () => {
