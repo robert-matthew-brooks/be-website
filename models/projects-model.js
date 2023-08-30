@@ -1,6 +1,6 @@
 const db = require('../db/connection');
 
-async function getProjects(limit = 12, p = 1) {
+async function getProjects(limit = 6, p = 1) {
   // validate inputs
   const orderBy = 'created_at';
 

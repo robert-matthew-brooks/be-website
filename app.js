@@ -1,26 +1,43 @@
 const app = require('express')();
 const cors = require('cors');
-const apiController = require('./controllers/api-controller');
-const projectsController = require('./controllers/projects-controller');
+const { getEndpointDetails } = require('./controllers/api-controller');
+const { getProjects } = require('./controllers/projects-controller');
+const { getLanguages } = require('./controllers/languages-controller');
 
 const allowedUrls = ['http://localhost:5173'];
 
-// middleware
+/**************/
+/* middleware */
+/**************/
 
 app.use(cors({ origin: allowedUrls }));
 app.set('json spaces', 2);
 
-// endpoints
+/*************/
+/* endpoints */
+/*************/
+
+// server status
 
 app.get('/', (req, res, next) => {
   res.status(200).send('Server OK');
 });
 
-app.get('/api', apiController.getEndpointDetails);
+// list endpoints
 
-app.get('/api/projects', projectsController.getProjects);
+app.get('/api', getEndpointDetails);
 
-// error handling
+// projects
+
+app.get('/api/projects', getProjects);
+
+// languages
+
+app.get('/api/languages', getLanguages);
+
+/******************/
+/* error handling */
+/******************/
 
 app.all('*', (req, res, next) => {
   res.status(404).send({ msg: 'endpoint not found' });

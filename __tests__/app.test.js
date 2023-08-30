@@ -54,12 +54,12 @@ describe('GET /api/projects', () => {
     }
   });
 
-  it('200: should provide 12 results by default', async () => {
+  it('200: should return 6 results by default', async () => {
     const { body } = await request(app).get('/api/projects').expect(200);
-    expect(body.projects).toHaveLength(12);
+    expect(body.projects).toHaveLength(6);
   });
 
-  it('200: should fetch specified number of results', async () => {
+  it('200: should return specified number of results', async () => {
     const { body: results5 } = await request(app)
       .get('/api/projects?limit=5')
       .expect(200);
@@ -74,5 +74,25 @@ describe('GET /api/projects', () => {
   describe('error handling', () => {
     // no projects found
     // invalid limit
+  });
+});
+
+describe('GET /api/languages', () => {
+  it('200: should return an array of languages with correct properties', async () => {
+    const expectedObject = {
+      id: expect.any(Number),
+      name: expect.any(String),
+      icon_url: expect.any(String),
+    };
+    const { body } = await request(app).get('/api/languages').expect(200);
+
+    for (const language of body.languages) {
+      expect(language).toMatchObject(expectedObject);
+    }
+  });
+
+  it('200: should provide all (10) results', async () => {
+    const { body } = await request(app).get('/api/languages').expect(200);
+    expect(body.languages).toHaveLength(10);
   });
 });
