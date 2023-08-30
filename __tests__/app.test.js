@@ -27,7 +27,7 @@ describe('GET /api', () => {
   });
 });
 
-describe.only('GET /api/projects', () => {
+describe('GET /api/projects', () => {
   it('200: should return an array of projects with correct properties', async () => {
     const expectedObject = {
       id: expect.any(Number),
@@ -53,4 +53,23 @@ describe.only('GET /api/projects', () => {
       }
     }
   });
+
+  it('200: should provide 10 results by default', async () => {
+    const { body } = await request(app).get('/api/projects').expect(200);
+    expect(body.projects).toHaveLength(10);
+  });
+
+  it('200: should fetch specified number of results', async () => {
+    const { body: results5 } = await request(app)
+      .get('/api/projects?limit=5')
+      .expect(200);
+    expect(results5.projects).toHaveLength(5);
+
+    const { body: results12 } = await request(app)
+      .get('/api/projects?limit=12')
+      .expect(200);
+    expect(results12.projects).toHaveLength(12);
+  });
+
+  describe('error handling', () => {});
 });

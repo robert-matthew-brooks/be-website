@@ -1,6 +1,11 @@
 const db = require('../db/connection');
 
-async function getProjects() {
+async function getProjects(limit = 10, p = 1) {
+  // validate inputs
+  const orderBy = 'created_at';
+
+  const offset = limit * (p - 1);
+
   const { rows: projects } = await db.query(`
     SELECT
       p.id,
@@ -15,7 +20,9 @@ async function getProjects() {
     ON p.id = pl.project_id
     INNER JOIN languages l
     ON l.id = pl.language_id
-    GROUP BY p.id;
+    GROUP BY p.id
+    ORDER BY ${orderBy}
+    LIMIT ${limit} OFFSET ${offset};
   `);
 
   return projects;
