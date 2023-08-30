@@ -51,6 +51,18 @@ describe('GET /api/projects', () => {
     }
   });
 
+  it.only('200: should return the number of articles before pagination', async () => {
+    const { body: resultsAll } = await request(app)
+      .get('/api/projects')
+      .expect(200);
+    expect(resultsAll.project_count).toBe(19);
+
+    const { body: results5 } = await request(app)
+      .get('/api/projects?language_id=5')
+      .expect(200);
+    expect(results5.project_count).toBe(6);
+  });
+
   describe('pagination', () => {
     it('200: should return 6 results by default', async () => {
       const { body } = await request(app).get('/api/projects').expect(200);

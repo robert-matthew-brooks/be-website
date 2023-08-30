@@ -39,7 +39,21 @@ async function getProjects(language_id = '%', limit = 6, p = 1) {
     LIMIT ${limit} OFFSET ${offset};
   `);
 
-  return projects;
+  const { rows: project_count } = await db.query(`
+    SELECT COUNT(*)::int
+    FROM (
+      SELECT p.id
+      FROM projects p
+      INNER JOIN projects_languages pl
+      ON p.id = pl.project_id
+      INNER JOIN languages l
+      ON l.id = pl.language_id
+      WHERE pl.language_id::VARCHAR LIKE '${language_id}'
+      GROUP BY p.id
+    ) t;
+  `);
+
+  return { projects, project_count: project_count[0].count };
 }
 
 module.exports = { getProjects };
