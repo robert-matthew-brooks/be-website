@@ -51,7 +51,7 @@ describe('GET /api/projects', () => {
     }
   });
 
-  it.only('200: should return the number of articles before pagination', async () => {
+  it('200: should return the number of articles before pagination', async () => {
     const { body: resultsAll } = await request(app)
       .get('/api/projects')
       .expect(200);

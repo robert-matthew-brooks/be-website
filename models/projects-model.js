@@ -22,7 +22,7 @@ async function getProjects(language_id = '%', limit = 6, p = 1) {
 
   const offset = limit * (p - 1);
 
-  const { rows: projects } = await db.query(`
+  const projectsQuery = db.query(`
     SELECT
       p.id,
       p.title,
@@ -39,7 +39,7 @@ async function getProjects(language_id = '%', limit = 6, p = 1) {
     LIMIT ${limit} OFFSET ${offset};
   `);
 
-  const { rows: project_count } = await db.query(`
+  const projectCountQuery = db.query(`
     SELECT COUNT(*)::int
     FROM (
       SELECT p.id
@@ -53,7 +53,15 @@ async function getProjects(language_id = '%', limit = 6, p = 1) {
     ) t;
   `);
 
-  return { projects, project_count: project_count[0].count };
+  const [projectsResponse, projectCountResponse] = await Promise.all([
+    projectsQuery,
+    projectCountQuery,
+  ]);
+
+  return {
+    projects: projectsResponse.rows,
+    project_count: projectCountResponse.rows[0].count,
+  };
 }
 
 module.exports = { getProjects };
