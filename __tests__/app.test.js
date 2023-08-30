@@ -80,6 +80,8 @@ describe('GET /api/projects', () => {
         .expect(200);
       expect(results15.projects).toHaveLength(15);
     });
+
+    // check changing page is different results
   });
 
   describe('filtering', () => {
@@ -119,14 +121,18 @@ describe('GET /api/projects', () => {
       expect(body.msg).toBe('invalid limit');
     });
 
-    it('400: should return correct error when p is not a number', async () => {
-      const { body } = await request(app).get('/api/projects?p=a').expect(400);
-      expect(body.msg).toBe('invalid p');
+    it('400: should return correct error when page is not a number', async () => {
+      const { body } = await request(app)
+        .get('/api/projects?page=a')
+        .expect(400);
+      expect(body.msg).toBe('invalid page');
     });
 
-    it('400: should return correct error when p is less than 1', async () => {
-      const { body } = await request(app).get('/api/projects?p=0').expect(400);
-      expect(body.msg).toBe('invalid p');
+    it('400: should return correct error when page is less than 1', async () => {
+      const { body } = await request(app)
+        .get('/api/projects?page=0')
+        .expect(400);
+      expect(body.msg).toBe('invalid page');
     });
 
     it('404: should return an error when language_id is not a number', async () => {

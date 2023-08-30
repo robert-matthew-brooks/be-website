@@ -5,10 +5,10 @@ const {
   rejectIfNotInTable,
 } = require('./validate');
 
-async function getProjects(language_id = '%', limit = 6, p = 1) {
+async function getProjects(language_id = '%', limit = 6, page = 1) {
   const validationTests = [
-    rejectIfNotNumber({ limit, p }),
-    rejectIfLessThan({ limit, p }, 1),
+    rejectIfNotNumber({ limit, page }),
+    rejectIfLessThan({ limit, page }, 1),
   ];
 
   if (language_id !== '%') {
@@ -20,7 +20,7 @@ async function getProjects(language_id = '%', limit = 6, p = 1) {
 
   const orderBy = 'created_at';
 
-  const offset = limit * (p - 1);
+  const offset = limit * (page - 1);
 
   const projectsQuery = db.query(`
     SELECT
