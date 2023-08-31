@@ -16,6 +16,7 @@
             {
               "id": 1,
               "name": "JavaScript",
+              "slug": "js",
               "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
             }
           ]
@@ -30,6 +31,7 @@
         {
           "id": 1,
           "name": "JavaScript",
+          "slug": "js",
           "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
           "project_count": 5
         }
