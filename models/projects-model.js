@@ -14,7 +14,7 @@ async function getProjects(language = '%', limit = 6, page = 1) {
   ];
 
   if (language !== '%') {
-    validationTests.push(rejectIfNotInTable(language, 'name', 'languages'));
+    validationTests.push(rejectIfNotInTable(language, 'slug', 'languages'));
   }
 
   await Promise.all(validationTests);
@@ -35,13 +35,13 @@ async function getProjects(language = '%', limit = 6, page = 1) {
     INNER JOIN languages l
     ON l.id = pl.language_id
     GROUP BY p.id
-    HAVING BOOL_OR(LOWER(l.name) LIKE '${language}')
+    HAVING BOOL_OR(LOWER(l.slug) LIKE '${language}')
     ORDER BY ${orderBy}
     LIMIT ${limit} OFFSET ${offset};
   `);
 
   const projectCountQuery = db.query(`
-    SELECT COUNT(*)::int
+    SELECT COUNT(*)::INT
     FROM (
       SELECT p.id
       FROM projects p
@@ -49,7 +49,7 @@ async function getProjects(language = '%', limit = 6, page = 1) {
       ON p.id = pl.project_id
       INNER JOIN languages l
       ON l.id = pl.language_id
-      WHERE LOWER(l.name) LIKE '${language}'
+      WHERE LOWER(l.slug) LIKE '${language}'
       GROUP BY p.id
     ) t;
   `);

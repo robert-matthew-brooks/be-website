@@ -5,6 +5,7 @@ async function getLanguages() {
     SELECT
       l.id,
       l.name,
+      l.slug,
       l.icon_url,
       COUNT(*)::INT AS project_count
     FROM languages l

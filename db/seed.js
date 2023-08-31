@@ -37,6 +37,7 @@ async function seed({ projectData, languageData, projectLanguageData }) {
     CREATE TABLE languages (
       id SERIAL PRIMARY KEY,
       name VARCHAR,
+      slug VARCHAR,
       icon_url VARCHAR
     );
   `);
@@ -70,10 +71,15 @@ async function seed({ projectData, languageData, projectLanguageData }) {
   const insertLanguagesQueryStr = format(
     `INSERT INTO languages (
       name,
+      slug,
       icon_url
     )
     VALUES %L;`,
-    languageData.map((language) => [language.name, language.icon_url])
+    languageData.map((language) => [
+      language.name,
+      language.slug,
+      language.icon_url,
+    ])
   );
 
   const insertProjectsLanguagesQueryStr = format(

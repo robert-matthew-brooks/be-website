@@ -45,6 +45,7 @@ describe('GET /api/projects', () => {
         expect(language).toMatchObject({
           id: expect.any(Number),
           name: expect.any(String),
+          slug: expect.any(String),
           icon_url: expect.any(String),
         });
       }
@@ -58,7 +59,7 @@ describe('GET /api/projects', () => {
     expect(resultsAll.project_count).toBe(19);
 
     const { body: results5 } = await request(app)
-      .get('/api/projects?language=language_5')
+      .get('/api/projects?language=l5')
       .expect(200);
     expect(results5.project_count).toBe(6);
   });
@@ -85,9 +86,9 @@ describe('GET /api/projects', () => {
   });
 
   describe('filtering', () => {
-    it('200: should filter by specified language name', async () => {
+    it('200: should filter by specified language slug', async () => {
       const { body: results9 } = await request(app).get(
-        '/api/projects?language=language_9'
+        '/api/projects?language=l9'
       );
 
       expect(results9.projects).toHaveLength(5);
@@ -137,11 +138,11 @@ describe('GET /api/projects', () => {
       expect(body.msg).toBe('invalid page');
     });
 
-    it('404: should return an error when language_id is not in table', async () => {
+    it('404: should return an error when language slug is not in table', async () => {
       const { body } = await request(app)
         .get('/api/projects?language=a')
         .expect(404);
-      expect(body.msg).toBe('specified name not found in languages table');
+      expect(body.msg).toBe('specified slug not found in languages table');
     });
   });
 });
@@ -151,6 +152,7 @@ describe('GET /api/languages', () => {
     const expectedObject = {
       id: expect.any(Number),
       name: expect.any(String),
+      slug: expect.any(String),
       icon_url: expect.any(String),
       project_count: expect.any(Number),
     };
