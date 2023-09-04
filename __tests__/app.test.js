@@ -103,6 +103,34 @@ describe('GET /api/projects', () => {
     });
   });
 
+  describe('sorting', () => {
+    it('200: should sort results in descending date order by default', async () => {
+      const { body } = await request(app).get('/api/projects').expect(200);
+      expect(body.projects).toBeSorted({ key: 'created_at', descending: true });
+    });
+
+    it('200: should sort results in ascending date order', async () => {
+      const { body } = await request(app)
+        .get('/api/projects?order=asc')
+        .expect(200);
+      expect(body.projects).toBeSorted({ key: 'created_at' });
+    });
+
+    it('200: should sort results in descending alphabetical order', async () => {
+      const { body } = await request(app)
+        .get('/api/projects?sort_by=title')
+        .expect(200);
+      expect(body.projects).toBeSorted({ key: 'title', descending: true });
+    });
+
+    it('200: should sort results in ascending alphabetical order', async () => {
+      const { body } = await request(app)
+        .get('/api/projects?sort_by=title&order=asc')
+        .expect(200);
+      expect(body.projects).toBeSorted({ key: 'title' });
+    });
+  });
+
   describe('error handling', () => {
     it('500: should return an error when projects table not found', async () => {
       await db.query('DROP TABLE projects CASCADE;');
@@ -143,6 +171,20 @@ describe('GET /api/projects', () => {
         .get('/api/projects?language=a')
         .expect(404);
       expect(body.msg).toBe('specified slug not found in languages table');
+    });
+
+    it('400: should return an error when sort_by option is not allowed', async () => {
+      const { body } = await request(app)
+        .get('/api/projects?sort_by=colour')
+        .expect(400);
+      expect(body.msg).toBe('invalid sort_by');
+    });
+
+    it('400: should return an error when order option is not allowed', async () => {
+      const { body } = await request(app)
+        .get('/api/projects?order=up')
+        .expect(400);
+      expect(body.msg).toBe('invalid order');
     });
   });
 });

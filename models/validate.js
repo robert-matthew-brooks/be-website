@@ -37,4 +37,22 @@ async function rejectIfNotInTable(value, column, table) {
   }
 }
 
-module.exports = { rejectIfNotNumber, rejectIfLessThan, rejectIfNotInTable };
+const sortByGreenlist = ['created_at', 'title'];
+const orderGreenlist = ['ASC', 'DESC'];
+
+function rejectIfNotInGreenList(values, greenlist) {
+  for (const key in values) {
+    if (!greenlist.includes(values[key])) {
+      return Promise.reject({ status: 400, msg: `invalid ${key}` });
+    }
+  }
+}
+
+module.exports = {
+  rejectIfNotNumber,
+  rejectIfLessThan,
+  rejectIfNotInTable,
+  sortByGreenlist,
+  orderGreenlist,
+  rejectIfNotInGreenList,
+};

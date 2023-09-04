@@ -3,14 +3,28 @@ const {
   rejectIfNotNumber,
   rejectIfLessThan,
   rejectIfNotInTable,
+  sortByGreenlist,
+  orderGreenlist,
+  rejectIfNotInGreenList,
 } = require('./validate');
 
-async function getProjects(language = '%', limit = 6, page = 1) {
+async function getProjects(
+  language = '%',
+  limit = 6,
+  page = 1,
+  sort_by = 'created_at',
+  order = 'DESC'
+) {
   language = language.toLowerCase();
+  sort_by = sort_by.toLocaleLowerCase();
+  if (sort_by === 'date') sort_by = 'created_at';
+  order = order.toUpperCase();
 
   const validationTests = [
     rejectIfNotNumber({ limit, page }),
     rejectIfLessThan({ limit, page }, 1),
+    rejectIfNotInGreenList({ sort_by }, sortByGreenlist),
+    rejectIfNotInGreenList({ order }, orderGreenlist),
   ];
 
   if (language !== '%') {
@@ -19,13 +33,10 @@ async function getProjects(language = '%', limit = 6, page = 1) {
 
   await Promise.all(validationTests);
 
-  const orderBy = 'created_at';
-
-  const offset = limit * (page - 1);
-
   const projectsQuery = db.query(`
     SELECT
       p.id,
+      p.created_at,
       p.title,
       p.img_url,
       JSON_AGG(l) AS languages
@@ -36,8 +47,8 @@ async function getProjects(language = '%', limit = 6, page = 1) {
     ON l.id = pl.language_id
     GROUP BY p.id
     HAVING BOOL_OR(LOWER(l.slug) LIKE '${language}')
-    ORDER BY ${orderBy}
-    LIMIT ${limit} OFFSET ${offset};
+    ORDER BY ${sort_by} ${order}
+    LIMIT ${limit} OFFSET ${limit * (page - 1)};
   `);
 
   const projectCountQuery = db.query(`

@@ -5,7 +5,7 @@
   "GET /api/projects": {
     "description": "returns a paginated array of projects with details to populate the website portfolio list, and a total number of projects before pagination",
     "allowedQueries": ["limit", "page"],
-    "examplResponse": {
+    "exampleResponse": {
       "project_count": 1,
       "projects": [
         {

@@ -1,13 +1,15 @@
 const projectsModel = require('../models/projects-model');
 
 async function getProjects(req, res, next) {
-  const { language, limit, page } = req.query;
+  const { language, limit, page, sort_by, order } = req.query;
 
   try {
     const { projects, project_count } = await projectsModel.getProjects(
       language,
       limit,
-      page
+      page,
+      sort_by,
+      order
     );
     res.status(200).send({ projects, project_count });
   } catch (err) {
