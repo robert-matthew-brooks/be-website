@@ -37,5 +37,26 @@
         }
       ]
     }
+  },
+  "GET /api/projects/:project_id": {
+    "description": "returns details of a project",
+    "exampleResponse": {
+      "project": {
+        "id": 1,
+        "created_at": "",
+        "title": "Building A Website Backend",
+        "img_url": "https://images.pexels.com/photos/1117452/pexels-photo-1117452.jpeg",
+        "video_url": "https://www.youtube.com/watch?v=jNQXAC9IVRw",
+        "body": "This is a programming article. To build a backend api: seed a database, build a server, perform unit tests, host the database, host the server.",
+        "languages": [
+          {
+            "id": 1,
+            "name": "JavaScript",
+            "slug": "js",
+            "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+          }
+        ]
+      }
+    }
   }
 }

@@ -56,9 +56,10 @@ describe('languages table', () => {
 });
 
 describe('projects-languages junction table', () => {
-  it('should contain 60 rows', async () => {
+  // 3 languages removed from last project to test empty languages array
+  it('should contain 57 rows', async () => {
     const { rows } = await db.query('SELECT * FROM projects_languages;');
-    expect(rows).toHaveLength(60);
+    expect(rows).toHaveLength(57);
   });
 
   it('should return a junction data with correct properties', async () => {
