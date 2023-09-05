@@ -1,6 +1,9 @@
 const app = require('express')();
 const cors = require('cors');
-const { getProjects } = require('./controllers/projects-controller');
+const {
+  getProjects,
+  getProject,
+} = require('./controllers/projects-controller');
 const { getLanguages } = require('./controllers/languages-controller');
 const {
   customErrorHandler,
@@ -35,6 +38,7 @@ app.get('/api', (req, res, next) => {
 // projects
 
 app.get('/api/projects', getProjects);
+app.get('/api/projects/:project_id', getProject);
 
 // languages
 

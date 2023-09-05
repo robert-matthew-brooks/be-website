@@ -33,37 +33,41 @@ async function getProjects(
 
   await Promise.all(validationTests);
 
-  const projectsQuery = db.query(`
-    SELECT
-      p.id,
-      p.created_at,
-      p.title,
-      p.img_url,
-      JSON_AGG(l) AS languages
-    FROM projects p
-    INNER JOIN projects_languages pl
-    ON p.id = pl.project_id
-    INNER JOIN languages l
-    ON l.id = pl.language_id
-    GROUP BY p.id
-    HAVING BOOL_OR(LOWER(l.slug) LIKE '${language}')
-    ORDER BY ${sort_by} ${order}
-    LIMIT ${limit} OFFSET ${limit * (page - 1)};
-  `);
-
-  const projectCountQuery = db.query(`
-    SELECT COUNT(*)::INT
-    FROM (
-      SELECT p.id
+  const projectsQuery = db.query(
+    `
+      SELECT
+        p.id,
+        p.created_at,
+        p.title,
+        p.img_url,
+        JSON_AGG(l) AS languages
       FROM projects p
       INNER JOIN projects_languages pl
       ON p.id = pl.project_id
       INNER JOIN languages l
       ON l.id = pl.language_id
-      WHERE LOWER(l.slug) LIKE '${language}'
       GROUP BY p.id
-    ) t;
-  `);
+      HAVING BOOL_OR(LOWER(l.slug) LIKE '${language}')
+      ORDER BY ${sort_by} ${order}
+      LIMIT ${limit} OFFSET ${limit * (page - 1)};
+    `
+  );
+
+  const projectCountQuery = db.query(
+    `
+      SELECT COUNT(*)::INT
+      FROM (
+        SELECT p.id
+        FROM projects p
+        INNER JOIN projects_languages pl
+        ON p.id = pl.project_id
+        INNER JOIN languages l
+        ON l.id = pl.language_id
+        WHERE LOWER(l.slug) LIKE '${language}'
+        GROUP BY p.id
+      ) t;
+    `
+  );
 
   const [projectsResponse, projectCountResponse] = await Promise.all([
     projectsQuery,
@@ -76,4 +80,32 @@ async function getProjects(
   };
 }
 
-module.exports = { getProjects };
+async function getProject(project_id) {
+  await rejectIfNotNumber({ project_id });
+  await rejectIfNotInTable(project_id, 'id', 'projects');
+
+  const { rows } = await db.query(
+    `
+      SELECT
+        p.id,
+        p.created_at,
+        p.title,
+        p.img_url,
+        p.video_url,
+        p.body,
+        JSON_AGG(l) AS languages
+      FROM projects p
+      INNER JOIN projects_languages pl
+      ON p.id = pl.project_id
+      INNER JOIN languages l
+      ON l.id = pl.language_id
+      WHERE p.id = $1
+      GROUP BY p.id;
+    `,
+    [project_id]
+  );
+
+  return { project: rows[0] };
+}
+
+module.exports = { getProjects, getProject };

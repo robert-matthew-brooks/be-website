@@ -13,7 +13,7 @@ afterAll(() => {
 });
 
 describe('ALL invalid endpoint', () => {
-  it('404: should return correct error message', async () => {
+  it('404: should return an error message', async () => {
     const { body } = await request(app).get('/api/not_an_endpoint').expect(404);
     expect(body.msg).toBe('endpoint not found');
   });
@@ -29,17 +29,15 @@ describe('GET /api', () => {
 
 describe('GET /api/projects', () => {
   it('200: should return an array of projects with correct properties', async () => {
-    const expectedObject = {
-      id: expect.any(Number),
-      title: expect.any(String),
-      img_url: expect.any(String),
-      languages: expect.any(Array),
-    };
-
     const { body } = await request(app).get('/api/projects').expect(200);
 
     for (const project of body.projects) {
-      expect(project).toMatchObject(expectedObject);
+      expect(project).toMatchObject({
+        id: expect.any(Number),
+        title: expect.any(String),
+        img_url: expect.any(String),
+        languages: expect.any(Array),
+      });
 
       for (const language of project.languages) {
         expect(language).toMatchObject({
@@ -138,28 +136,28 @@ describe('GET /api/projects', () => {
       expect(body.msg).toBe('undefined table');
     });
 
-    it('400: should return correct error when limit is not a number', async () => {
+    it('400: should return an error when limit is not a number', async () => {
       const { body } = await request(app)
         .get('/api/projects?limit=a')
         .expect(400);
       expect(body.msg).toBe('invalid limit');
     });
 
-    it('400: should return correct error when limit is less than 1', async () => {
+    it('400: should return an error when limit is less than 1', async () => {
       const { body } = await request(app)
         .get('/api/projects?limit=0')
         .expect(400);
       expect(body.msg).toBe('invalid limit');
     });
 
-    it('400: should return correct error when page is not a number', async () => {
+    it('400: should return an error when page is not a number', async () => {
       const { body } = await request(app)
         .get('/api/projects?page=a')
         .expect(400);
       expect(body.msg).toBe('invalid page');
     });
 
-    it('400: should return correct error when page is less than 1', async () => {
+    it('400: should return an error when page is less than 1', async () => {
       const { body } = await request(app)
         .get('/api/projects?page=0')
         .expect(400);
@@ -191,18 +189,16 @@ describe('GET /api/projects', () => {
 
 describe('GET /api/languages', () => {
   it('200: should return an array of languages with correct properties', async () => {
-    const expectedObject = {
-      id: expect.any(Number),
-      name: expect.any(String),
-      slug: expect.any(String),
-      icon_url: expect.any(String),
-      project_count: expect.any(Number),
-    };
-
     const { body } = await request(app).get('/api/languages').expect(200);
 
     for (const language of body.languages) {
-      expect(language).toMatchObject(expectedObject);
+      expect(language).toMatchObject({
+        id: expect.any(Number),
+        name: expect.any(String),
+        slug: expect.any(String),
+        icon_url: expect.any(String),
+        project_count: expect.any(Number),
+      });
     }
   });
 
@@ -216,6 +212,42 @@ describe('GET /api/languages', () => {
       await db.query('DROP TABLE languages CASCADE;');
       const { body } = await request(app).get('/api/languages').expect(500);
       expect(body.msg).toBe('undefined table');
+    });
+  });
+});
+
+describe('GET /api/projects/:project_id', () => {
+  it('200: should return an object with correct properties', async () => {
+    const { body } = await request(app).get('/api/projects/1').expect(200);
+
+    expect(body.project).toMatchObject({
+      id: expect.any(Number),
+      created_at: expect.any(String),
+      title: expect.any(String),
+      img_url: expect.any(String),
+      video_url: expect.any(String),
+      body: expect.any(String),
+    });
+
+    for (const language of body.project.languages) {
+      expect(language).toMatchObject({
+        id: expect.any(Number),
+        name: expect.any(String),
+        slug: expect.any(String),
+        icon_url: expect.any(String),
+      });
+    }
+  });
+
+  describe('error handling', () => {
+    it('400: should return an error when project_id is not a number', async () => {
+      const { body } = await request(app).get('/api/projects/a').expect(400);
+      expect(body.msg).toBe('invalid project_id');
+    });
+
+    it('404: should return an error when project_id is not in table', async () => {
+      const { body } = await request(app).get('/api/projects/999').expect(404);
+      expect(body.msg).toBe('specified id not found in projects table');
     });
   });
 });

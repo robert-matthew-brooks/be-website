@@ -17,4 +17,15 @@ async function getProjects(req, res, next) {
   }
 }
 
-module.exports = { getProjects };
+async function getProject(req, res, next) {
+  const { project_id } = req.params;
+
+  try {
+    const { project } = await projectsModel.getProject(project_id);
+    res.status(200).send({ project });
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { getProjects, getProject };
