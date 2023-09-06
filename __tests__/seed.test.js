@@ -20,6 +20,7 @@ describe('projects table', () => {
     const expectedObject = {
       id: expect.any(Number),
       created_at: expect.any(Object),
+      link: expect.any(String),
       title: expect.any(String),
       img_url: expect.any(String),
       video_url: expect.any(String),

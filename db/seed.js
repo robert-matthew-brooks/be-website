@@ -27,6 +27,7 @@ async function seed({ projectData, languageData, projectLanguageData }) {
       id SERIAL PRIMARY KEY,
       created_at TIMESTAMP DEFAULT NOW(),
       title VARCHAR,
+      link VARCHAR,
       img_url VARCHAR,
       video_url VARCHAR,
       body VARCHAR
@@ -55,6 +56,7 @@ async function seed({ projectData, languageData, projectLanguageData }) {
   const insertProjectsQueryStr = format(
     `INSERT INTO projects (
       title,
+      link,
       img_url,
       video_url,
       body
@@ -62,6 +64,7 @@ async function seed({ projectData, languageData, projectLanguageData }) {
     VALUES %L;`,
     projectData.map((project) => [
       project.title,
+      project.link,
       project.img_url,
       project.video_url,
       project.body,

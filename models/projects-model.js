@@ -90,6 +90,7 @@ async function getProject(project_id) {
         p.id,
         p.created_at,
         p.title,
+        p.link,
         p.img_url,
         p.video_url,
         p.body,

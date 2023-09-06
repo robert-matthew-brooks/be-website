@@ -223,6 +223,7 @@ describe('GET /api/projects/:project_id', () => {
     expect(body.project).toMatchObject({
       id: expect.any(Number),
       created_at: expect.any(String),
+      link: expect.any(String),
       title: expect.any(String),
       img_url: expect.any(String),
       video_url: expect.any(String),
