@@ -2,7 +2,6 @@ const projectData = [
   {
     title: 'project 1',
     link: 'some_url.com/project_1',
-    img_url: 'some_image_1.jpg',
     video_url: 'some_url.com/video_1',
     body: 'some text describing project 1',
     language_ids: [1, 2, 3],
@@ -25,7 +24,6 @@ const projectData = [
   {
     title: 'project 4',
     link: 'some_url.com/project_4',
-    img_url: 'some_url.com/video_4',
     body: 'some text describing project 4',
     language_ids: [10, 1, 2],
   },
@@ -40,7 +38,6 @@ const projectData = [
   {
     title: 'project 6',
     link: 'some_url.com/project_6',
-    img_url: 'some_image_6.jpg',
     body: 'some text describing project 6',
     language_ids: [6, 7, 8],
   },
@@ -70,7 +67,6 @@ const projectData = [
   {
     title: 'project 10',
     link: 'some_url.com/project_10',
-    img_url: 'some_image_10.jpg',
     body: 'some text describing project 10',
     language_ids: [8, 9, 10],
   },
@@ -115,7 +111,6 @@ const projectData = [
   {
     title: 'project 16',
     link: 'some_url.com/project_16',
-    img_url: 'some_image_16.jpg',
     body: 'some text describing project 16',
     language_ids: [6, 7, 8],
   },
@@ -137,7 +132,6 @@ const projectData = [
   {
     title: 'project 19',
     link: 'some_url.com/project_19',
-    img_url: 'some_image_19.jpg',
     video_url: 'some_url.com/video_19',
     body: 'some text describing project 19',
     language_ids: [5, 6, 7],

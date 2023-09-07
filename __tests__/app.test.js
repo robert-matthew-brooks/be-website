@@ -37,7 +37,7 @@ describe('GET /api/projects', () => {
       expect(project).toMatchObject({
         id: expect.any(Number),
         title: expect.any(String),
-        img_url: expect.any(String),
+        img_url: expect.toBeOneOf([expect.any(String), null]),
         languages: expect.any(Array),
       });
 
@@ -227,7 +227,7 @@ describe('GET /api/projects/:project_id', () => {
       created_at: expect.any(String),
       link: expect.any(String),
       title: expect.any(String),
-      img_url: expect.any(String),
+      img_url: expect.toBeOneOf([expect.any(String), null]),
       video_url: expect.toBeOneOf([expect.any(String), null]),
       body: expect.any(String),
     });
