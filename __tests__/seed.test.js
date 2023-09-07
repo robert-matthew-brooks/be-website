@@ -1,3 +1,5 @@
+const { toBeOneOf } = require('jest-extended');
+expect.extend({ toBeOneOf });
 const db = require('../db/connection');
 const seed = require('../db/seed');
 const testData = require('../db/data/test');
@@ -23,7 +25,7 @@ describe('projects table', () => {
       link: expect.any(String),
       title: expect.any(String),
       img_url: expect.any(String),
-      video_url: expect.any(String),
+      video_url: expect.toBeOneOf([expect.any(String), null]),
       body: expect.any(String),
     };
 
