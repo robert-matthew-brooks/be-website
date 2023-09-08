@@ -40,6 +40,7 @@ async function getProjects(
         p.created_at,
         p.title,
         p.img_url,
+        p.img_alt,
         JSON_AGG(l) AS languages
       FROM projects p
       INNER JOIN projects_languages pl
@@ -92,6 +93,7 @@ async function getProject(project_id) {
         p.title,
         p.link,
         p.img_url,
+        p.img_alt,
         p.video_url,
         p.body,
         JSON_AGG(l) AS languages

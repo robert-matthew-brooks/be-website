@@ -29,6 +29,7 @@ async function seed({ projectData, languageData, projectLanguageData }) {
       title VARCHAR,
       link VARCHAR,
       img_url VARCHAR,
+      img_alt VARCHAR,
       video_url VARCHAR,
       body VARCHAR
     );
@@ -58,6 +59,7 @@ async function seed({ projectData, languageData, projectLanguageData }) {
       title,
       link,
       img_url,
+      img_alt,
       video_url,
       body
     )
@@ -66,6 +68,7 @@ async function seed({ projectData, languageData, projectLanguageData }) {
       project.title,
       project.link,
       project.img_url,
+      project.img_alt,
       project.video_url,
       project.body,
     ])

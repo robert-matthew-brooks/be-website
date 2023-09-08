@@ -38,6 +38,7 @@ describe('GET /api/projects', () => {
         id: expect.any(Number),
         title: expect.any(String),
         img_url: expect.toBeOneOf([expect.any(String), null]),
+        img_alt: expect.toBeOneOf([expect.any(String), null]),
         languages: expect.any(Array),
       });
 
@@ -228,6 +229,7 @@ describe('GET /api/projects/:project_id', () => {
       link: expect.any(String),
       title: expect.any(String),
       img_url: expect.toBeOneOf([expect.any(String), null]),
+      img_alt: expect.toBeOneOf([expect.any(String), null]),
       video_url: expect.toBeOneOf([expect.any(String), null]),
       body: expect.any(String),
     });

@@ -24,7 +24,8 @@ describe('projects table', () => {
       created_at: expect.any(Object),
       link: expect.any(String),
       title: expect.any(String),
-      img_url: expect.any(String),
+      img_url: expect.toBeOneOf([expect.any(String), null]),
+      img_alt: expect.toBeOneOf([expect.any(String), null]),
       video_url: expect.toBeOneOf([expect.any(String), null]),
       body: expect.any(String),
     };
