@@ -27,7 +27,8 @@ const projectData = [
   {
     title: 'Kata: Find Closing Parentheses',
     link: 'http://www.live-version.com/project',
-    img_url: 'https://images.pexels.com/photos/7412068/pexels-photo-7412068',
+    img_url:
+      'https://images.pexels.com/photos/7412068/pexels-photo-7412068.jpeg',
     img_alt: 'Magnifying glass on map',
     body: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p>',
     language_ids: [1, 2, 3],
@@ -68,7 +69,8 @@ const projectData = [
   {
     title: 'Kata: Find Closing Parentheses',
     link: 'http://www.live-version.com/project',
-    img_url: 'https://images.pexels.com/photos/7412068/pexels-photo-7412068',
+    img_url:
+      'https://images.pexels.com/photos/7412068/pexels-photo-7412068.jpeg',
     img_alt: 'Magnifying glass on map',
     body: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p>',
     language_ids: [3, 4],
@@ -82,7 +84,8 @@ const projectData = [
   {
     title: 'Kata: Find Closing Parentheses',
     link: 'http://www.live-version.com/project',
-    img_url: 'https://images.pexels.com/photos/7412068/pexels-photo-7412068',
+    img_url:
+      'https://images.pexels.com/photos/7412068/pexels-photo-7412068.jpeg',
     img_alt: 'Magnifying glass on map',
     body: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p>',
     language_ids: [1, 2, 3],
@@ -123,7 +126,8 @@ const projectData = [
   {
     title: 'Kata: Find Closing Parentheses',
     link: 'http://www.live-version.com/project',
-    img_url: 'https://images.pexels.com/photos/7412068/pexels-photo-7412068',
+    img_url:
+      'https://images.pexels.com/photos/7412068/pexels-photo-7412068.jpeg',
     img_alt: 'Magnifying glass on map',
     body: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p>',
     language_ids: [3, 4],
@@ -131,7 +135,8 @@ const projectData = [
   {
     title: 'Kata: Find Closing Parentheses',
     link: 'http://www.live-version.com/project',
-    img_url: 'https://images.pexels.com/photos/7412068/pexels-photo-7412068',
+    img_url:
+      'https://images.pexels.com/photos/7412068/pexels-photo-7412068.jpeg',
     img_alt: 'Magnifying glass on map',
     body: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p>',
     language_ids: [5, 6, 1],
@@ -139,7 +144,8 @@ const projectData = [
   {
     title: 'Kata: Find Closing Parentheses',
     link: 'http://www.live-version.com/project',
-    img_url: 'https://images.pexels.com/photos/7412068/pexels-photo-7412068',
+    img_url:
+      'https://images.pexels.com/photos/7412068/pexels-photo-7412068.jpeg',
     img_alt: 'Magnifying glass on map',
     body: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p>',
     language_ids: [1, 2, 3],
@@ -180,7 +186,8 @@ const projectData = [
   {
     title: 'Kata: Find Closing Parentheses',
     link: 'http://www.live-version.com/project',
-    img_url: 'https://images.pexels.com/photos/7412068/pexels-photo-7412068',
+    img_url:
+      'https://images.pexels.com/photos/7412068/pexels-photo-7412068.jpeg',
     img_alt: 'Magnifying glass on map',
     body: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p>',
     language_ids: [3, 4],
@@ -188,7 +195,8 @@ const projectData = [
   {
     title: 'Kata: Find Closing Parentheses',
     link: 'http://www.live-version.com/project',
-    img_url: 'https://images.pexels.com/photos/7412068/pexels-photo-7412068',
+    img_url:
+      'https://images.pexels.com/photos/7412068/pexels-photo-7412068.jpeg',
     img_alt: 'Magnifying glass on map',
     body: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p>',
     language_ids: [5, 6, 1],
@@ -236,7 +244,8 @@ const projectData = [
   {
     title: 'Kata: Find Closing Parentheses',
     link: 'http://www.live-version.com/project',
-    img_url: 'https://images.pexels.com/photos/7412068/pexels-photo-7412068',
+    img_url:
+      'https://images.pexels.com/photos/7412068/pexels-photo-7412068.jpeg',
     img_alt: 'Magnifying glass on map',
     body: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p>',
     language_ids: [3, 4],
@@ -250,7 +259,8 @@ const projectData = [
   {
     title: 'Kata: Find Closing Parentheses',
     link: 'http://www.live-version.com/project',
-    img_url: 'https://images.pexels.com/photos/7412068/pexels-photo-7412068',
+    img_url:
+      'https://images.pexels.com/photos/7412068/pexels-photo-7412068.jpeg',
     img_alt: 'Magnifying glass on map',
     body: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. Dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu. Diam vulputate ut pharetra sit. Nisl pretium fusce id velit ut tortor. Purus sit amet volutpat consequat. Morbi tincidunt ornare massa eget. Porta lorem mollis aliquam ut porttitor leo. Mauris in aliquam sem fringilla ut morbi. Feugiat pretium nibh ipsum consequat nisl vel pretium. Proin fermentum leo vel orci porta non pulvinar neque. Luctus venenatis lectus magna fringilla urna porttitor.</p>',
     language_ids: [1, 2, 3],
