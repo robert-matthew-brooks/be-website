@@ -7,6 +7,7 @@ const {
   orderGreenlist,
   rejectIfNotInGreenList,
 } = require('./validate');
+const { parseVideoUrl } = require('./parse-video-url');
 
 async function getProjects(
   language = '%',
@@ -108,7 +109,12 @@ async function getProject(project_id) {
     [project_id]
   );
 
-  return { project: rows[0] };
+  const project = { ...rows[0] };
+  if (project.video_url) {
+    project.video_url = parseVideoUrl(project.video_url);
+  }
+
+  return { project };
 }
 
 module.exports = { getProjects, getProject };
