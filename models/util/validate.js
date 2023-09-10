@@ -1,5 +1,5 @@
 const format = require('pg-format');
-const db = require('../db/connection');
+const db = require('../../db/connection');
 
 function rejectIfNotNumber(values) {
   for (const key in values) {

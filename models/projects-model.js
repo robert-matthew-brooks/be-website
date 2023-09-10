@@ -6,8 +6,8 @@ const {
   sortByGreenlist,
   orderGreenlist,
   rejectIfNotInGreenList,
-} = require('./validate');
-const { parseVideoUrl } = require('./parse-video-url');
+} = require('./util/validate');
+const { parseVideoUrl } = require('./util/parse-video-url');
 
 async function getProjects(
   language = '%',
