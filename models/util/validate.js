@@ -1,9 +1,17 @@
 const format = require('pg-format');
 const db = require('../../db/connection');
 
-function rejectIfNotNumber(values) {
+function rejectIfNotDigit(values) {
   for (const key in values) {
     if (!/^[\d]+$/.test(values[key])) {
+      return Promise.reject({ status: 400, msg: `invalid ${key}` });
+    }
+  }
+}
+
+function rejectIfNotValidSlug(values) {
+  for (const key in values) {
+    if (!/^[\w\d-]+$/.test(values[key])) {
       return Promise.reject({ status: 400, msg: `invalid ${key}` });
     }
   }
@@ -50,7 +58,8 @@ function rejectIfNotInGreenList(values, greenlist) {
 }
 
 module.exports = {
-  rejectIfNotNumber,
+  rejectIfNotDigit,
+  rejectIfNotValidSlug,
   rejectIfLessThan,
   rejectIfNotInTable,
   sortByGreenlist,

@@ -22,9 +22,10 @@ describe('projects table', () => {
     const expectedObject = {
       id: expect.any(Number),
       created_at: expect.any(Object),
+      title: expect.any(String),
+      slug: expect.any(String),
       live_link: expect.toBeOneOf([expect.any(String), null]),
       github_link: expect.toBeOneOf([expect.any(String), null]),
-      title: expect.any(String),
       img_url: expect.toBeOneOf([expect.any(String), null]),
       img_alt: expect.toBeOneOf([expect.any(String), null]),
       video_url: expect.toBeOneOf([expect.any(String), null]),

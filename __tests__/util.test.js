@@ -1,5 +1,6 @@
 const {
-  rejectIfNotNumber,
+  rejectIfNotDigit,
+  rejectIfNotValidSlug,
   rejectIfLessThan,
   rejectIfNotInTable,
   rejectIfNotInGreenList,
@@ -8,15 +9,15 @@ const {
 describe('validate.js', () => {
   describe('rejectIfNotNumber()', () => {
     it('should reject the promise if not provided a number', async () => {
-      await expect(rejectIfNotNumber({ input: 'abc' })).rejects.toBeDefined();
+      await expect(rejectIfNotDigit({ input: 'abc' })).rejects.toBeDefined();
     });
 
     it('should not reject the promise if provided a string which contains only numbers', () => {
-      expect(rejectIfNotNumber({ input: '1' })).toBeUndefined();
+      expect(rejectIfNotDigit({ input: '1' })).toBeUndefined();
     });
 
     it('should not reject the promise if provided a number', () => {
-      expect(rejectIfNotNumber({ input: 1 })).toBeUndefined();
+      expect(rejectIfNotDigit({ input: 1 })).toBeUndefined();
     });
   });
 

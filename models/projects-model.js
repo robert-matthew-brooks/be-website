@@ -1,6 +1,7 @@
 const db = require('../db/connection');
 const {
-  rejectIfNotNumber,
+  rejectIfNotDigit,
+  rejectIfNotValidSlug,
   rejectIfLessThan,
   rejectIfNotInTable,
   sortByGreenlist,
@@ -22,7 +23,7 @@ async function getProjects(
   order = order.toUpperCase();
 
   const validationTests = [
-    rejectIfNotNumber({ limit, page }),
+    rejectIfNotDigit({ limit, page }),
     rejectIfLessThan({ limit, page }, 1),
     rejectIfNotInGreenList({ sort_by }, sortByGreenlist),
     rejectIfNotInGreenList({ order }, orderGreenlist),
@@ -40,6 +41,7 @@ async function getProjects(
         p.id,
         p.created_at,
         p.title,
+        p.slug,
         p.img_url,
         p.img_alt,
         JSON_AGG(l) AS languages
@@ -82,9 +84,9 @@ async function getProjects(
   };
 }
 
-async function getProject(project_id) {
-  await rejectIfNotNumber({ project_id });
-  await rejectIfNotInTable(project_id, 'id', 'projects');
+async function getProject(project_slug) {
+  await rejectIfNotValidSlug({ project_slug });
+  await rejectIfNotInTable(project_slug, 'slug', 'projects');
 
   const { rows } = await db.query(
     `
@@ -92,6 +94,7 @@ async function getProject(project_id) {
         p.id,
         p.created_at,
         p.title,
+        p.slug,
         p.live_link,
         p.github_link,
         p.img_url,
@@ -104,10 +107,10 @@ async function getProject(project_id) {
       ON p.id = pl.project_id
       INNER JOIN languages l
       ON l.id = pl.language_id
-      WHERE p.id = $1
+      WHERE p.slug = $1
       GROUP BY p.id;
     `,
-    [project_id]
+    [project_slug]
   );
 
   const project = { ...rows[0] };

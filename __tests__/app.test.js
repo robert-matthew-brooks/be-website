@@ -37,6 +37,7 @@ describe('GET /api/projects', () => {
       expect(project).toMatchObject({
         id: expect.any(Number),
         title: expect.any(String),
+        slug: expect.any(String),
         img_url: expect.toBeOneOf([expect.any(String), null]),
         img_alt: expect.toBeOneOf([expect.any(String), null]),
         languages: expect.any(Array),
@@ -221,14 +222,15 @@ describe('GET /api/languages', () => {
 
 describe('GET /api/projects/:project_id', () => {
   it('200: should return an object with correct properties', async () => {
-    const { body } = await request(app).get('/api/projects/1').expect(200);
+    const { body } = await request(app).get('/api/projects/proj-1').expect(200);
 
     expect(body.project).toMatchObject({
       id: expect.any(Number),
       created_at: expect.any(String),
+      title: expect.any(String),
+      slug: expect.any(String),
       live_link: expect.toBeOneOf([expect.any(String), null]),
       github_link: expect.toBeOneOf([expect.any(String), null]),
-      title: expect.any(String),
       img_url: expect.toBeOneOf([expect.any(String), null]),
       img_alt: expect.toBeOneOf([expect.any(String), null]),
       video_url: expect.toBeOneOf([expect.any(String), null]),
@@ -246,14 +248,18 @@ describe('GET /api/projects/:project_id', () => {
   });
 
   describe('error handling', () => {
-    it('400: should return an error when project_id is not a number', async () => {
-      const { body } = await request(app).get('/api/projects/a').expect(400);
-      expect(body.msg).toBe('invalid project_id');
+    it('400: should return an error when project_slug is not letters, numbers and hyphens', async () => {
+      const { body } = await request(app)
+        .get('/api/projects/( i n v a l i d )')
+        .expect(400);
+      expect(body.msg).toBe('invalid project_slug');
     });
 
-    it('404: should return an error when project_id is not in table', async () => {
-      const { body } = await request(app).get('/api/projects/999').expect(404);
-      expect(body.msg).toBe('specified id not found in projects table');
+    it('404: should return an error when project_slug is not in table', async () => {
+      const { body } = await request(app)
+        .get('/api/projects/unknown-project')
+        .expect(404);
+      expect(body.msg).toBe('specified slug not found in projects table');
     });
   });
 });

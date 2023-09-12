@@ -1,6 +1,7 @@
 const projectData = [
   {
     title: 'project 1',
+    slug: 'proj-1',
     live_link: 'some_url.com/project_1',
     github_link: 'github.com/project_1',
     video_url: 'some_url.com/video_1',
@@ -9,6 +10,7 @@ const projectData = [
   },
   {
     title: 'project 2',
+    slug: 'proj-2',
     live_link: 'some_url.com/project_2',
     img_url: 'some_image_2.jpg',
     img_alt: 'some image 2',
@@ -17,6 +19,7 @@ const projectData = [
   },
   {
     title: 'project 3',
+    slug: 'proj-3',
     live_link: 'some_url.com/project_3',
     img_url: 'some_image_3.jpg',
     img_alt: 'some image 3',
@@ -26,12 +29,14 @@ const projectData = [
   },
   {
     title: 'project 4',
+    slug: 'proj-4',
     live_link: 'some_url.com/project_4',
     body: 'some text describing project 4',
     language_ids: [10, 1, 2],
   },
   {
     title: 'project 5',
+    slug: 'proj-5',
     live_link: 'some_url.com/project_5',
     github_link: 'github.com/project_5',
     img_url: 'some_image_5.jpg',
@@ -42,12 +47,14 @@ const projectData = [
   },
   {
     title: 'project 6',
+    slug: 'proj-6',
     live_link: 'some_url.com/project_6',
     body: 'some text describing project 6',
     language_ids: [6, 7, 8],
   },
   {
     title: 'project 7',
+    slug: 'proj-7',
     live_link: 'some_url.com/project_7',
     img_url: 'some_image_7.jpg',
     img_alt: 'some image 7',
@@ -57,6 +64,7 @@ const projectData = [
   },
   {
     title: 'project 8',
+    slug: 'proj-8',
     live_link: 'some_url.com/project_8',
     github_link: 'github.com/project_8',
     img_url: 'some_image_8.jpg',
@@ -66,6 +74,7 @@ const projectData = [
   },
   {
     title: 'project 9',
+    slug: 'proj-9',
     live_link: 'some_url.com/project_9',
     img_url: 'some_image_9.jpg',
     img_alt: 'some image 9',
@@ -75,12 +84,14 @@ const projectData = [
   },
   {
     title: 'project 10',
+    slug: 'proj-10',
     live_link: 'some_url.com/project_10',
     body: 'some text describing project 10',
     language_ids: [8, 9, 10],
   },
   {
     title: 'project 11',
+    slug: 'proj-11',
     live_link: 'some_url.com/project_11',
     github_link: 'github.com/project_11',
     img_url: 'some_image_11.jpg',
@@ -91,6 +102,7 @@ const projectData = [
   },
   {
     title: 'project 12',
+    slug: 'proj-12',
     live_link: 'some_url.com/project_12',
     github_link: 'github.com/project_12',
     img_url: 'some_image_12.jpg',
@@ -100,6 +112,7 @@ const projectData = [
   },
   {
     title: 'project 13',
+    slug: 'proj-13',
     live_link: 'some_url.com/project_13',
     img_url: 'some_image_13.jpg',
     img_alt: 'some image 13',
@@ -109,6 +122,7 @@ const projectData = [
   },
   {
     title: 'project 14',
+    slug: 'proj-14',
     live_link: 'some_url.com/project_14',
     github_link: 'github.com/project_4',
     img_url: 'some_image_14.jpg',
@@ -118,6 +132,7 @@ const projectData = [
   },
   {
     title: 'project 15',
+    slug: 'proj-15',
     live_link: 'some_url.com/project_15',
     img_url: 'some_image_15.jpg',
     img_alt: 'some image 15',
@@ -127,12 +142,14 @@ const projectData = [
   },
   {
     title: 'project 16',
+    slug: 'proj-16',
     live_link: 'some_url.com/project_16',
     body: 'some text describing project 16',
     language_ids: [6, 7, 8],
   },
   {
     title: 'project 17',
+    slug: 'proj-17',
     live_link: 'some_url.com/project_17',
     img_url: 'some_image_17.jpg',
     img_alt: 'some image 17',
@@ -142,6 +159,7 @@ const projectData = [
   },
   {
     title: 'project 18',
+    slug: 'proj-18',
     live_link: 'some_url.com/project_18',
     img_url: 'some_image_18.jpg',
     img_alt: 'some image 18',
@@ -150,6 +168,7 @@ const projectData = [
   },
   {
     title: 'project 19',
+    slug: 'proj-19',
     live_link: 'some_url.com/project_19',
     github_link: 'github.com/project_19',
     video_url: 'some_url.com/video_19',
@@ -158,6 +177,7 @@ const projectData = [
   },
   {
     title: 'project 20',
+    slug: 'proj-20',
     live_link: 'some_url.com/project_20',
     img_url: 'some_image_20.jpg',
     img_alt: 'some image 20',

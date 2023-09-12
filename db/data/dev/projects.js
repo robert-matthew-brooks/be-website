@@ -1,5 +1,6 @@
 const projectData = [
   {
+    created_at: '2023-09-12T20:28:09.186Z',
     title: 'Kata: Sum Consecutive Duplicates',
     link: 'https://sum-consecutive-duplicates.onrender.com/frontend/',
     img_url: 'https://i.ibb.co/5K19c4w/sum-consecutive-duplicates.png',

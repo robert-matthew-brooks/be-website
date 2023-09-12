@@ -38,7 +38,7 @@ app.get('/api', (req, res, next) => {
 // projects
 
 app.get('/api/projects', getProjects);
-app.get('/api/projects/:project_id', getProject);
+app.get('/api/projects/:project_slug', getProject);
 
 // languages
 

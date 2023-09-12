@@ -18,10 +18,10 @@ async function getProjects(req, res, next) {
 }
 
 async function getProject(req, res, next) {
-  const { project_id } = req.params;
+  const { project_slug } = req.params;
 
   try {
-    const { project } = await projectsModel.getProject(project_id);
+    const { project } = await projectsModel.getProject(project_slug);
     res.status(200).send({ project });
   } catch (err) {
     next(err);

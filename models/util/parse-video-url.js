@@ -7,7 +7,6 @@ function parseVideoUrl(videoUrl) {
       'youtube.com',
       'youtube-nocookie.com'
     );
-    console.log(parsedVideoUrl);
   }
   return parsedVideoUrl;
 }
