@@ -1,14 +1,15 @@
 const projectData = [
   {
     title: 'project 1',
-    link: 'some_url.com/project_1',
+    live_link: 'some_url.com/project_1',
+    github_link: 'github.com/project_1',
     video_url: 'some_url.com/video_1',
     body: 'some text describing project 1',
     language_ids: [1, 2, 3],
   },
   {
     title: 'project 2',
-    link: 'some_url.com/project_2',
+    live_link: 'some_url.com/project_2',
     img_url: 'some_image_2.jpg',
     img_alt: 'some image 2',
     body: 'some text describing project 2',
@@ -16,7 +17,7 @@ const projectData = [
   },
   {
     title: 'project 3',
-    link: 'some_url.com/project_3',
+    live_link: 'some_url.com/project_3',
     img_url: 'some_image_3.jpg',
     img_alt: 'some image 3',
     video_url: 'some_url.com/video_3',
@@ -25,13 +26,14 @@ const projectData = [
   },
   {
     title: 'project 4',
-    link: 'some_url.com/project_4',
+    live_link: 'some_url.com/project_4',
     body: 'some text describing project 4',
     language_ids: [10, 1, 2],
   },
   {
     title: 'project 5',
-    link: 'some_url.com/project_5',
+    live_link: 'some_url.com/project_5',
+    github_link: 'github.com/project_5',
     img_url: 'some_image_5.jpg',
     img_alt: 'some image 5',
     video_url: 'some_url.com/video_5',
@@ -40,13 +42,13 @@ const projectData = [
   },
   {
     title: 'project 6',
-    link: 'some_url.com/project_6',
+    live_link: 'some_url.com/project_6',
     body: 'some text describing project 6',
     language_ids: [6, 7, 8],
   },
   {
     title: 'project 7',
-    link: 'some_url.com/project_7',
+    live_link: 'some_url.com/project_7',
     img_url: 'some_image_7.jpg',
     img_alt: 'some image 7',
     video_url: 'some_url.com/video_7',
@@ -55,7 +57,8 @@ const projectData = [
   },
   {
     title: 'project 8',
-    link: 'some_url.com/project_8',
+    live_link: 'some_url.com/project_8',
+    github_link: 'github.com/project_8',
     img_url: 'some_image_8.jpg',
     img_alt: 'some image 8',
     body: 'some text describing project 8',
@@ -63,7 +66,7 @@ const projectData = [
   },
   {
     title: 'project 9',
-    link: 'some_url.com/project_9',
+    live_link: 'some_url.com/project_9',
     img_url: 'some_image_9.jpg',
     img_alt: 'some image 9',
     video_url: 'some_url.com/video_9',
@@ -72,13 +75,14 @@ const projectData = [
   },
   {
     title: 'project 10',
-    link: 'some_url.com/project_10',
+    live_link: 'some_url.com/project_10',
     body: 'some text describing project 10',
     language_ids: [8, 9, 10],
   },
   {
     title: 'project 11',
-    link: 'some_url.com/project_11',
+    live_link: 'some_url.com/project_11',
+    github_link: 'github.com/project_11',
     img_url: 'some_image_11.jpg',
     img_alt: 'some image 11',
     video_url: 'some_url.com/video_11',
@@ -87,7 +91,8 @@ const projectData = [
   },
   {
     title: 'project 12',
-    link: 'some_url.com/project_12',
+    live_link: 'some_url.com/project_12',
+    github_link: 'github.com/project_12',
     img_url: 'some_image_12.jpg',
     img_alt: 'some image 12',
     body: 'some text describing project 12',
@@ -95,7 +100,7 @@ const projectData = [
   },
   {
     title: 'project 13',
-    link: 'some_url.com/project_13',
+    live_link: 'some_url.com/project_13',
     img_url: 'some_image_13.jpg',
     img_alt: 'some image 13',
     video_url: 'some_url.com/video_13',
@@ -104,7 +109,8 @@ const projectData = [
   },
   {
     title: 'project 14',
-    link: 'some_url.com/project_14',
+    live_link: 'some_url.com/project_14',
+    github_link: 'github.com/project_4',
     img_url: 'some_image_14.jpg',
     img_alt: 'some image 14',
     body: 'some text describing project 14',
@@ -112,7 +118,7 @@ const projectData = [
   },
   {
     title: 'project 15',
-    link: 'some_url.com/project_15',
+    live_link: 'some_url.com/project_15',
     img_url: 'some_image_15.jpg',
     img_alt: 'some image 15',
     video_url: 'some_url.com/video_15',
@@ -121,13 +127,13 @@ const projectData = [
   },
   {
     title: 'project 16',
-    link: 'some_url.com/project_16',
+    live_link: 'some_url.com/project_16',
     body: 'some text describing project 16',
     language_ids: [6, 7, 8],
   },
   {
     title: 'project 17',
-    link: 'some_url.com/project_17',
+    live_link: 'some_url.com/project_17',
     img_url: 'some_image_17.jpg',
     img_alt: 'some image 17',
     video_url: 'some_url.com/video_17',
@@ -136,7 +142,7 @@ const projectData = [
   },
   {
     title: 'project 18',
-    link: 'some_url.com/project_18',
+    live_link: 'some_url.com/project_18',
     img_url: 'some_image_18.jpg',
     img_alt: 'some image 18',
     body: 'some text describing project 18',
@@ -144,14 +150,15 @@ const projectData = [
   },
   {
     title: 'project 19',
-    link: 'some_url.com/project_19',
+    live_link: 'some_url.com/project_19',
+    github_link: 'github.com/project_19',
     video_url: 'some_url.com/video_19',
     body: 'some text describing project 19',
     language_ids: [5, 6, 7],
   },
   {
     title: 'project 20',
-    link: 'some_url.com/project_20',
+    live_link: 'some_url.com/project_20',
     img_url: 'some_image_20.jpg',
     img_alt: 'some image 20',
     body: 'some text describing project 20',

@@ -1,17 +1,5 @@
 const languageData = [
   {
-    name: 'React',
-    slug: 'react',
-    icon_url:
-      'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-  },
-  {
-    name: 'Postgresql',
-    slug: 'psql',
-    icon_url:
-      'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
-  },
-  {
     name: 'JavaScript',
     slug: 'js',
     icon_url:
