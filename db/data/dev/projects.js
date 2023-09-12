@@ -2,7 +2,10 @@ const projectData = [
   {
     created_at: '2023-09-12T20:28:09.186Z',
     title: 'Kata: Sum Consecutive Duplicates',
-    link: 'https://sum-consecutive-duplicates.onrender.com/frontend/',
+    slug: 'sum-consecutive-duplicates',
+    live_link: 'https://sum-consecutive-duplicates.onrender.com/frontend/',
+    github_link:
+      'https://github.com/robert-matthew-brooks/sum-consecutive-duplicates',
     img_url: 'https://i.ibb.co/5K19c4w/sum-consecutive-duplicates.png',
     img_alt: 'VS code on screen',
     video_url: '',

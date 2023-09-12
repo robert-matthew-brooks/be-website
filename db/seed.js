@@ -27,7 +27,7 @@ async function seed({ projectData, languageData, projectLanguageData }) {
       id SERIAL PRIMARY KEY,
       created_at TIMESTAMP DEFAULT NOW(),
       title VARCHAR,
-      slug VARCHAR,
+      slug VARCHAR UNIQUE,
       live_link VARCHAR,
       github_link VARCHAR,
       img_url VARCHAR,
