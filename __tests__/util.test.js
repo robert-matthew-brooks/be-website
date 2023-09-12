@@ -1,3 +1,4 @@
+const db = require('../db/connection');
 const {
   rejectIfNotDigit,
   rejectIfNotValidSlug,
@@ -5,6 +6,10 @@ const {
   rejectIfNotInTable,
   rejectIfNotInGreenList,
 } = require('../models/util/validate');
+
+afterAll(() => {
+  db.end();
+});
 
 describe('validate.js', () => {
   describe('rejectIfNotNumber()', () => {
@@ -18,6 +23,22 @@ describe('validate.js', () => {
 
     it('should not reject the promise if provided a number', () => {
       expect(rejectIfNotDigit({ input: 1 })).toBeUndefined();
+    });
+  });
+
+  describe('rejectIfNotValidSlug()', () => {
+    it('should reject the promise if not provided anything but letters, numbers and hyphens', async () => {
+      await expect(
+        rejectIfNotValidSlug({ input: 'cannot-$$$-have-!!!-symbols-???' })
+      ).rejects.toBeDefined();
+
+      await expect(
+        rejectIfNotValidSlug({ input: 'cannot have spaces' })
+      ).rejects.toBeDefined();
+    });
+
+    it('should not reject the promise if provided provided letters, numbers and hyphens', () => {
+      expect(rejectIfNotValidSlug({ input: 'abc-123' })).toBeUndefined();
     });
   });
 
@@ -43,9 +64,29 @@ describe('validate.js', () => {
 
   describe('rejectIfNotInTable()', () => {
     it('should reject the promise if value not found in column of table', async () => {
-      await expect(rejectIfNotInTable()).rejects.toBeDefined();
+      await expect(
+        rejectIfNotInTable('invalid-slug', 'slug', 'projects')
+      ).rejects.toBeDefined();
     });
 
-    it('should not reject the promise if value found in column of table', () => {});
+    it('should not reject the promise if value found in column of table', async () => {
+      expect(
+        await rejectIfNotInTable('proj-1', 'slug', 'projects')
+      ).toBeUndefined();
+    });
+  });
+
+  describe('rejectIfNotInGreenList()', () => {
+    it('should reject the promise if value not found in greenlist', async () => {
+      await expect(
+        rejectIfNotInGreenList({ greeting: 'yo' }, ['hi', 'hello', 'hey'])
+      ).rejects.toBeDefined();
+    });
+
+    it('should not reject the promise if value found in greenlist', () => {
+      expect(
+        rejectIfNotInGreenList({ greeting: 'hello' }, ['hi', 'hello', 'hey'])
+      ).toBeUndefined();
+    });
   });
 });
