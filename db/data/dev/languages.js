@@ -6,6 +6,30 @@ const languageData = [
       'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
   },
   {
+    name: 'Express',
+    slug: 'express',
+    icon_url:
+      'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
+  },
+  {
+    name: 'PostgreSQL',
+    slug: 'psql',
+    icon_url:
+      'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+  },
+  {
+    name: 'Jest',
+    slug: 'jest',
+    icon_url:
+      'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg',
+  },
+  {
+    name: 'React',
+    slug: 'react',
+    icon_url:
+      'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+  },
+  {
     name: 'HTML',
     slug: 'html',
     icon_url:
@@ -16,12 +40,6 @@ const languageData = [
     slug: 'css',
     icon_url:
       'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
-  },
-  {
-    name: 'Jest',
-    slug: 'jest',
-    icon_url:
-      'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg',
   },
 ];
 

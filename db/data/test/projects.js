@@ -1,5 +1,6 @@
 const projectData = [
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 1',
     slug: 'proj-1',
     live_link: 'some_url.com/project_1',
@@ -9,6 +10,7 @@ const projectData = [
     language_ids: [1, 2, 3],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 2',
     slug: 'proj-2',
     live_link: 'some_url.com/project_2',
@@ -18,6 +20,7 @@ const projectData = [
     language_ids: [4, 5, 6],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 3',
     slug: 'proj-3',
     live_link: 'some_url.com/project_3',
@@ -28,6 +31,7 @@ const projectData = [
     language_ids: [7, 8, 9],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 4',
     slug: 'proj-4',
     live_link: 'some_url.com/project_4',
@@ -35,6 +39,7 @@ const projectData = [
     language_ids: [10, 1, 2],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 5',
     slug: 'proj-5',
     live_link: 'some_url.com/project_5',
@@ -46,6 +51,7 @@ const projectData = [
     language_ids: [3, 4, 5],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 6',
     slug: 'proj-6',
     live_link: 'some_url.com/project_6',
@@ -53,6 +59,7 @@ const projectData = [
     language_ids: [6, 7, 8],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 7',
     slug: 'proj-7',
     live_link: 'some_url.com/project_7',
@@ -63,6 +70,7 @@ const projectData = [
     language_ids: [9, 10, 1],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 8',
     slug: 'proj-8',
     live_link: 'some_url.com/project_8',
@@ -73,6 +81,7 @@ const projectData = [
     language_ids: [2, 3, 4],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 9',
     slug: 'proj-9',
     live_link: 'some_url.com/project_9',
@@ -83,6 +92,7 @@ const projectData = [
     language_ids: [5, 6, 7],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 10',
     slug: 'proj-10',
     live_link: 'some_url.com/project_10',
@@ -90,6 +100,7 @@ const projectData = [
     language_ids: [8, 9, 10],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 11',
     slug: 'proj-11',
     live_link: 'some_url.com/project_11',
@@ -101,6 +112,7 @@ const projectData = [
     language_ids: [1, 2, 3],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 12',
     slug: 'proj-12',
     live_link: 'some_url.com/project_12',
@@ -111,6 +123,7 @@ const projectData = [
     language_ids: [4, 5, 6],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 13',
     slug: 'proj-13',
     live_link: 'some_url.com/project_13',
@@ -121,6 +134,7 @@ const projectData = [
     language_ids: [7, 8, 9],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 14',
     slug: 'proj-14',
     live_link: 'some_url.com/project_14',
@@ -131,6 +145,7 @@ const projectData = [
     language_ids: [10, 1, 2],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 15',
     slug: 'proj-15',
     live_link: 'some_url.com/project_15',
@@ -141,6 +156,7 @@ const projectData = [
     language_ids: [3, 4, 5],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 16',
     slug: 'proj-16',
     live_link: 'some_url.com/project_16',
@@ -148,6 +164,7 @@ const projectData = [
     language_ids: [6, 7, 8],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 17',
     slug: 'proj-17',
     live_link: 'some_url.com/project_17',
@@ -158,6 +175,7 @@ const projectData = [
     language_ids: [9, 10, 1],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 18',
     slug: 'proj-18',
     live_link: 'some_url.com/project_18',
@@ -167,6 +185,7 @@ const projectData = [
     language_ids: [2, 3, 4],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 19',
     slug: 'proj-19',
     live_link: 'some_url.com/project_19',
@@ -176,6 +195,7 @@ const projectData = [
     language_ids: [5, 6, 7],
   },
   {
+    created_at: new Date(Date.now()).toUTCString(),
     title: 'project 20',
     slug: 'proj-20',
     live_link: 'some_url.com/project_20',
