@@ -168,7 +168,13 @@ const projectData = [
       <f>/model</f> folders.
     </p>
     
-    <img />
+    <img
+      src="https://i.ibb.co/G7rsy4f/backend-nc-news-3.png"
+      alt="MVC model diagram"
+    />
+    <caption>
+      MVC model diagram
+    </caption>
     
     <ul>
       <li>
