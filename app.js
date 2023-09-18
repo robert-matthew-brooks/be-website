@@ -14,7 +14,7 @@ const endpoints = require('./endpoints.json');
 
 const allowedUrls = [
   'http://localhost:5173',
-  'https://robert-matthew-brooks.netlify.app/',
+  'https://robert-matthew-brooks.netlify.app',
 ];
 
 /**************/
