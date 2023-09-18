@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "create-dbs": "psql -f ./db/create-dbs.sql",
-    "seed-dev-db": "node ./db/seed-dev-db.js",
-    "seed-prod-db": "NODE_ENV=production node ./db/seed-dev-db.js",
+    "seed-dev-db": "node ./db/run-seed.js",
+    "seed-prod-db": "NODE_ENV=production node ./db/run-seed.js",
     "listen": "nodemon listen.js",
     "test": "jest"
   },
