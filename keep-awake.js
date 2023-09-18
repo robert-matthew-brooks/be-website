@@ -3,7 +3,7 @@ const https = require('https');
 
 const serverUrl = 'https://be-website.onrender.com/';
 
-const keepAwake = new CronJob('*/10 * * * * *', () => {
+const keepAwake = new CronJob('*/10 08-19 * * * ', () => {
   console.log('Pinging server...');
 
   https
