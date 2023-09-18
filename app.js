@@ -12,7 +12,10 @@ const {
 } = require('./error-handlers');
 const endpoints = require('./endpoints.json');
 
-const allowedUrls = ['http://localhost:5173'];
+const allowedUrls = [
+  'http://localhost:5173',
+  'https://robert-matthew-brooks.netlify.app/',
+];
 
 /**************/
 /* middleware */
