@@ -4,9 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "listen": "nodemon listen.js",
     "create-dbs": "psql -f ./db/create-dbs.sql",
     "seed-dev-db": "node ./db/seed-dev-db.js",
+    "seed-prod-db": "NODE_ENV=production node ./db/seed-dev-db.js",
+    "listen": "nodemon listen.js",
     "test": "jest"
   },
   "keywords": [],
@@ -16,13 +17,13 @@
     "jest": "^29.6.2",
     "jest-extended": "^4.0.1",
     "jest-sorted": "^1.0.14",
-    "nodemon": "^3.0.1",
     "supertest": "^6.3.3"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "nodemon": "^3.0.1",
     "pg": "^8.11.2",
     "pg-format": "^1.0.4"
   },
