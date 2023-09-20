@@ -13,6 +13,6 @@ app.listen(port, (err) => {
 });
 
 if (process.env.NODE_ENV === 'production') {
-  console.log('Starting server nudge CronJob');
+  console.log('starting server nudge CronJob');
   keepAwake(serverUrl).start();
 }

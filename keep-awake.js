@@ -5,10 +5,10 @@ function keepAwake(serverUrl) {
   return new CronJob('0 */10 * * * *', () => {
     https
       .get(serverUrl, (res) => {
-        console.log(`Nudged server - responded with code: ${res.statusCode}`);
+        console.log(`nudged server - response code: ${res.statusCode}`);
       })
       .on('error', (err) => {
-        console.error(`Nudged server - responded with error: ${err.message}`);
+        console.error(`nudged server - response error: ${err.message}`);
       });
   });
 }
