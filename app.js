@@ -11,14 +11,11 @@ const {
   serverErrorHandler,
 } = require('./error-handlers');
 const endpoints = require('./endpoints.json');
-const keepAwake = require('./keep-awake');
 
 const allowedUrls = [
   'http://localhost:5173',
   'https://robert-matthew-brooks.netlify.app',
 ];
-
-keepAwake.start();
 
 /**************/
 /* middleware */
