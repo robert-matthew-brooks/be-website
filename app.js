@@ -13,7 +13,8 @@ const {
 const endpoints = require('./endpoints.json');
 
 const allowedUrls = [
-  'http://localhost:5173',
+  'http://localhost:5173', // react
+  'http://localhost:5000', // react server
   'https://robert-matthew-brooks.netlify.app',
 ];
 
