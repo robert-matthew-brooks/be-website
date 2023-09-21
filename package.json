@@ -7,7 +7,7 @@
     "create-dbs": "psql -f ./db/create-dbs.sql",
     "seed-dev-db": "node ./db/run-seed.js",
     "seed-prod-db": "NODE_ENV=production node ./db/run-seed.js",
-    "listen": "nodemon listen.js",
+    "listen": "node listen.js",
     "test": "jest"
   },
   "keywords": [],
@@ -24,7 +24,6 @@
     "cron": "^2.4.3",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "nodemon": "^3.0.1",
     "pg": "^8.11.2",
     "pg-format": "^1.0.4"
   },
