@@ -4,8 +4,8 @@ async function getLanguages() {
   const { rows: languages } = await db.query(`
     SELECT
       l.id,
-      l.name,
       l.slug,
+      l.name,
       l.icon_url,
       COUNT(*)::INT AS project_count
     FROM languages l

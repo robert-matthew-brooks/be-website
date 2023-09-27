@@ -10,7 +10,10 @@
       "projects": [
         {
           "id": 1,
+          "slug": "build-website-be",
+          "created_at": "2023-06-30T18:11:01.487Z",
           "title": "Building A Website Backend",
+          "description": "An article about building a website backend",
           "img_url": "https://images.pexels.com/photos/1117452/pexels-photo-1117452.jpeg",
           "languages": [
             {
@@ -30,8 +33,8 @@
       "languages": [
         {
           "id": 1,
-          "name": "JavaScript",
           "slug": "js",
+          "name": "JavaScript",
           "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
           "project_count": 5
         }
@@ -43,11 +46,16 @@
     "exampleResponse": {
       "project": {
         "id": 1,
-        "created_at": "",
+        "slug": "build-website-be",
+        "created_at": "2023-06-30T18:11:01.487Z",
         "title": "Building A Website Backend",
+        "description": "An article about building a website backend",
         "img_url": "https://images.pexels.com/photos/1117452/pexels-photo-1117452.jpeg",
+        "img_alt": "A silhouette of some men building a scaffold",
         "video_url": "https://www.youtube.com/watch?v=jNQXAC9IVRw",
-        "body": "This is a programming article. To build a backend api: seed a database, build a server, perform unit tests, host the database, host the server.",
+        "live_link": "https://build-website-be.onrender.com",
+        "github_link": "https://github.com/robert-matthew-brooks/build-website-be",
+        "body": "Hello, this is a programming article. To build a backend api: seed a database, build a server, perform unit tests, host the database, host the server.",
         "languages": [
           {
             "id": 1,

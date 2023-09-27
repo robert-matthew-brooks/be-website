@@ -25,9 +25,10 @@ async function seed({ projectData, languageData, projectLanguageData }) {
   await db.query(`
     CREATE TABLE projects (
       id SERIAL PRIMARY KEY,
+      slug VARCHAR UNIQUE NOT NULL,
       created_at TIMESTAMP DEFAULT NOW() NOT NULL,
       title VARCHAR NOT NULL,
-      slug VARCHAR UNIQUE NOT NULL,
+      description VARCHAR NOT NULL,
       live_link VARCHAR,
       github_link VARCHAR,
       img_url VARCHAR,
@@ -40,8 +41,8 @@ async function seed({ projectData, languageData, projectLanguageData }) {
   await db.query(`
     CREATE TABLE languages (
       id SERIAL PRIMARY KEY,
-      name VARCHAR NOT NULL,
       slug VARCHAR NOT NULL,
+      name VARCHAR NOT NULL,
       icon_url VARCHAR NOT NULL
     );
   `);
@@ -59,39 +60,41 @@ async function seed({ projectData, languageData, projectLanguageData }) {
   const insertProjectsQueryStr = format(
     `INSERT INTO projects (
       created_at,
-      title,
       slug,
-      live_link,
-      github_link,
+      title,
+      description,
       img_url,
       img_alt,
       video_url,
+      live_link,
+      github_link,
       body
     )
     VALUES %L;`,
     projectData.map((project) => [
       project.created_at,
-      project.title,
       project.slug,
-      project.live_link,
-      project.github_link,
+      project.title,
+      project.description,
       project.img_url,
       project.img_alt,
       project.video_url,
+      project.live_link,
+      project.github_link,
       project.body,
     ])
   );
 
   const insertLanguagesQueryStr = format(
     `INSERT INTO languages (
-      name,
       slug,
+      name,
       icon_url
     )
     VALUES %L;`,
     languageData.map((language) => [
-      language.name,
       language.slug,
+      language.name,
       language.icon_url,
     ])
   );

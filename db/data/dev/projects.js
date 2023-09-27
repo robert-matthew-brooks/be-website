@@ -1,12 +1,14 @@
 const projectData = [
   {
+    slug: 'backend-nc-news',
     created_at: '2023-06-30T18:11:01.487Z',
     title: 'NC-News Backend API',
-    slug: 'backend-nc-news',
-    live_link: 'https://be-nc-news-nvms.onrender.com/api',
-    github_link: 'https://github.com/robert-matthew-brooks/be-nc-news',
+    description:
+      'An api which mimics a real world backend service for a news/blog website, which provides information to frontend architecture',
     img_url: 'https://i.ibb.co/t2vHVnC/backend-nc-news.png',
     img_alt: 'JSON object in Insomnia',
+    live_link: 'https://be-nc-news-nvms.onrender.com/api',
+    github_link: 'https://github.com/robert-matthew-brooks/be-nc-news',
     body: `
     <h>Intro</h>
 
@@ -262,13 +264,15 @@ const projectData = [
     language_ids: [1, 2, 3, 4],
   },
   {
+    slug: 'frontend-nc-news',
     created_at: '2023-07-21T13:51:04.186Z',
     title: 'NC-News Frontend Website',
-    slug: 'frontend-nc-news',
-    live_link: 'https://frontend-nc-news.netlify.app/',
-    github_link: 'https://github.com/robert-matthew-brooks/fe-nc-news',
+    description:
+      'A Reddit style social news hub featuring user-curated ratings and a comments',
     img_url: 'https://i.ibb.co/FBBwGy7/frontend-nc-news.jpg',
     img_alt: 'NC-News website',
+    live_link: 'https://frontend-nc-news.netlify.app/',
+    github_link: 'https://github.com/robert-matthew-brooks/fe-nc-news',
     body: `
     <h>Intro</h>
 

@@ -36,8 +36,10 @@ describe('GET /api/projects', () => {
     for (const project of body.projects) {
       expect(project).toMatchObject({
         id: expect.any(Number),
-        title: expect.any(String),
         slug: expect.any(String),
+        created_at: expect.any(String),
+        title: expect.any(String),
+        description: expect.any(String),
         img_url: expect.toBeOneOf([expect.any(String), null]),
         img_alt: expect.toBeOneOf([expect.any(String), null]),
         languages: expect.any(Array),
@@ -198,8 +200,8 @@ describe('GET /api/languages', () => {
     for (const language of body.languages) {
       expect(language).toMatchObject({
         id: expect.any(Number),
-        name: expect.any(String),
         slug: expect.any(String),
+        name: expect.any(String),
         icon_url: expect.any(String),
         project_count: expect.any(Number),
       });
@@ -226,22 +228,24 @@ describe('GET /api/projects/:project_id', () => {
 
     expect(body.project).toMatchObject({
       id: expect.any(Number),
+      slug: expect.any(String),
       created_at: expect.any(String),
       title: expect.any(String),
-      slug: expect.any(String),
-      live_link: expect.toBeOneOf([expect.any(String), null]),
-      github_link: expect.toBeOneOf([expect.any(String), null]),
+      description: expect.any(String),
       img_url: expect.toBeOneOf([expect.any(String), null]),
       img_alt: expect.toBeOneOf([expect.any(String), null]),
       video_url: expect.toBeOneOf([expect.any(String), null]),
+      live_link: expect.toBeOneOf([expect.any(String), null]),
+      github_link: expect.toBeOneOf([expect.any(String), null]),
       body: expect.any(String),
+      languages: expect.any(Array),
     });
 
     for (const language of body.project.languages) {
       expect(language).toMatchObject({
         id: expect.any(Number),
-        name: expect.any(String),
         slug: expect.any(String),
+        name: expect.any(String),
         icon_url: expect.any(String),
       });
     }

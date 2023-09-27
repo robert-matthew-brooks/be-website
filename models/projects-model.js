@@ -39,9 +39,10 @@ async function getProjects(
     `
       SELECT
         p.id,
+        p.slug,
         p.created_at,
         p.title,
-        p.slug,
+        p.description,
         p.img_url,
         p.img_alt,
         JSON_AGG(l) AS languages
@@ -92,14 +93,15 @@ async function getProject(project_slug) {
     `
       SELECT
         p.id,
+        p.slug,
         p.created_at,
         p.title,
-        p.slug,
-        p.live_link,
-        p.github_link,
+        p.description,
         p.img_url,
         p.img_alt,
         p.video_url,
+        p.live_link,
+        p.github_link,
         p.body,
         JSON_AGG(l) AS languages
       FROM projects p

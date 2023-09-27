@@ -31,11 +31,11 @@ app.set('json spaces', 2);
 
 // server info
 
-app.get('/', (req, res, next) => {
+app.get('/', (_req, res, _next) => {
   res.status(200).send('Server OK');
 });
 
-app.get('/api', (req, res, next) => {
+app.get('/api', (_req, res, _next) => {
   res.status(200).send(endpoints);
 });
 
@@ -52,7 +52,7 @@ app.get('/api/languages', getLanguages);
 /* error handling */
 /******************/
 
-app.all('*', (req, res, next) => {
+app.all('*', (req, res, _next) => {
   res.status(404).send({ msg: 'endpoint not found' });
 });
 
