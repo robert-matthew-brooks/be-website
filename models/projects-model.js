@@ -45,7 +45,7 @@ async function getProjects(
         p.description,
         p.img_url,
         p.img_alt,
-        JSON_AGG(l) AS languages,
+        JSON_AGG(DISTINCT l) AS languages,
         COUNT(DISTINCT lk.ip_address)::INT AS total_likes
       FROM projects p
       LEFT JOIN projects_languages pl
