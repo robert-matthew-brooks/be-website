@@ -19,7 +19,7 @@ async function getLikes(project_slug) {
   const likes_ips = rows.map((el) => el.ip_address);
   const likes_count = likes_ips.length;
 
-  return { likes_ips, likes_count };
+  return { likes_count, likes_ips };
 }
 
 module.exports = { getLikes };

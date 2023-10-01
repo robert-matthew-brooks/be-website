@@ -284,8 +284,8 @@ describe('GET /api/likes/:project_id', () => {
     const { body } = await request(app).get('/api/likes/proj-1').expect(200);
 
     expect(body).toMatchObject({
-      likes_ips: expect.any(Array),
       likes_count: expect.any(Number),
+      likes_ips: expect.any(Array),
     });
 
     for (const ip of body.likes_ips) {

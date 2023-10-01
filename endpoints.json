@@ -64,9 +64,15 @@
             "slug": "js",
             "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
           }
-        ],
-        "liked_ips": ["192.168.1.1", "192.168.1.2", "192.168.1.3"]
+        ]
       }
+    }
+  },
+  "GET /api/likes/:project_id": {
+    "description": "returns ip addresses that liked a project",
+    "exampleResponse": {
+      "likes_count": 3,
+      "likes_ips": ["192.168.1.1", "192.168.1.2", "192.168.1.3"]
     }
   }
 }
