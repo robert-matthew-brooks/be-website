@@ -19,8 +19,9 @@ async function getVotes(project_slug) {
   );
 
   const votesSum = votes.reduce((acc, vote) => acc + vote.value, 0);
+  const voteIps = votes.map((vote) => vote.ip);
 
-  return { votesSum, votes };
+  return { votesSum, voteIps };
 }
 
 module.exports = { getVotes };

@@ -273,14 +273,11 @@ describe('GET /api/votes/:project_id', () => {
 
     expect(body).toMatchObject({
       votes_sum: expect.any(Number),
-      votes: expect.any(Array),
+      vote_ips: expect.any(Array),
     });
 
-    for (const vote of body.votes) {
-      expect(vote).toMatchObject({
-        ip: expect.any(String),
-        value: expect.any(Number),
-      });
+    for (const voteIp of body.vote_ips) {
+      expect(typeof voteIp).toBe('string');
     }
   });
 
