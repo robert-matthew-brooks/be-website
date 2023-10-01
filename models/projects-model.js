@@ -106,7 +106,7 @@ async function getProject(project_slug) {
         p.live_link,
         p.github_link,
         p.body,
-        JSON_AGG(l) AS languages,
+        JSON_AGG(DISTINCT l) AS languages,
         JSON_AGG(DISTINCT lk.ip_address) AS liked_ips
       FROM projects p
       INNER JOIN projects_languages pl
