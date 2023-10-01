@@ -269,28 +269,26 @@ describe('GET /api/projects/:project_id', () => {
 
 describe('GET /api/votes/:project_id', () => {
   it('200: should return an object with correct properties', async () => {
-    const { body } = await request(app).get('/api/votes/proj-1').expect(200);
+    const { body } = await request(app)
+      .get('/api/votes/proj-1/192.168.1.1')
+      .expect(200);
 
     expect(body).toMatchObject({
       votes_sum: expect.any(Number),
-      vote_ips: expect.any(Array),
+      user_votes: expect.any(Number),
     });
-
-    for (const voteIp of body.vote_ips) {
-      expect(typeof voteIp).toBe('string');
-    }
   });
 
   describe('error handling', () => {
     it('400: should return an error when project slug is not letters, numbers and hyphens', async () => {
       const { body } = await request(app)
-        .get('/api/votes/( i n v a l i d )')
+        .get('/api/votes/( i n v a l i d )/192.168.1.1')
         .expect(400);
     });
 
     it('404: should return an error when project slug is not in table', async () => {
       const { body } = await request(app)
-        .get('/api/votes/unknown-project')
+        .get('/api/votes/unknown-project/192.168.1.1')
         .expect(404);
     });
   });

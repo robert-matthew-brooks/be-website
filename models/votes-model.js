@@ -1,27 +1,50 @@
 const db = require('../db/connection');
 const { rejectIfNotValidSlug, rejectIfNotInTable } = require('./util/validate');
 
-async function getVotes(project_slug) {
-  await rejectIfNotValidSlug({ project_slug });
-  await rejectIfNotInTable(project_slug, 'slug', 'projects');
+async function getVotes(projectSlug, userIp) {
+  await rejectIfNotValidSlug({ projectSlug });
+  await rejectIfNotInTable(projectSlug, 'slug', 'projects');
 
-  const { rows: votes } = await db.query(
+  const { rows } = await db.query(
     `
       SELECT
-        v.ip,
-        v.value
-      FROM projects_votes v
-      INNER JOIN projects p
-      ON v.project_id = p.id
-      WHERE p.slug = $1;
+        sum.votes_sum,
+        value.value
+      
+      FROM (
+        SELECT
+          p.id,
+          SUM(v.value)::INT AS votes_sum
+        FROM projects p
+        INNER JOIN projects_votes v
+        ON p.id = v.project_id
+        WHERE p.slug = $1
+        GROUP BY p.id
+      ) sum
+
+      LEFT JOIN (
+        SELECT
+          p.id,
+          v.value
+        FROM projects p
+        INNER JOIN projects_votes v
+        ON p.id = v.project_id
+        WHERE v.ip = $2
+      ) value
+
+      ON sum.id = value.id;
     `,
-    [project_slug]
+    [projectSlug, userIp]
   );
 
-  const votesSum = votes.reduce((acc, vote) => acc + vote.value, 0);
-  const voteIps = votes.map((vote) => vote.ip);
+  let votesSum = null;
+  let userVotes = null;
+  if (rows.length > 0) {
+    votesSum = rows[0].votes_sum;
+    userVotes = rows[0].value;
+  }
 
-  return { votesSum, voteIps };
+  return { votesSum, userVotes };
 }
 
 module.exports = { getVotes };

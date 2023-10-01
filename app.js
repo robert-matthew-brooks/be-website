@@ -1,4 +1,4 @@
-const app = require('express')();
+const express = require('express');
 const cors = require('cors');
 const {
   getProjects,
@@ -19,11 +19,13 @@ const allowedUrls = [
   'https://robert-matthew-brooks.netlify.app',
 ];
 
-/**************/
-/* middleware */
-/**************/
+/*********************/
+/* init / middleware */
+/*********************/
 
+const app = express();
 app.use(cors({ origin: allowedUrls }));
+app.use(express.json());
 app.set('json spaces', 2);
 
 /*************/
@@ -51,7 +53,7 @@ app.get('/api/languages', getLanguages);
 
 // votes ip addresses
 
-app.get('/api/votes/:project_slug', getVotes);
+app.get('/api/votes/:project_slug/:user_ip', getVotes);
 
 /******************/
 /* error handling */
