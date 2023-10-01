@@ -22,18 +22,16 @@ async function getProjects(
   if (sort_by === 'date') sort_by = 'created_at';
   order = order.toUpperCase();
 
-  const validationTests = [
+  await Promise.all([
     rejectIfNotDigit({ limit, page }),
     rejectIfLessThan({ limit, page }, 1),
     rejectIfNotInGreenList({ sort_by }, sortByGreenlist),
     rejectIfNotInGreenList({ order }, orderGreenlist),
-  ];
+  ]);
 
   if (language !== '%') {
-    validationTests.push(rejectIfNotInTable(language, 'slug', 'languages'));
+    await rejectIfNotInTable(language, 'slug', 'languages');
   }
-
-  await Promise.all(validationTests);
 
   const projectsQuery = db.query(
     `
@@ -106,15 +104,12 @@ async function getProject(project_slug) {
         p.live_link,
         p.github_link,
         p.body,
-        JSON_AGG(DISTINCT l) AS languages,
-        JSON_AGG(DISTINCT lk.ip_address) AS liked_ips
+        JSON_AGG(DISTINCT l) AS languages
       FROM projects p
       INNER JOIN projects_languages pl
       ON p.id = pl.project_id
       LEFT JOIN languages l
       ON l.id = pl.language_id
-      LEFT JOIN projects_likes lk
-      ON p.id = lk.project_id
       WHERE p.slug = $1
       GROUP BY p.id;
     `,

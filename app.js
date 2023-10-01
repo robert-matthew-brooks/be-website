@@ -5,6 +5,7 @@ const {
   getProject,
 } = require('./controllers/projects-controller');
 const { getLanguages } = require('./controllers/languages-controller');
+const { getLikes } = require('./controllers/likes-controller');
 const {
   customErrorHandler,
   psqlErrorHandler,
@@ -47,6 +48,10 @@ app.get('/api/projects/:project_slug', getProject);
 // languages
 
 app.get('/api/languages', getLanguages);
+
+// liked ip addresses
+
+app.get('/api/likes/:project_slug', getLikes);
 
 /******************/
 /* error handling */
