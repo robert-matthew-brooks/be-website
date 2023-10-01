@@ -43,6 +43,7 @@ describe('GET /api/projects', () => {
         img_url: expect.toBeOneOf([expect.any(String), null]),
         img_alt: expect.toBeOneOf([expect.any(String), null]),
         languages: expect.any(Array),
+        total_likes: expect.any(Number),
       });
 
       for (const language of project.languages) {
@@ -86,14 +87,24 @@ describe('GET /api/projects', () => {
       expect(results15.projects).toHaveLength(15);
     });
 
-    // check changing page is different results
+    it('200: should provide different data when different pages are requested', async () => {
+      const { body: resultsPage1 } = await request(app)
+        .get('/api/projects?page=1')
+        .expect(200);
+
+      const { body: resultsPage2 } = await request(app)
+        .get('/api/projects?page=2')
+        .expect(200);
+
+      expect(resultsPage1).not.toEqual(resultsPage2);
+    });
   });
 
   describe('filtering', () => {
     it('200: should filter by specified language slug', async () => {
-      const { body: results9 } = await request(app).get(
-        '/api/projects?language=l9'
-      );
+      const { body: results9 } = await request(app)
+        .get('/api/projects?language=l9')
+        .expect(200);
 
       expect(results9.projects).toHaveLength(5);
 
@@ -239,6 +250,7 @@ describe('GET /api/projects/:project_id', () => {
       github_link: expect.toBeOneOf([expect.any(String), null]),
       body: expect.any(String),
       languages: expect.any(Array),
+      liked_ips: expect.any(Array),
     });
 
     for (const language of body.project.languages) {
@@ -248,6 +260,10 @@ describe('GET /api/projects/:project_id', () => {
         name: expect.any(String),
         icon_url: expect.any(String),
       });
+    }
+
+    for (const ip of body.project.liked_ips) {
+      expect(typeof ip).toBe('string');
     }
   });
 

@@ -15,7 +15,13 @@ const db = require('./connection');
 // this can be run from the terminal:
 // `$ npm run seed-dev-db`
 
-async function seed({ projectData, languageData, projectLanguageData }) {
+async function seed({
+  projectData,
+  languageData,
+  projectLanguageData,
+  projectLikesData,
+}) {
+  await db.query('DROP TABLE IF EXISTS projects_likes;');
   await db.query('DROP TABLE IF EXISTS projects_languages;');
   await db.query('DROP TABLE IF EXISTS projects;');
   await db.query('DROP TABLE IF EXISTS languages;');
@@ -54,6 +60,14 @@ async function seed({ projectData, languageData, projectLanguageData }) {
       language_id INT REFERENCES languages(id) NOT NULL
     );
   `);
+
+  await db.query(`
+  CREATE TABLE projects_likes (
+    id SERIAL PRIMARY KEY,
+    project_id INT REFERENCES projects(id) NOT NULL,
+    ip_address VARCHAR NOT NULL
+  );
+`);
 
   // INSERT INTO tables
 
@@ -111,9 +125,27 @@ async function seed({ projectData, languageData, projectLanguageData }) {
     ])
   );
 
-  await db.query(insertProjectsQueryStr);
-  await db.query(insertLanguagesQueryStr);
-  await db.query(insertProjectsLanguagesQueryStr);
+  const insertLikesQueryStr = format(
+    `INSERT INTO projects_likes (
+      project_id,
+      ip_address
+    )
+    VALUES %L;`,
+    projectLikesData.map((junction) => [
+      junction.project_id,
+      junction.ip_address,
+    ])
+  );
+
+  await Promise.all([
+    db.query(insertProjectsQueryStr),
+    db.query(insertLanguagesQueryStr),
+  ]);
+
+  await Promise.all([
+    db.query(insertProjectsLanguagesQueryStr),
+    db.query(insertLikesQueryStr),
+  ]);
 }
 
 module.exports = seed;

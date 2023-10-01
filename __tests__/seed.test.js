@@ -68,7 +68,7 @@ describe('projects-languages junction table', () => {
     expect(rows).toHaveLength(57);
   });
 
-  it('should return a junction data with correct properties', async () => {
+  it('should return junction data with correct properties', async () => {
     const expectedObject = {
       id: expect.any(Number),
       project_id: expect.any(Number),
@@ -76,6 +76,28 @@ describe('projects-languages junction table', () => {
     };
 
     const { rows } = await db.query('SELECT * FROM projects_languages');
+
+    for (const junction of rows) {
+      expect(junction).toMatchObject(expectedObject);
+    }
+  });
+});
+
+describe('projects-likes junction table', () => {
+  // no likes/ips on last project to test no likes
+  it('should contain 57 rows', async () => {
+    const { rows } = await db.query('SELECT * FROM projects_likes;');
+    expect(rows).toHaveLength(57);
+  });
+
+  it('should return a junction data with correct properties', async () => {
+    const expectedObject = {
+      id: expect.any(Number),
+      project_id: expect.any(Number),
+      ip_address: expect.any(String),
+    };
+
+    const { rows } = await db.query('SELECT * FROM projects_likes');
 
     for (const junction of rows) {
       expect(junction).toMatchObject(expectedObject);

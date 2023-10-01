@@ -8,7 +8,7 @@
     "seed-dev-db": "node ./db/run-seed.js",
     "seed-prod-db": "NODE_ENV=production node ./db/run-seed.js",
     "listen": "node listen.js",
-    "test": "jest"
+    "test": "jest --runInBand"
   },
   "keywords": [],
   "author": "",

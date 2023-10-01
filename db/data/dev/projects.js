@@ -1,5 +1,99 @@
 const projectData = [
   {
+    slug: 'carbon-intensity-data',
+    created_at: '2023-07-11T12:13:46.836Z',
+    title: 'Carbon Intensity Data',
+    description:
+      'A webpage that fetches data from an external api, and displays the results using a third party graph rendering module',
+    img_url: 'https://i.ibb.co/HXndgdh/carbon-intensity-data.png',
+    img_alt: 'Bar graph of actual and forecast carbon levels in the UK',
+    live_link: 'https://carbon-intensity-data.netlify.app/',
+    github_link:
+      'https://github.com/robert-matthew-brooks/carbon-intensity-data',
+    body: `
+    <h>Intro</h>
+
+    <p>
+      I built this webpage while learning <l>React</l>. The page will request some
+      information from an external api, then pass the data to a third-party
+      <l>React</l> component to render it as a graph.
+    </p>
+    
+    <p>
+      The date to show information for is saved as a state variable. When the user interacts with the form to change the date, a rerender of the graph is triggered with new data requested from the api.
+    </p>
+    
+    <h>The API</h>
+    
+    <p>
+      In this case, the information is <b>carbon intensity levels in Great Britain as a result of electricity generation</b>. This information comes from <a href="https://api.carbonintensity.org.uk/">National Grid</a>.
+    </p>
+    
+    <p>
+      The fetched data parsed into a <l>JavaScript</l> object that can be
+      interpreted by the graph component.
+    </p>
+    
+    <h>The React Library</h>
+    
+    <p>
+      I used a chart library called
+      <a href="https://react-chartjs-2.js.org/">react-chartjs-2</a>, which provides
+      <l>React</l> components that render charts for tabulated passed as a argument.
+    </p>
+    
+    <!--code
+      import { Bar } from 'react-chartjs-2';
+    
+      ...
+    
+      // chartData comes from the api request
+    
+      const data = {
+        labels: chartData.map(el => el.time),
+        datasets: [
+          {
+            label: 'Actual',
+            data: chartData.map(el => el.actual),
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+          },
+          {
+            label: 'Forecast',
+            data: chartData.map(el => el.forecast),
+            backgroundColor: 'rgba(53, 162, 235, 0.5)',
+          },
+        ],
+      };
+    
+      const options = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          }
+        },
+      };
+    
+      ...
+    
+      <Bar data={data} options={options} />
+    code-->
+    <caption>
+      Arranging the data into a <l>JavaScript</l> object for the <c>&lt;Bar&gt;</c> element to render as a chart
+    </caption>
+    
+    <h>Outro</h>
+    
+    <p>
+      This was an interesting project to learn the basics of <l>React</l>. I also
+      had the chance to practice and learn more about <b>api requests</b> and
+      <b>responsive design</b> using <l>CSS</l>.
+    </p>    
+    `,
+    language_ids: [5, 6, 7],
+    liked_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+  },
+  {
     slug: 'backend-nc-news',
     created_at: '2023-06-30T18:11:01.487Z',
     title: 'NC-News Backend API',
@@ -259,9 +353,9 @@ const projectData = [
       shared to external clients. The next project in the course will be to build a
       frontend to handle user requests to the api and present the data!
     </p>
-    
     `,
     language_ids: [1, 2, 3, 4],
+    liked_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
   },
   {
     slug: 'frontend-nc-news',
@@ -367,9 +461,9 @@ const projectData = [
         comment could be easily interpreted by a screen reader
       </li>
       <li>
-        <b>Landmark tags</b> were used wherever possible, for example &lt;nav&gt;
-        instead of &lt;div class="nav"&gt;, which again easier for screen reader
-        users to navigate a site
+        <b>Landmark tags</b> were used wherever possible, for example
+        <c>&lt;nav&gt;</c> instead of <c>&lt;div class="nav"&gt;</c>, which again
+        easier for screen reader users to navigate a site
       </li>
       <li>
         <b>Alt tags</b> were used on images, so their meaning could be understood
@@ -538,7 +632,7 @@ const projectData = [
       with making multiple votes, as these are not tracked per when the browser is
       refreshed.
     </p>
-
+    
     <p>
       Another point to consider is the slow server spin up times when using a
       <l>SQL</l> server on Render. Although this is a backend api issue, but the
@@ -546,15 +640,281 @@ const projectData = [
       to make a similar project again, I would consider migrating the server to a
       different platform (eg <l>Supabase</l>).
     </p>
-
+    
     <p>
-      As a learning experience this has definetely been worthwhile, but rather than
+      As a learning experience this has definitely been worthwhile, but rather than
       continue this project, I am going to start a similar project of building a
       <b>portfolio website</b> using the knowledge I've acquired about this tech
       stack.
     </p>
-`,
+    `,
     language_ids: [5, 6, 7],
+    liked_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+  },
+  {
+    slug: 'sum-consecutive-duplicates',
+    created_at: '2023-09-12T20:28:09.186Z',
+    title: 'Kata: Sum Consecutive Duplicates',
+    description:
+      'A solution to an array manipulation problem featuring an animated CSS gui',
+    img_url: 'https://i.ibb.co/7bysbQF/sum-consecutive-duplicates.jpg',
+    img_alt: 'VS code on screen',
+    live_link: 'https://sum-consecutive-duplicates.onrender.com/frontend/',
+    github_link:
+      'https://github.com/robert-matthew-brooks/sum-consecutive-duplicates',
+    body: `
+    <h>Intro</h>
+
+    <p>
+      Given an array of integers,
+      <b>sum any consecutive numbers</b> into a single element. For example, if the
+      input is <c>[ 1, 2, 2, 2, 3 ]</c>, the output would be <c>[ 1, 6, 3 ]</c>,
+      because the twos would add together.
+    </p>
+    
+    <p>
+      I set out to solve this <l>JavaScript</l> kata, but with a twist - I wanted to
+      develop my frontend presentation and animation skills with <l>CSS</l> by
+      showing the algorithm solving the problem in real time.
+    </p>
+    
+    <h>The Kata</h>
+    
+    <quote>
+      Implement a function
+      <f>sumConsecutiveDuplicates()</f> which adds together all the consecutive
+      numbers in an array and pushes them into a new array. For extra credit, write
+      a function <f>reduceConsecutives()</f> which recursively uses your
+      <f>sumConsecutiveDuplicates()</f> function to reduce the array down until
+      there are no more consecutive duplicate numbers.
+    </quote>
+    
+    <p>
+      See the original kata
+      <a
+        href="https://l2c.northcoders.com/courses/be/be-katas-week-2#sectionId=sumConsecutiveDuplicates"
+        >here</a
+      >.
+    </p>
+    
+    <h>The Solution</h>
+    
+    <p>
+      This is the core of the <l>JavaScript</l> solution and the steps involved:
+    </p>
+    
+    <!--code
+          function sumConsecutiveDuplicates(inputArray) {
+            const numbers = [...inputArray];
+        
+            for (let scanIndex=0; scanIndex&lt;numbers.length; scanIndex++) {
+                scannedNumber = numbers[scanIndex];
+        
+                let duplicateIndexes = [];
+        
+                for (let lookAheadIndex=scanIndex+1; numbers[lookAheadIndex]===scannedNumber; lookAheadIndex++) {
+                    duplicateIndexes.push(lookAheadIndex);
+                }
+                
+                if (duplicateIndexes.length > 0) {
+                    const duplicates = numbers.splice(scanIndex, duplicateIndexes.length);
+                    const duplicatesTotal = duplicates.reduce((number, total) => total+number);
+        
+                    numbers[scanIndex] += duplicatesTotal;
+                }
+            }
+            return numbers;
+          }
+        code-->
+    <caption>
+      Solution without any frontend elements
+    </caption>
+    
+    <ul>
+      <li>
+        Copy the input into the <f>numbers</f> array (pure function!) - this array
+        is shown as the <b>cards you see appearing</b> on the frontend.
+      </li>
+    
+      <li>
+        Iterate through the numbers, keeping track of the index <f>scanIndex</f>.
+        This element <b>blinks a black outline</b> in the frontend.
+      </li>
+    
+      <li>
+        Keep looking at the next elements (<c>scanIndex + 1</c>,
+        <c>scanIndex + 2</c> etc) and check if those <f>numbers</f> are the same.
+        Push the duplicates (but not <f>scannedNumber</f>) into
+        <f>duplicateIndexes</f>.
+      </li>
+    
+      <li>
+        Did we find any duplicates (<c>duplicateIndexes.length > 0</c>)? If not, the
+        frontend shows a <b>green card</b>. If so, the frontend shows
+        <f>scanIndex</f> and anything in <f>duplicateIndexes</f> as
+        <b>red cards</b>, and...
+      </li>
+    
+      <li>
+        ...splice those duplicates out of the <f>numbers</f> array! Store the values
+        as <f>duplicates</f>, then get the total (of the duplicates, still not
+        including <f>scannedNumber</f>). Add the total to the value at
+        <f>scanIndex</f>. This is shown on the frontend as the
+        <b>duplicates sliding into the number at scanIndex</b>.
+      </li>
+    
+      <li>
+        When <c>scanIndex > numbers.length</c>, we're done! <c>return</c> the
+        mutated <f>numbers</f> array.
+      </li>
+    </ul>
+    
+    <p>
+      A cleaner solution would be to push the subtotal of consecutives to a new
+      array (if there are no consecutives, the
+      <b>subtotal is the single number</b> and gets pushed to the new array).
+    </p>
+    
+    <img
+      src="https://i.ibb.co/N6bzzgC/sum-consecutive-duplicates-1.jpg"
+      alt="Alternative algorithm"
+    />
+    <caption>
+      Cleaner and simpler algorithm
+    </caption>
+    
+    <p>
+      However, because I want to visualise a single array on the screen, I chose to
+      <b>mutate the array</b>. This means splicing the duplicate elements out and
+      inserting the subtotal, but I think it keeps the code a truer representation
+      of the frontend, and it is more interesting to watch!
+    </p>
+    
+    <p>
+      Of course, the output array could itself contain consecutive duplicate
+      numbers. For example, <c>[2, 2, 2, 3, 3]</c> will reduce to <c>[6, 6]</c>. I
+      implemented a second function which recursively runs the solution algorithm
+      until the <b>base case</b> is met: there are no consecutive duplicate numbers.
+    </p>
+    
+    <!--code
+          function reduceConsecutives(inputArray, hasDoneFirstPass) {
+            let numbers;
+            if (!hasDoneFirstPass) {    // this makes sure the function is always called, so there is at least one animation, even when no duplicates are present
+                numbers = sumConsecutiveDuplicates(inputArray);
+            }
+            else {
+                numbers = [...inputArray];
+            }
+            let reducedArray;
+        
+            // function to check if recursion should occur or not
+            const hasConsecutiveDuplicates = array => {
+                for (let i=0; i&lt;array.length-1; i++) {
+                    if (array[i] === array[i+1]) return true;
+                }
+                return false;
+            };
+        
+            // recursive case (array has consecutive duplicates)
+            if (hasConsecutiveDuplicates(numbers)) {
+                // recursion
+                reducedArray = reduceConsecutives(
+                    sumConsecutiveDuplicates(numbers), true
+                );
+            }
+            // base case (no consecutive duplicates)
+            else {
+               return numbers;
+            }
+        
+            return reducedArray;
+          }
+        code-->
+    <caption>
+      Recursively calling sumConsecutiveDuplicates()
+    </caption>
+    
+    <p>
+      I've labelled the important components of a recursive function: the
+      <b>base case</b>, and the <b>recursive case</b>. I simplified the main
+      function by abstracting logic into a helper function,
+      <f>hasConsecutiveDuplicates()</f>, which returns a boolean.
+    </p>
+    
+    <p>
+      I also built a test suite while working on the script, so I could follow
+      <b>test-driven development</b> principles. Making <b>unit tests</b> was
+      important, as it ensured that when I expanded on the script to manipulate the
+      DOM <l>HTML</l> object, I didn't inadvertently break any functionality of the
+      solution. The finished test suite also gave me confidence the code would work
+      correctly with some of the trickier concepts, such as recursion.
+    </p>
+    
+    <p>
+      One problem I encountered was using the same <f>.js</f> file in both
+      <l>HTML</l> and <l>Node.js/Jest</l>, as the test suite requires an
+      export/import, and the webpage doesn't allow this language. I solved the
+      problem by checking if the <f>module</f> object exists:
+    </p>
+    
+    <!--code
+          // only export functions if run in node (jest), not for browser (which does not recognise 'module')
+          if (typeof module === "object" && typeof module.exports === "object") {
+            module.exports = { sumConsecutiveDuplicates, reduceConsecutives };
+          }
+        code-->
+    <caption>
+      Conditionally exporting the script
+    </caption>
+    
+    <p>
+      Here are links to the
+      <a
+        href="https://github.com/robert-matthew-brooks/sum-consecutive-duplicates/blob/main/sumConsecutiveDuplicates.js"
+        >solution script</a
+      >, and the
+      <a
+        href="https://github.com/robert-matthew-brooks/sum-consecutive-duplicates/blob/main/__tests__/sumConsecutiveDuplicates.test.js"
+        >test suite</a
+      >.
+    </p>
+    
+    <h>Frontend Features</h>
+    
+    <p>
+      Learning to create an intuitive and easy to understand animation was part of
+      my motivation for this project, and I wanted to practise using vanilla
+      <l>CSS</l> to achieve this. The element being scanned will blink, then turn
+      green or red to indicate if a duplicate is found. If there are duplicates,
+      they will move to <b>visually combine</b> into one element.
+    </p>
+    
+    <p>
+      The user can control the script with a "Run" button, and toggle whether it
+      runs recursively or not. There are preset input arrays to select from, as well
+      as a random input array option. It's not entirely random though - I tipped the
+      scales so there is at least one pair of consecutive duplicate numbers!
+    </p>
+    
+    <p>
+      Although the layout is fairly simple, I had an opportunity to make a
+      <b>responsive layout</b>. I started by getting all the important design
+      elements on a small mobile screen, then expanding the styling for larger
+      screens with more space.
+    </p>
+    
+    <h>Outro</h>
+    
+    <p>
+      Thanks for looking at my project, I hope the process was as interesting for
+      you as it was for me. Its been great to practise not only solving a kata, but
+      also <b>documenting the process</b>. There are still many more katas to solve
+      and frontends to design! See you next time!
+    </p>
+    `,
+    language_ids: [1, 6, 7, 4],
+    liked_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
   },
 ];
 

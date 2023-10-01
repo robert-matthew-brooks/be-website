@@ -22,7 +22,8 @@
               "slug": "js",
               "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
             }
-          ]
+          ],
+          "total_likes": 3
         }
       ]
     }
@@ -63,7 +64,8 @@
             "slug": "js",
             "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
           }
-        ]
+        ],
+        "liked_ips": ["192.168.1.1", "192.168.1.2", "192.168.1.3"]
       }
     }
   }

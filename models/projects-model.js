@@ -45,12 +45,15 @@ async function getProjects(
         p.description,
         p.img_url,
         p.img_alt,
-        JSON_AGG(l) AS languages
+        JSON_AGG(l) AS languages,
+        COUNT(DISTINCT lk.ip_address)::INT AS total_likes
       FROM projects p
-      INNER JOIN projects_languages pl
+      LEFT JOIN projects_languages pl
       ON p.id = pl.project_id
-      INNER JOIN languages l
+      LEFT JOIN languages l
       ON l.id = pl.language_id
+      LEFT JOIN projects_likes lk
+      ON p.id = lk.project_id
       GROUP BY p.id
       HAVING BOOL_OR(LOWER(l.slug) LIKE '${language}')
       ORDER BY ${sort_by} ${order}
@@ -66,7 +69,7 @@ async function getProjects(
         FROM projects p
         INNER JOIN projects_languages pl
         ON p.id = pl.project_id
-        INNER JOIN languages l
+        LEFT JOIN languages l
         ON l.id = pl.language_id
         WHERE LOWER(l.slug) LIKE '${language}'
         GROUP BY p.id
@@ -103,12 +106,15 @@ async function getProject(project_slug) {
         p.live_link,
         p.github_link,
         p.body,
-        JSON_AGG(l) AS languages
+        JSON_AGG(l) AS languages,
+        JSON_AGG(DISTINCT lk.ip_address) AS liked_ips
       FROM projects p
       INNER JOIN projects_languages pl
       ON p.id = pl.project_id
-      INNER JOIN languages l
+      LEFT JOIN languages l
       ON l.id = pl.language_id
+      LEFT JOIN projects_likes lk
+      ON p.id = lk.project_id
       WHERE p.slug = $1
       GROUP BY p.id;
     `,
