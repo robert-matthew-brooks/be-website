@@ -9,7 +9,11 @@ const projectData = [
     github_link: 'github.com/project_1',
     body: 'some text describing project 1',
     language_ids: [1, 2, 3],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-2',
@@ -21,7 +25,11 @@ const projectData = [
     live_link: 'some_url.com/project_2',
     body: 'some text describing project 2',
     language_ids: [4, 5, 6],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-3',
@@ -34,7 +42,11 @@ const projectData = [
     live_link: 'some_url.com/project_3',
     body: 'some text describing project 3',
     language_ids: [7, 8, 9],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-4',
@@ -44,7 +56,11 @@ const projectData = [
     live_link: 'some_url.com/project_4',
     body: 'some text describing project 4',
     language_ids: [10, 1, 2],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-5',
@@ -58,7 +74,11 @@ const projectData = [
     github_link: 'github.com/project_5',
     body: 'some text describing project 5',
     language_ids: [3, 4, 5],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-6',
@@ -68,7 +88,11 @@ const projectData = [
     live_link: 'some_url.com/project_6',
     body: 'some text describing project 6',
     language_ids: [6, 7, 8],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-7',
@@ -81,7 +105,11 @@ const projectData = [
     live_link: 'some_url.com/project_7',
     body: 'some text describing project 7',
     language_ids: [9, 10, 1],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-8',
@@ -94,7 +122,11 @@ const projectData = [
     github_link: 'github.com/project_8',
     body: 'some text describing project 8',
     language_ids: [2, 3, 4],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-9',
@@ -107,7 +139,11 @@ const projectData = [
     live_link: 'some_url.com/project_9',
     body: 'some text describing project 9',
     language_ids: [5, 6, 7],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-10',
@@ -117,7 +153,11 @@ const projectData = [
     live_link: 'some_url.com/project_10',
     body: 'some text describing project 10',
     language_ids: [8, 9, 10],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-11',
@@ -131,7 +171,11 @@ const projectData = [
     github_link: 'github.com/project_11',
     body: 'some text describing project 11',
     language_ids: [1, 2, 3],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-12',
@@ -144,7 +188,11 @@ const projectData = [
     github_link: 'github.com/project_12',
     body: 'some text describing project 12',
     language_ids: [4, 5, 6],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-13',
@@ -157,7 +205,11 @@ const projectData = [
     live_link: 'some_url.com/project_13',
     body: 'some text describing project 13',
     language_ids: [7, 8, 9],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-14',
@@ -170,7 +222,11 @@ const projectData = [
     github_link: 'github.com/project_4',
     body: 'some text describing project 14',
     language_ids: [10, 1, 2],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-15',
@@ -183,7 +239,11 @@ const projectData = [
     live_link: 'some_url.com/project_15',
     body: 'some text describing project 15',
     language_ids: [3, 4, 5],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-16',
@@ -193,7 +253,11 @@ const projectData = [
     live_link: 'some_url.com/project_16',
     body: 'some text describing project 16',
     language_ids: [6, 7, 8],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-17',
@@ -206,7 +270,11 @@ const projectData = [
     live_link: 'some_url.com/project_17',
     body: 'some text describing project 17',
     language_ids: [9, 10, 1],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-18',
@@ -218,7 +286,11 @@ const projectData = [
     live_link: 'some_url.com/project_18',
     body: 'some text describing project 18',
     language_ids: [2, 3, 4],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-19',
@@ -230,7 +302,11 @@ const projectData = [
     github_link: 'github.com/project_19',
     body: 'some text describing project 19',
     language_ids: [5, 6, 7],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'proj-20',
@@ -242,7 +318,7 @@ const projectData = [
     live_link: 'some_url.com/project_20',
     body: 'some text describing project 20',
     language_ids: [],
-    votes_ips: [],
+    votes: [],
   },
 ];
 

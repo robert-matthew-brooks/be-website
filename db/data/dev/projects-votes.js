@@ -5,10 +5,11 @@ const projectVotesData = [];
 for (const project of projectData) {
   const project_id = projectData.indexOf(project) + 1;
 
-  for (const ip_address of project.votes_ips) {
+  for (const vote of project.votes) {
     projectVotesData.push({
       project_id,
-      ip_address,
+      value: vote.value,
+      ip: vote.ip,
     });
   }
 }

@@ -91,7 +91,8 @@ describe('projects-votes junction table', () => {
       expect(junction).toMatchObject({
         id: expect.any(Number),
         project_id: expect.any(Number),
-        ip_address: expect.any(String),
+        value: expect.any(Number),
+        ip: expect.any(String),
       });
     }
   });

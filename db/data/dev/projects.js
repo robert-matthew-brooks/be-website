@@ -91,7 +91,11 @@ const projectData = [
     </p>    
     `,
     language_ids: [5, 6, 7],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'backend-nc-news',
@@ -355,7 +359,11 @@ const projectData = [
     </p>
     `,
     language_ids: [1, 2, 3, 4],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'frontend-nc-news',
@@ -649,7 +657,11 @@ const projectData = [
     </p>
     `,
     language_ids: [5, 6, 7],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
   {
     slug: 'sum-consecutive-duplicates',
@@ -914,7 +926,11 @@ const projectData = [
     </p>
     `,
     language_ids: [1, 6, 7, 4],
-    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+      { ip: '192.168.1.3', value: -1 },
+    ],
   },
 ];
 

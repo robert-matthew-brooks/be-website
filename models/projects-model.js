@@ -10,22 +10,23 @@ const {
 } = require('./util/validate');
 const { parseVideoUrl } = require('./util/parse-video-url');
 
+// used for rendering a list of projects on frontend
 async function getProjects(
   language = '%',
   limit = 6,
   page = 1,
-  sort_by = 'created_at',
+  sortBy = 'created_at',
   order = 'DESC'
 ) {
   language = language.toLowerCase();
-  sort_by = sort_by.toLocaleLowerCase();
-  if (sort_by === 'date') sort_by = 'created_at';
+  sortBy = sortBy.toLocaleLowerCase();
+  if (sortBy === 'date') sortBy = 'created_at';
   order = order.toUpperCase();
 
   await Promise.all([
     rejectIfNotDigit({ limit, page }),
     rejectIfLessThan({ limit, page }, 1),
-    rejectIfNotInGreenList({ sort_by }, sortByGreenlist),
+    rejectIfNotInGreenList({ sortBy }, sortByGreenlist),
     rejectIfNotInGreenList({ order }, orderGreenlist),
   ]);
 
@@ -36,25 +37,48 @@ async function getProjects(
   const projectsQuery = db.query(
     `
       SELECT
-        p.id,
-        p.slug,
-        p.created_at,
-        p.title,
-        p.description,
-        p.img_url,
-        p.img_alt,
-        JSON_AGG(DISTINCT l) AS languages,
-        COUNT(DISTINCT lk.ip_address)::INT AS total_votes
-      FROM projects p
-      LEFT JOIN projects_languages pl
-      ON p.id = pl.project_id
-      LEFT JOIN languages l
-      ON l.id = pl.language_id
-      LEFT JOIN projects_votes lk
-      ON p.id = lk.project_id
-      GROUP BY p.id
-      HAVING BOOL_OR(LOWER(l.slug) LIKE '${language}')
-      ORDER BY ${sort_by} ${order}
+        p_pl.id,
+        p_pl.slug,
+        p_pl.created_at,
+        p_pl.title,
+        p_pl.description,
+        p_pl.img_url,
+        p_pl.img_alt,
+        p_pl.languages,
+        p_v.votes_sum
+      
+      FROM (
+        SELECT
+          p.id,
+          p.slug,
+          p.created_at,
+          p.title,
+          p.description,
+          p.img_url,
+          p.img_alt,
+          JSON_AGG(l) AS languages
+        FROM projects p
+        LEFT JOIN projects_languages pl
+        ON p.id = pl.project_id
+        LEFT JOIN languages l
+        ON l.id = pl.language_id
+        GROUP BY p.id
+        HAVING BOOL_OR(LOWER(l.slug) LIKE '${language}') 
+      ) p_pl
+      
+      INNER JOIN (
+        SELECT
+          p.id,
+          SUM(v.value)::INT AS votes_sum
+        FROM projects p
+        LEFT JOIN projects_votes v
+        ON p.id = v.project_id
+        GROUP BY p.id
+      ) p_v
+      
+      ON p_pl.id = p_v.id
+
+      ORDER BY ${sortBy} ${order}
       LIMIT ${limit} OFFSET ${limit * (page - 1)};
     `
   );
@@ -82,13 +106,14 @@ async function getProjects(
 
   return {
     projects: projectsResponse.rows,
-    project_count: projectCountResponse.rows[0].count,
+    projectCount: projectCountResponse.rows[0].count,
   };
 }
 
-async function getProject(project_slug) {
-  await rejectIfNotValidSlug({ project_slug });
-  await rejectIfNotInTable(project_slug, 'slug', 'projects');
+// used for rendering a single project on frontend
+async function getProject(projectSlug) {
+  await rejectIfNotValidSlug({ projectSlug });
+  await rejectIfNotInTable(projectSlug, 'slug', 'projects');
 
   const { rows } = await db.query(
     `
@@ -113,7 +138,7 @@ async function getProject(project_slug) {
       WHERE p.slug = $1
       GROUP BY p.id;
     `,
-    [project_slug]
+    [projectSlug]
   );
 
   const project = { ...rows[0] };

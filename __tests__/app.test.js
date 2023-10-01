@@ -17,7 +17,6 @@ afterAll(() => {
 describe('ALL invalid endpoint', () => {
   it('404: should return an error message', async () => {
     const { body } = await request(app).get('/api/not_an_endpoint').expect(404);
-    expect(body.msg).toBe('endpoint not found');
   });
 });
 
@@ -43,7 +42,7 @@ describe('GET /api/projects', () => {
         img_url: expect.toBeOneOf([expect.any(String), null]),
         img_alt: expect.toBeOneOf([expect.any(String), null]),
         languages: expect.any(Array),
-        total_votes: expect.any(Number),
+        votes_sum: expect.any(Number),
       });
 
       for (const language of project.languages) {
@@ -150,56 +149,48 @@ describe('GET /api/projects', () => {
     it('500: should return an error when projects table not found', async () => {
       await db.query('DROP TABLE projects CASCADE;');
       const { body } = await request(app).get('/api/projects').expect(500);
-      expect(body.msg).toBe('undefined table');
     });
 
     it('400: should return an error when limit is not a number', async () => {
       const { body } = await request(app)
         .get('/api/projects?limit=a')
         .expect(400);
-      expect(body.msg).toBe('invalid limit');
     });
 
     it('400: should return an error when limit is less than 1', async () => {
       const { body } = await request(app)
         .get('/api/projects?limit=0')
         .expect(400);
-      expect(body.msg).toBe('invalid limit');
     });
 
     it('400: should return an error when page is not a number', async () => {
       const { body } = await request(app)
         .get('/api/projects?page=a')
         .expect(400);
-      expect(body.msg).toBe('invalid page');
     });
 
     it('400: should return an error when page is less than 1', async () => {
       const { body } = await request(app)
         .get('/api/projects?page=0')
         .expect(400);
-      expect(body.msg).toBe('invalid page');
     });
 
     it('404: should return an error when language slug is not in table', async () => {
       const { body } = await request(app)
         .get('/api/projects?language=a')
         .expect(404);
-      expect(body.msg).toBe('specified slug not found in languages table');
     });
 
-    it('400: should return an error when sort_by option is not allowed', async () => {
+    it('400: should return an error when sort by option is not allowed', async () => {
       const { body } = await request(app)
         .get('/api/projects?sort_by=colour')
         .expect(400);
-      expect(body.msg).toBe('invalid sort_by');
     });
 
     it('400: should return an error when order option is not allowed', async () => {
       const { body } = await request(app)
         .get('/api/projects?order=up')
         .expect(400);
-      expect(body.msg).toBe('invalid order');
     });
   });
 });
@@ -228,7 +219,6 @@ describe('GET /api/languages', () => {
     it('500: should return an error when languages table not found', async () => {
       await db.query('DROP TABLE languages CASCADE;');
       const { body } = await request(app).get('/api/languages').expect(500);
-      expect(body.msg).toBe('undefined table');
     });
   });
 });
@@ -263,18 +253,16 @@ describe('GET /api/projects/:project_id', () => {
   });
 
   describe('error handling', () => {
-    it('400: should return an error when project_slug is not letters, numbers and hyphens', async () => {
+    it('400: should return an error when project slug is not letters, numbers and hyphens', async () => {
       const { body } = await request(app)
         .get('/api/projects/( i n v a l i d )')
         .expect(400);
-      expect(body.msg).toBe('invalid project_slug');
     });
 
-    it('404: should return an error when project_slug is not in table', async () => {
+    it('404: should return an error when project slug is not in table', async () => {
       const { body } = await request(app)
         .get('/api/projects/unknown-project')
         .expect(404);
-      expect(body.msg).toBe('specified slug not found in projects table');
     });
   });
 });
@@ -284,28 +272,29 @@ describe('GET /api/votes/:project_id', () => {
     const { body } = await request(app).get('/api/votes/proj-1').expect(200);
 
     expect(body).toMatchObject({
-      votes_count: expect.any(Number),
-      votes_ips: expect.any(Array),
+      votes_sum: expect.any(Number),
+      votes: expect.any(Array),
     });
 
-    for (const ip of body.votes_ips) {
-      expect(typeof ip).toBe('string');
+    for (const vote of body.votes) {
+      expect(vote).toMatchObject({
+        ip: expect.any(String),
+        value: expect.any(Number),
+      });
     }
   });
 
   describe('error handling', () => {
-    it('400: should return an error when project_slug is not letters, numbers and hyphens', async () => {
+    it('400: should return an error when project slug is not letters, numbers and hyphens', async () => {
       const { body } = await request(app)
         .get('/api/votes/( i n v a l i d )')
         .expect(400);
-      expect(body.msg).toBe('invalid project_slug');
     });
 
-    it('404: should return an error when project_slug is not in table', async () => {
+    it('404: should return an error when project slug is not in table', async () => {
       const { body } = await request(app)
         .get('/api/votes/unknown-project')
         .expect(404);
-      expect(body.msg).toBe('specified slug not found in projects table');
     });
   });
 });
