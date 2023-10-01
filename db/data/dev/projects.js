@@ -91,7 +91,7 @@ const projectData = [
     </p>    
     `,
     language_ids: [5, 6, 7],
-    likes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
   },
   {
     slug: 'backend-nc-news',
@@ -355,7 +355,7 @@ const projectData = [
     </p>
     `,
     language_ids: [1, 2, 3, 4],
-    likes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
   },
   {
     slug: 'frontend-nc-news',
@@ -649,7 +649,7 @@ const projectData = [
     </p>
     `,
     language_ids: [5, 6, 7],
-    likes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
   },
   {
     slug: 'sum-consecutive-duplicates',
@@ -914,7 +914,7 @@ const projectData = [
     </p>
     `,
     language_ids: [1, 6, 7, 4],
-    likes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
+    votes_ips: ['192.168.1.1', '192.168.1.2', '192.168.1.3'],
   },
 ];
 

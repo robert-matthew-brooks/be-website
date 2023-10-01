@@ -1,14 +1,14 @@
 const db = require('../db/connection');
 const { rejectIfNotValidSlug, rejectIfNotInTable } = require('./util/validate');
 
-async function getLikes(project_slug) {
+async function getVotes(project_slug) {
   await rejectIfNotValidSlug({ project_slug });
   await rejectIfNotInTable(project_slug, 'slug', 'projects');
 
   const { rows } = await db.query(
     `
       SELECT pl.ip_address
-      FROM projects_likes pl
+      FROM projects_votes pl
       INNER JOIN projects p
       ON pl.project_id = p.id
       WHERE p.slug = $1;
@@ -16,10 +16,10 @@ async function getLikes(project_slug) {
     [project_slug]
   );
 
-  const likes_ips = rows.map((el) => el.ip_address);
-  const likes_count = likes_ips.length;
+  const votes_ips = rows.map((el) => el.ip_address);
+  const votes_count = votes_ips.length;
 
-  return { likes_count, likes_ips };
+  return { votes_count, votes_ips };
 }
 
-module.exports = { getLikes };
+module.exports = { getVotes };

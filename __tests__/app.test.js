@@ -43,7 +43,7 @@ describe('GET /api/projects', () => {
         img_url: expect.toBeOneOf([expect.any(String), null]),
         img_alt: expect.toBeOneOf([expect.any(String), null]),
         languages: expect.any(Array),
-        total_likes: expect.any(Number),
+        total_votes: expect.any(Number),
       });
 
       for (const language of project.languages) {
@@ -279,16 +279,16 @@ describe('GET /api/projects/:project_id', () => {
   });
 });
 
-describe('GET /api/likes/:project_id', () => {
+describe('GET /api/votes/:project_id', () => {
   it('200: should return an object with correct properties', async () => {
-    const { body } = await request(app).get('/api/likes/proj-1').expect(200);
+    const { body } = await request(app).get('/api/votes/proj-1').expect(200);
 
     expect(body).toMatchObject({
-      likes_count: expect.any(Number),
-      likes_ips: expect.any(Array),
+      votes_count: expect.any(Number),
+      votes_ips: expect.any(Array),
     });
 
-    for (const ip of body.likes_ips) {
+    for (const ip of body.votes_ips) {
       expect(typeof ip).toBe('string');
     }
   });
@@ -296,14 +296,14 @@ describe('GET /api/likes/:project_id', () => {
   describe('error handling', () => {
     it('400: should return an error when project_slug is not letters, numbers and hyphens', async () => {
       const { body } = await request(app)
-        .get('/api/likes/( i n v a l i d )')
+        .get('/api/votes/( i n v a l i d )')
         .expect(400);
       expect(body.msg).toBe('invalid project_slug');
     });
 
     it('404: should return an error when project_slug is not in table', async () => {
       const { body } = await request(app)
-        .get('/api/likes/unknown-project')
+        .get('/api/votes/unknown-project')
         .expect(404);
       expect(body.msg).toBe('specified slug not found in projects table');
     });

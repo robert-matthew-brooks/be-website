@@ -44,13 +44,13 @@ async function getProjects(
         p.img_url,
         p.img_alt,
         JSON_AGG(DISTINCT l) AS languages,
-        COUNT(DISTINCT lk.ip_address)::INT AS total_likes
+        COUNT(DISTINCT lk.ip_address)::INT AS total_votes
       FROM projects p
       LEFT JOIN projects_languages pl
       ON p.id = pl.project_id
       LEFT JOIN languages l
       ON l.id = pl.language_id
-      LEFT JOIN projects_likes lk
+      LEFT JOIN projects_votes lk
       ON p.id = lk.project_id
       GROUP BY p.id
       HAVING BOOL_OR(LOWER(l.slug) LIKE '${language}')

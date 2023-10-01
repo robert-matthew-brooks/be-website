@@ -19,9 +19,10 @@ async function seed({
   projectData,
   languageData,
   projectLanguageData,
-  projectLikesData,
+  projectVotesData,
 }) {
   await db.query('DROP TABLE IF EXISTS projects_likes;');
+  await db.query('DROP TABLE IF EXISTS projects_votes;');
   await db.query('DROP TABLE IF EXISTS projects_languages;');
   await db.query('DROP TABLE IF EXISTS projects;');
   await db.query('DROP TABLE IF EXISTS languages;');
@@ -62,7 +63,7 @@ async function seed({
   `);
 
   await db.query(`
-  CREATE TABLE projects_likes (
+  CREATE TABLE projects_votes (
     id SERIAL PRIMARY KEY,
     project_id INT REFERENCES projects(id) NOT NULL,
     ip_address VARCHAR NOT NULL
@@ -125,13 +126,13 @@ async function seed({
     ])
   );
 
-  const insertLikesQueryStr = format(
-    `INSERT INTO projects_likes (
+  const insertVotesQueryStr = format(
+    `INSERT INTO projects_votes (
       project_id,
       ip_address
     )
     VALUES %L;`,
-    projectLikesData.map((junction) => [
+    projectVotesData.map((junction) => [
       junction.project_id,
       junction.ip_address,
     ])
@@ -144,7 +145,7 @@ async function seed({
 
   await Promise.all([
     db.query(insertProjectsLanguagesQueryStr),
-    db.query(insertLikesQueryStr),
+    db.query(insertVotesQueryStr),
   ]);
 }
 

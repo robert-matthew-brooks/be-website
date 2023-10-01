@@ -19,23 +19,21 @@ describe('projects table', () => {
   });
 
   it('should return projects with correct properties', async () => {
-    const expectedObject = {
-      id: expect.any(Number),
-      created_at: expect.any(Object),
-      title: expect.any(String),
-      slug: expect.any(String),
-      live_link: expect.toBeOneOf([expect.any(String), null]),
-      github_link: expect.toBeOneOf([expect.any(String), null]),
-      img_url: expect.toBeOneOf([expect.any(String), null]),
-      img_alt: expect.toBeOneOf([expect.any(String), null]),
-      video_url: expect.toBeOneOf([expect.any(String), null]),
-      body: expect.any(String),
-    };
-
     const { rows } = await db.query('SELECT * FROM projects;');
 
     for (const project of rows) {
-      expect(project).toMatchObject(expectedObject);
+      expect(project).toMatchObject({
+        id: expect.any(Number),
+        created_at: expect.any(Object),
+        title: expect.any(String),
+        slug: expect.any(String),
+        live_link: expect.toBeOneOf([expect.any(String), null]),
+        github_link: expect.toBeOneOf([expect.any(String), null]),
+        img_url: expect.toBeOneOf([expect.any(String), null]),
+        img_alt: expect.toBeOneOf([expect.any(String), null]),
+        video_url: expect.toBeOneOf([expect.any(String), null]),
+        body: expect.any(String),
+      });
     }
   });
 });
@@ -47,16 +45,14 @@ describe('languages table', () => {
   });
 
   it('should return languages with correct properties', async () => {
-    const expectedObject = {
-      id: expect.any(Number),
-      name: expect.any(String),
-      icon_url: expect.any(String),
-    };
-
     const { rows } = await db.query('SELECT * FROM languages;');
 
     for (const language of rows) {
-      expect(language).toMatchObject(expectedObject);
+      expect(language).toMatchObject({
+        id: expect.any(Number),
+        name: expect.any(String),
+        icon_url: expect.any(String),
+      });
     }
   });
 });
@@ -69,38 +65,34 @@ describe('projects-languages junction table', () => {
   });
 
   it('should return junction data with correct properties', async () => {
-    const expectedObject = {
-      id: expect.any(Number),
-      project_id: expect.any(Number),
-      language_id: expect.any(Number),
-    };
-
     const { rows } = await db.query('SELECT * FROM projects_languages');
 
     for (const junction of rows) {
-      expect(junction).toMatchObject(expectedObject);
+      expect(junction).toMatchObject({
+        id: expect.any(Number),
+        project_id: expect.any(Number),
+        language_id: expect.any(Number),
+      });
     }
   });
 });
 
-describe('projects-likes junction table', () => {
-  // no likes/ips on last project to test no likes
+describe('projects-votes junction table', () => {
+  // no votes/ips on last project to test no votes
   it('should contain 57 rows', async () => {
-    const { rows } = await db.query('SELECT * FROM projects_likes;');
+    const { rows } = await db.query('SELECT * FROM projects_votes;');
     expect(rows).toHaveLength(57);
   });
 
   it('should return a junction data with correct properties', async () => {
-    const expectedObject = {
-      id: expect.any(Number),
-      project_id: expect.any(Number),
-      ip_address: expect.any(String),
-    };
-
-    const { rows } = await db.query('SELECT * FROM projects_likes');
+    const { rows } = await db.query('SELECT * FROM projects_votes');
 
     for (const junction of rows) {
-      expect(junction).toMatchObject(expectedObject);
+      expect(junction).toMatchObject({
+        id: expect.any(Number),
+        project_id: expect.any(Number),
+        ip_address: expect.any(String),
+      });
     }
   });
 });
