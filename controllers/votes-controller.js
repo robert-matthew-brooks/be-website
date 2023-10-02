@@ -1,11 +1,12 @@
 const votesModel = require('../models/votes-model');
 
 async function getVotes(req, res, next) {
-  const { project_slug: projectSlug, user_ip: userIp } = req.params;
+  const { project_id: projectId } = req.params;
+  const { user_ip: userIp } = req.query;
 
   try {
     const { votesSum, userVotes } = await votesModel.getVotes(
-      projectSlug,
+      projectId,
       userIp
     );
     res.status(200).send({ votes_sum: votesSum, user_votes: userVotes });
@@ -14,4 +15,16 @@ async function getVotes(req, res, next) {
   }
 }
 
-module.exports = { getVotes };
+async function putVotes(req, res, next) {
+  const { project_id: projectId } = req.params;
+  const { user_ip: userIp, value } = req.body;
+
+  try {
+    const { new_row } = await votesModel.putVotes(projectId, userIp, value);
+    res.status(204).send({ new_row });
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { getVotes, putVotes };

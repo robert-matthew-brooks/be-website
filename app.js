@@ -5,7 +5,7 @@ const {
   getProject,
 } = require('./controllers/projects-controller');
 const { getLanguages } = require('./controllers/languages-controller');
-const { getVotes } = require('./controllers/votes-controller');
+const { getVotes, putVotes } = require('./controllers/votes-controller');
 const {
   customErrorHandler,
   psqlErrorHandler,
@@ -53,7 +53,8 @@ app.get('/api/languages', getLanguages);
 
 // votes ip addresses
 
-app.get('/api/votes/:project_slug/:user_ip', getVotes);
+app.get('/api/votes/:project_id', getVotes);
+app.put('/api/votes/:project_id', putVotes);
 
 /******************/
 /* error handling */

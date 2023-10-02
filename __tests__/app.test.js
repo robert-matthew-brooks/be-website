@@ -223,7 +223,7 @@ describe('GET /api/languages', () => {
   });
 });
 
-describe('GET /api/projects/:project_id', () => {
+describe('GET /api/projects/:project_slug', () => {
   it('200: should return an object with correct properties', async () => {
     const { body } = await request(app).get('/api/projects/proj-1').expect(200);
 
@@ -253,7 +253,7 @@ describe('GET /api/projects/:project_id', () => {
   });
 
   describe('error handling', () => {
-    it('400: should return an error when project slug is not letters, numbers and hyphens', async () => {
+    it('400: should return an error when project slug is not valid', async () => {
       const { body } = await request(app)
         .get('/api/projects/( i n v a l i d )')
         .expect(400);
@@ -267,10 +267,10 @@ describe('GET /api/projects/:project_id', () => {
   });
 });
 
-describe('GET /api/votes/:project_id', () => {
+describe.only('GET /api/votes/:project_id', () => {
   it('200: should return an object with correct properties', async () => {
     const { body } = await request(app)
-      .get('/api/votes/proj-1/192.168.1.1')
+      .get('/api/votes/1?user_ip=192.168.1.1')
       .expect(200);
 
     expect(body).toMatchObject({
@@ -280,15 +280,26 @@ describe('GET /api/votes/:project_id', () => {
   });
 
   describe('error handling', () => {
-    it('400: should return an error when project slug is not letters, numbers and hyphens', async () => {
+    it('400: should return an error when project id is not digits', async () => {
       const { body } = await request(app)
-        .get('/api/votes/( i n v a l i d )/192.168.1.1')
+        .get('/api/votes/invalid')
+        .send({ ip: '192.168.1.1' })
         .expect(400);
     });
 
-    it('404: should return an error when project slug is not in table', async () => {
+    it('400: should return an error when project id is not provided', async () => {
+      const { body } = await request(app).get('/api/votes/1').expect(400);
+    });
+
+    it('404: should return an error when ip address is invalid', async () => {
       const { body } = await request(app)
-        .get('/api/votes/unknown-project/192.168.1.1')
+        .get('/api/votes/1?user_ip=invalid')
+        .expect(400);
+    });
+
+    it('404: should return an error when project id is not in table', async () => {
+      const { body } = await request(app)
+        .get('/api/votes/999?user_ip=192.168.1.1')
         .expect(404);
     });
   });

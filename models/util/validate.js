@@ -3,7 +3,7 @@ const db = require('../../db/connection');
 
 function rejectIfNotDigit(values) {
   for (const key in values) {
-    if (!/^[\d]+$/.test(values[key])) {
+    if (!/^[\d-]+$/.test(values[key])) {
       return Promise.reject({ status: 400, msg: `invalid ${key}` });
     }
   }
@@ -12,6 +12,14 @@ function rejectIfNotDigit(values) {
 function rejectIfNotValidSlug(values) {
   for (const key in values) {
     if (!/^[\w\d-]+$/.test(values[key])) {
+      return Promise.reject({ status: 400, msg: `invalid ${key}` });
+    }
+  }
+}
+
+function rejectIfNotValidIp(values) {
+  for (const key in values) {
+    if (!/^[\d.]+$/.test(values[key])) {
       return Promise.reject({ status: 400, msg: `invalid ${key}` });
     }
   }
@@ -60,6 +68,7 @@ function rejectIfNotInGreenList(values, greenlist) {
 module.exports = {
   rejectIfNotDigit,
   rejectIfNotValidSlug,
+  rejectIfNotValidIp,
   rejectIfLessThan,
   rejectIfNotInTable,
   sortByGreenlist,

@@ -25,6 +25,7 @@ async function seed({
   await db.query('DROP TABLE IF EXISTS projects_languages;');
   await db.query('DROP TABLE IF EXISTS projects;');
   await db.query('DROP TABLE IF EXISTS languages;');
+  await db.query('DROP DOMAIN IF EXISTS vote_value;');
 
   // CREATE tables
 
@@ -62,10 +63,16 @@ async function seed({
   `);
 
   await db.query(`
+  CREATE DOMAIN vote_value
+  AS INT
+  CHECK (
+    VALUE BETWEEN -1 AND 1
+  );
+
   CREATE TABLE projects_votes (
     id SERIAL PRIMARY KEY,
     project_id INT REFERENCES projects(id) NOT NULL,
-    value INT NOT NULL,
+    value vote_value NOT NULL,
     ip VARCHAR NOT NULL
   );
 `);
