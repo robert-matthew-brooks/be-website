@@ -20,8 +20,8 @@ async function putVotes(req, res, next) {
   const { user_ip: userIp, value } = req.body;
 
   try {
-    const { new_row } = await votesModel.putVotes(projectId, userIp, value);
-    res.status(204).send({ new_row });
+    const { newVote } = await votesModel.putVotes(projectId, userIp, value);
+    res.status(204).send({ new_vote: newVote });
   } catch (err) {
     next(err);
   }

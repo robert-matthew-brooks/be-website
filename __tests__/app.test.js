@@ -267,7 +267,7 @@ describe('GET /api/projects/:project_slug', () => {
   });
 });
 
-describe.only('GET /api/votes/:project_id', () => {
+describe('GET /api/votes/:project_id', () => {
   it('200: should return an object with correct properties', async () => {
     const { body } = await request(app)
       .get('/api/votes/1?user_ip=192.168.1.1')

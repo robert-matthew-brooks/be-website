@@ -66,13 +66,13 @@ async function putVotes(projectId, userIp, value) {
   const update = await db.query(
     `
       UPDATE projects_votes
-      SET value = value + $1
+      SET value = $1
       FROM projects p
       WHERE project_id = p.id
       AND p.id = $2
       AND ip = $3
       RETURNING
-        p.slug,
+        p.id AS project_id,
         ip,
         value;
     `,
@@ -80,25 +80,27 @@ async function putVotes(projectId, userIp, value) {
   );
 
   if (update.rows.length > 0) {
-    console.log(update.rows[0]);
-    return { new_row: update.rows[0] };
+    return { newVote: update.rows[0] };
   } else {
     const insert = await db.query(
       `
         INSERT INTO projects_votes (
           project_id,
-          value,
-          ip
+          ip,
+          value
         )
         VALUES (
           $1, $2, $3
         )
-        RETURNING *;
+        RETURNING
+          project_id,
+          ip,
+          value;
       `,
-      [projectId, value, userIp]
+      [projectId, userIp, value]
     );
-    console.log(insert.rows[0]);
-    return { new_row: insert.rows[0] };
+
+    return { newVote: insert.rows[0] };
   }
 }
 
