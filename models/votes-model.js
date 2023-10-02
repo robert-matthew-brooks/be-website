@@ -5,7 +5,7 @@ const {
   rejectIfNotInTable,
 } = require('./util/validate');
 
-async function getVotes(projectId, userIp) {
+async function getVotes(projectId, userIp = '0.0.0.0') {
   await Promise.all([
     rejectIfNotDigit({ projectId }),
     rejectIfNotValidIp({ userIp }),

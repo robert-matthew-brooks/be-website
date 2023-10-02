@@ -279,16 +279,16 @@ describe('GET /api/votes/:project_id', () => {
     });
   });
 
+  it('200: should return null when no user ip address is provided', async () => {
+    const { body } = await request(app).get('/api/votes/1').expect(200);
+    expect(body.user_votes).toBeNull();
+  });
+
   describe('error handling', () => {
     it('400: should return an error when project id is not digits', async () => {
       const { body } = await request(app)
-        .get('/api/votes/invalid')
-        .send({ ip: '192.168.1.1' })
+        .get('/api/votes/invalid?user_ip=192.168.1.1')
         .expect(400);
-    });
-
-    it('400: should return an error when project id is not provided', async () => {
-      const { body } = await request(app).get('/api/votes/1').expect(400);
     });
 
     it('404: should return an error when ip address is invalid', async () => {
@@ -300,6 +300,65 @@ describe('GET /api/votes/:project_id', () => {
     it('404: should return an error when project id is not in table', async () => {
       const { body } = await request(app)
         .get('/api/votes/999?user_ip=192.168.1.1')
+        .expect(404);
+    });
+  });
+});
+
+describe('PUT /api/votes/:project_id', () => {
+  it('204: should add a row to the votes table', async () => {
+    const { body: before } = await request(app).get('/api/votes/1');
+
+    await request(app)
+      .put('/api/votes/1')
+      .send({ user_ip: '192.168.1.9', value: 1 })
+      .expect(204);
+
+    const { body: after } = await request(app).get('/api/votes/1');
+
+    expect(after.votes_sum).toBe(before.votes_sum + 1);
+  });
+
+  describe('error handling', () => {
+    it('400: should return an error when project id is not digits', async () => {
+      const { body } = await request(app)
+        .put('/api/votes/invalid')
+        .send({ user_ip: '192.168.1.1', value: 1 })
+        .expect(400);
+    });
+
+    it('400: should return an error when an ip address is not provided', async () => {
+      const { body } = await request(app)
+        .put('/api/votes/1')
+        .send({ value: 1 })
+        .expect(400);
+    });
+
+    it('400: should return an error when a vote value is not provided', async () => {
+      const { body } = await request(app)
+        .put('/api/votes/1')
+        .send({ user_ip: '192.168.1.1' })
+        .expect(400);
+    });
+
+    it('400: should return an error when ip address is invalid', async () => {
+      const { body } = await request(app)
+        .put('/api/votes/1')
+        .send({ user_ip: 'invalid', value: 1 })
+        .expect(400);
+    });
+
+    it('400: should return an error when vote value is invalid', async () => {
+      const { body } = await request(app)
+        .put('/api/votes/1')
+        .send({ user_ip: '192.168.1.1', value: 'invalid' })
+        .expect(400);
+    });
+
+    it('404: should return an error when project id is not in table', async () => {
+      const { body } = await request(app)
+        .put('/api/votes/999?user_ip=192.168.1.1')
+        .send({ user_ip: '192.168.1.1', value: 1 })
         .expect(404);
     });
   });
