@@ -1,0 +1,193 @@
+<h>Intro</h>
+
+<p>
+  For a given array of <b>customer handling times</b>, and a set
+  <b>number of tills</b> that can serve the customers, calculate the
+  <b>time it takes</b> for all customers to be served.
+</p>
+
+<p>
+  As I had a good idea of how to approach this problem, I attempted to use
+  <l>Python</l> to code the solution. I haven't used <l>Python</l> before, but
+  as I could imagine what steps the solution would take (eg loops, array
+  methods, math functions), I knew it would be a good excuse to look up known
+  methods in an <b>unfamiliar language</b>.
+</p>
+
+<h>The Kata</h>
+
+<quote>
+  You are a middle manager in a large supermarket chain, tasked with overseeing
+  the checkout queue. Every once in a while, your boss radios you to ask how
+  long the current queues will take to process. You take this job seriously, so
+  you've decided to write a function called <f>queueTime</f> to solve the
+  problem. The function takes two arguments:
+
+  <ul>
+    <li>
+      <b>customers</b>: an array of positive integers representing the queue.
+      Each integer represents a customer, and its value is the amount of time
+      they require to check out.
+    </li>
+    <li>
+      <b>checkouts</b>: a positive integer, the number of checkout tills. The
+      function should return the time required to process all the customers.
+    </li>
+  </ul>
+
+  <ul>
+    <li>There is only ONE queue.</li>
+    <li>The order of the queue NEVER changes.</li>
+    <li>
+      Assume that the front person in the queue (i.e. the first element in the
+      array) proceeds to a till as soon as it becomes free.
+    </li>
+  </ul>
+</quote>
+
+<p>
+  See the original kata
+  <a
+    href="https://l2c.northcoders.com/courses/be/be-katas-week-2#sectionId=queueTime"
+    >here</a
+  >.
+</p>
+
+<h>The Solution</h>
+
+<p>
+  I'd never used <l>Python</l> before, but I had a good plan of how to approach
+  the problem. This was my thought process in <b>code agnostic</b> or
+  <b>pseudo code</b> form:
+</p>
+
+<!--code
+  # 1) setup:
+  # make arrays for 'queue' (from argument), 'tills' (size from argument)
+  # make a 'timer' counter set to 0
+  # SHIFT the first elements of 'queue' into the empty 'tills'
+
+  # 2) LOOP until all the 'tills' are empty AND the 'queue' is empty:
+  # IF a till is empty AND the 'queue' isn't empty...
+  # ...SHIFT next customer in the 'queue' into the empty 'till'
+  # reduce the waiting time of all the customers at a 'till' by one minute...
+  # ...and add one minute to the 'timer'
+
+  # 3) when both arrays are empty:
+  # return the 'timer' value
+code-->
+<caption>
+  Pseudo code plan before approaching
+  <l>Python</l>
+</caption>
+
+<p>
+  Next came a process of looking up each method I wanted to use. Fortunately,
+  <l>Python</l> is reasonably similar to other languages I have seen. Some
+  refactors were required, for example when I found out the function and
+  filename convention is <b>lower_case</b> not <b>camelCase</b>.
+</p>
+
+<p>
+  <l>Python</l> doesn't feature a native <c>Array.shift</c> method - I wanted to
+  get the value of the first element of and remove (mutate) it from the array. I
+  was able to define my own utility method that could achieve this:
+</p>
+
+<!--code
+  # start with array, eg [1, 2, 3, 4, 5]
+
+  def shift(array):
+    array.reverse()   # [5, 4, 3, 2, 1]
+    el = array.pop()  # [5, 4, 3, 2]
+    array.reverse()   # [2, 3, 4, 5]
+    return el         # 1
+code-->
+<caption>
+  Flipped, popped, and flipped back
+</caption>
+
+<note>
+  Edit: I've since learned that unlike <l>JavaScript</l>, you can define the
+  element to be popped, eg <c>Array.pop(0)</c>. Time for a refactor...
+</note>
+
+<h>Running The Script</h>
+
+<p>
+  When it came to running the script, I found I already had
+  <b>Python 3</b> installed on Ubuntu. The main script was run from the CLI
+  using <c>python3 main.py</c>, similar to how <l>Node.js</l> runs .js files.
+</p>
+
+<p>
+  Luckily, it is very easy to get user input in <l>Python</l> from the CLI. I
+  made a separate function which asks the user for the function arguments (or
+  generates a random initial state) before passing them into the solution
+  script.
+</p>
+
+<p>
+  I couldn't easily host the files online in a way that could be run by others
+  (without cloning the Github repo), but I found an online host called
+  <a href="https://replit.com/@robertmatthewbrooks/supermarket-queue"
+    >Replit.com</a
+  >
+  that can run <l>Python</l> scripts in a browser window.
+</p>
+
+<h>Adding Graphics</h>
+
+<p>
+  Unlike <l>JavaScript</l>, I couldn't simply view my output via a
+  <l>HTML</l> webpage, so I was <b>limited to the CLI output</b>. It turned out
+  better that I expected; I used filled box characters to draw a bar to
+  represent the time values graphically, and I also used more CLI input commands
+  to allow the user to control each step of the program loop. This allowed the
+  state of the variables can be observed at each state of the solution.
+</p>
+
+<p>
+  The command line keeps adding output to the bottom of the screen. To keep a
+  consistent UI, I cleared the console between each frame using
+  <c>os.system('clear')</c>.
+</p>
+
+<h>Testing</h>
+
+<p>
+  <l>Python</l> has a build in test suite called <c>unittest</c>. Again, writing
+  test felt familiar to test suites I've seen before, such as <l>Jest</l> or
+  <l>Flutter</l> / <l>Dart</l>.
+</p>
+
+<p>
+  One issue I faced was that my solution script included a subroutine,
+  <c>report()</c>, to display information on the CLI. This function waits for
+  the user to press a key to continue, so every test waited for user input. I
+  solved this problem by creating a <b>mock</b> function to replace
+  <c>report()</c>. This was fine, as it didn't do any processing, it only
+  displayed information:
+</p>
+
+<!--code
+  from unittest import mock
+
+  class TestQueueTime(unittest.TestCase):
+    @mock.patch('queue_time.report')
+    def test_name(self, mocked):
+      self.assertEqual(value, same_value)
+code-->
+<caption>
+  Replacing a test hindering function with a blank mock function
+</caption>
+
+<h>Outro</h>
+
+<p>
+  It was interesting to dip my toes into <l>Python</l>. While the problem
+  solving and functionality were certainly familiar, some aspects like
+  indentation instead of curly braces felt a bit alien! (although I have come
+  across <l>YAML</l> and <l>TOML</l> before) At least now, I'll feel more
+  confident if I need to use <l>Python</l> in future.
+</p>

@@ -1,0 +1,205 @@
+<h>Intro</h>
+
+<p>
+  Decode a message encoded with a
+  <a href="https://en.wikipedia.org/wiki/Caesar_cipher">Caesar cipher</a> - that
+  is, the letters of the message are
+  <b>displaced by a fixed number of positions</b> in the alphabet. For example,
+  <c>H E L L O</c>, if displaced one letter forward, would encode to
+  <c>I F M M P</c>.
+</p>
+
+<p>
+  This kata will be solved in <l>JavaScript</l>, but I will also add a
+  <l>CSS</l> animation showing the cipher being used to decode the message.
+</p>
+
+<h>The Kata</h>
+
+<quote>
+  For this kata, you need to write a function called <f>counterIntelligence</f>.
+  It takes an <b>encrypted string</b> as the argument and should
+  <b>return a decoded string.</b><br /><br />We've intercepted a channel of
+  communication between spies! The messages have been encrypted by shifting the
+  letters by a random number, but we know whoever has been sending them always
+  signs off with a kiss ('x'). Using the last letter, establish how the messages
+  have been shifted, and return the decoded string.<br /><br />
+  <b>Punctuation</b> is not encrypted and so can be ignored.<br /><br />The
+  messages should be returned in <b>uppercase</b>.
+</quote>
+
+<p>
+  See the original kata
+  <a
+    href="https://l2c.northcoders.com/courses/be/be-katas-week-2#sectionId=counterIntelligence"
+    >here</a
+  >.
+</p>
+
+<h>The Solution</h>
+
+<p>
+  I first made a <l>JavaScript</l> function to decode the strings, as well as a
+  <l>Jest</l> suite to test my function. The first part of the solution is to
+  make a <b>lookup table</b>:
+</p>
+
+<!--code
+  function makeCipherLookup(encodedStr) {
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    // get lastChar - this maps to X
+    const lastChar = encodedStr.charAt(encodedStr.length - 1).toUpperCase();
+
+    let displacement = alphabet.indexOf(lastChar) - alphabet.indexOf('X');
+
+    // make a lookup table of the displaced alphabets
+    const lookup = { in: [], out: [] };
+    for (const i in alphabet) {
+      let decodedLetterIndex = +i - displacement;
+
+      // make sure new index doesn't exceed alphabet range
+      if (decodedLetterIndex < 0) decodedLetterIndex += alphabet.length;
+      if (decodedLetterIndex >= alphabet.length)
+        decodedLetterIndex -= alphabet.length;
+
+      lookup.in.push(alphabet[i]);
+      lookup.out.push(alphabet[decodedLetterIndex]);
+    }
+
+    return lookup;
+  }
+code-->
+<caption>
+  Make a cipher lookup table
+</caption>
+
+<ul>
+  <li>
+    The first step is to get the indices of the <b>last letter</b> and <b>X</b>,
+    because these will map to each other. The <c>displacement</c> between these
+    two is the amount we need to <b>shift each letter</b> in the encoded string.
+  </li>
+
+  <li>
+    Next I push the letters of the encoded alphabet (index <c>i</c>) and the
+    decoded alphabet (index <c>i + displacement</c>) into arrays, and this
+    lookup table will be used later.
+  </li>
+</ul>
+
+<!--code
+  const lookup = {
+    in: ['A', 'B', 'C', /* etc */],
+    out: ['E', 'F', 'G', /* etc */],
+  };
+code-->
+<caption>
+  An example returned lookup table
+</caption>
+
+<p>After making a lookup table, decoding the string is quite trivial:</p>
+
+<!--code
+function counterIntelligence(encodedStr) {
+  let outputStr = '';
+  const lookup = makeCipherLookup(encodedStr);
+
+  for (const i in encodedStr) {
+    const encodedChar = encodedStr[i].toUpperCase();
+    const lookupIndex = lookup.in.indexOf(encodedChar);
+
+    const isChanged = lookupIndex !== -1;
+    const decodedChar = isChanged ? lookup.out[lookupIndex] : encodedChar;
+
+    outputStr += decodedChar;
+  }
+
+  return outputStr;
+}
+code-->
+<caption>
+  The solution function
+</caption>
+
+<ul>
+  <li>
+    Get the index of the encoded letter - we can use the <b>same index</b> in
+    the decoded alphabet to get the <b>decoded letter</b>.
+  </li>
+
+  <li>
+    If the character doesn't have an index (returns <c>-1</c>), then it isn't an
+    A-Z letter - we <b>don't need to decode it</b>!
+  </li>
+
+  <li>
+    Add all the decoded (and ignored) characters to a string and return it...
+  </li>
+</ul>
+
+<p>
+  An <c>Array.prototype.map</c> function may have been a good choice here, but
+  it wasn't suitable here because I had to wait for <b>async</b> frontend
+  animations to complete.
+</p>
+
+<p>
+  Here are links to the
+  <a
+    href="https://github.com/robert-matthew-brooks/counter-intelligence/blob/main/counter-intelligence.js"
+    >solution script</a
+  >, and the
+  <a
+    href="https://github.com/robert-matthew-brooks/counter-intelligence/blob/main/__tests__/counter-intelligence.test.js"
+    >test suite</a
+  >.
+</p>
+
+<h>Frontend Features</h>
+
+<p>
+  I wanted to control the <b>colour of each letter</b>, for example red for
+  encoded and green for decoded. This wasn't immediately possible with a string
+  in <l>HTML</l>, so I used <l>JavaScript</l> to parse the string into a series
+  on <c>&lt;span&gt;</c> tags:
+</p>
+
+<!--code
+  <p>STRING</p>
+
+  &lt;!-- break each letter into a tag --&gt;
+
+  <div>
+    <span>S</span>
+    <span>T</span>
+    <span>R</span>
+    <span>I</span>
+    <span>N</span>
+    <span>G</span>
+  </div>
+code-->
+<caption>
+  Break a string into letter elements
+</caption>
+
+<p>
+  Now I can control the style of each letter by applying <l>CSS</l> rules to the
+  <c>span</c> tags. Also, by defining the width, I do not have to rely on
+  monospace fonts to arrange the letters into a grid.
+</p>
+
+<p>
+  I also needed to move objects in the cipher by X amounts of letters (eg move
+  the bottom cipher across). I achieved this in <l>CSS</l> by defining the width
+  in a <c>:root{}</c> rule, then measuring the width in pixels in
+  <l>JavaScript</l> after it was rendered, using the
+  <c>element.offsetWidth</c> property.
+</p>
+
+<h>Outro</h>
+
+<p>
+  This was a fun kata! The most challenging aspect was getting <l>HTML</l> DOM
+  elements to move correctly when the shapes and <b>positions are dynamic</b>.
+</p>

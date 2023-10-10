@@ -1,0 +1,190 @@
+<h>Intro</h>
+
+<p>
+  This project aims to build an <b>end-to-end (E2E) test framework</b> for a
+  mock login page (at <a href="https://www.saucedemo.com/">SauceDemo</a>). I'll
+  be using <l>Cypress</l>, an E2E web testing framework built on
+  <l>Mocha</l> and <l>Chai</l>.
+</p>
+
+<h>The Tests</h>
+
+<p>
+  The main test will be to command <l>Cypress</l> to log into the website, then
+  check where we are. Here I've done this by
+  <b>checking we got redirected</b> to the inventory page, and a
+  <b>logout link</b> exists:
+</p>
+
+<!--code
+  it('should login', () => {
+    // load up the page
+    cy.visit('https://www.saucedemo.com/')
+
+    // enter the correct login details
+    cy.get('#user-name').type('standard_user');
+    cy.get('#password').type('secret_sauce');
+    cy.get('#login-button').click();
+
+    // check we got redirected
+    cy.url().should('eq', 'https://www.saucedemo.com/inventory.html');
+    // check there is a logout element
+    cy.get('#logout_sidebar_link');
+  });
+code-->
+<caption>
+  Checking login was successful
+</caption>
+
+<p>
+  As well as <b>positive</b> testing, I also checked for
+  <b>negative</b> outcomes. For example, if we enter an incorrect username or
+  password, we need to confirm the login page <b>correctly fails</b> the login
+  procedure, and <b>doesn't</b> perform the expected login action. I put these
+  into two separate tests: incorrect username with correct password, and correct
+  username with incorrect password. This is so that if an error occurs, the
+  details of the test which fails will provide more insight into exactly what
+  condition caused the failure.
+</p>
+
+<!--code
+  it('should prevent login with incorrect USERNAME', () => {
+    // ...
+  });
+  // if this fails, there is a problem with how 
+  // the FE/BE blocks invalid usernames...
+
+  it('should prevent login with incorrect PASSWORD', () => {
+    // ...
+  });
+  // ... but if this fails, the problem is with
+  // how passwords are checked
+code-->
+<caption>
+  Depending on which test fails, we can go straight to fixing the relevant code
+</caption>
+
+<p>
+  Access to pages behind a login page, the creation of session cookies etc.
+  represent security issues that need to be tested. But as well as this
+  functionality, we can test a website for non-critical aspects, such as
+  providing <b>visual user feedback</b> when the login fails, or if the entered
+  data doesn't meet <b>validation</b> requirements. <l>Cypress</l> can access
+  the DOM, so we can find error message containers and input boxes. Then we can
+  check their state to see if <b>styles and classes have been applied</b>, such
+  as red error borders.
+</p>
+
+<!--code
+  // check the password box has the 'error' class
+  cy.get('#password').should('have.class', 'error');
+code-->
+<caption>
+  Checking a class exists in an elements
+  <l>CSS</l>
+  class list
+</caption>
+
+<h>Red Green Refactor</h>
+
+<p>
+  This test framework is new to me, so while spiking it, I found it useful to
+  fail my tests before passing. For example, if I am testing for the existence
+  of element with id <c>#password</c>, I'll run the test first with
+  <c>#passwor</c> and see it fail. This way, I know the test will correctly flag
+  up the failure condition, if the time ever comes. When there are a lot of
+  tests, running the whole suite can take a long time, so it is useful to use
+  the <c>it.only()</c> method to isolate a single test while writing it.
+</p>
+
+<h>CI/CD</h>
+
+<p>
+  So I have a test framework that will flag up any unexpected behaviour from my
+  project. Now I can implement it using <b>GitHub Actions</b> - I can request
+  GitHub to automatically run the test suite whenever a branch is pushed, so I
+  don't accidentally merge bugged code into the <b>production main</b> branch.
+</p>
+
+<p>I add the following <b>GitHub workflow</b> file into my repo:</p>
+
+<!--code
+  name: Run Cypress tests on push
+
+  # trigger when a branch is pushed to this repo
+  on: [push]
+
+  jobs:
+    install:
+      # set up a ubuntu VM
+      runs-on: ubuntu-latest
+      steps:
+        # make repo available to github actions
+        - name: Checkout
+          uses: actions/checkout@v2
+
+        # run all cypress scripts on chrome
+        - name: Cypress run
+          uses: cypress-io/github-action@v3
+          with:
+            project: ./
+            browser: chrome
+code-->
+<caption>
+  <c>.github/workflow/main.yaml</c>
+</caption>
+
+<p>
+  These actions trigger on every push to the repo, and if the
+  <l>Cypress</l> tests fail, it will flag up on the pull request. For example,
+  if I add the following test to my <l>Cypress</l> script:
+</p>
+
+<!--code
+  describe('This will fail', () => {
+    it('should confirm true is false', () => {
+      expect(true).to.equal(false)
+    });
+  });
+code-->
+<caption>
+  Test that will trigger a failure
+</caption>
+
+<p>
+  If I try to push a branch to the repo once this change is in the repo, I will
+  be alerted when making the pull request. In a realistic scenario, some
+  frontend code would be uploaded to the repo. If any changes were made that
+  failed the test, we could use an <b>admission controller</b> like
+  <b>Gatekeeper</b> to stop those frontend changes reaching the main branch.
+  This is important if code is being pushed to a repo that is being used for
+  production.
+</p>
+
+<img
+  src="https://i.ibb.co/rbBD4rr/cypress-login-test-1.gif"
+  alt="GitHub Actions finding the failing test"
+/>
+<caption>
+  GitHub Actions finding the failing test
+</caption>
+
+<h>Outro</h>
+
+<p>
+  I have learned how to use <l>Cypress</l> to build a basic automated test
+  framework, and use CI/CD to simply alert me if a pull request fails those
+  tests. The syntax is similar to other test suites I have seen such as
+  <l>Jest</l>. What I found interesting with <l>Cypress</l> is how well the
+  <b>DOM</b> is integrated, and finding elements on a page works similarly to
+  <l>CSS</l> selectors, eg. by providing <c>#id</c>, <c>.class</c> or
+  <c>.parent > child</c> information.
+</p>
+
+<p>
+  Testing can seem unnecessary on small sprints, but on larger projects, I've
+  seen how powerful unit tests are at preventing problems and quickly
+  pinpointing where new bugs occur. Now I've learned how to test the
+  <b>frontend</b> output as well as backend, I'll aim to get into the habit of
+  incorporating E2E testing in my projects going forward.
+</p>

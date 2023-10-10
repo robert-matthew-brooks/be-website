@@ -1,0 +1,89 @@
+<h>Intro</h>
+
+<p>
+  I built this webpage while learning <l>React</l>. The page will request some
+  information from an external api, then pass the data to a third-party
+  <l>React</l> component to render it as a graph.
+</p>
+
+<p>
+  The date to show information for is saved as a state variable. When the user
+  interacts with the form to change the date, a rerender of the graph is
+  triggered with new data requested from the api.
+</p>
+
+<h>The API</h>
+
+<p>
+  In this case, the information is
+  <b
+    >carbon intensity levels in Great Britain as a result of electricity
+    generation</b
+  >. This information comes from
+  <a href="https://api.carbonintensity.org.uk/">National Grid</a>.
+</p>
+
+<p>
+  The fetched data parsed into a <l>JavaScript</l> object that can be
+  interpreted by the graph component.
+</p>
+
+<h>The React Library</h>
+
+<p>
+  I used a chart library called
+  <a href="https://react-chartjs-2.js.org/">react-chartjs-2</a>, which provides
+  <l>React</l> components that render charts for tabulated passed as a argument.
+</p>
+
+<!--code
+  import { Bar } from 'react-chartjs-2';
+
+  ...
+
+  // chartData comes from the api request
+
+  const data = {
+    labels: chartData.map(el => el.time),
+    datasets: [
+      {
+        label: 'Actual',
+        data: chartData.map(el => el.actual),
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+      {
+        label: 'Forecast',
+        data: chartData.map(el => el.forecast),
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      }
+    },
+  };
+
+  ...
+
+  <Bar data={data} options={options} />
+code-->
+<caption>
+  Arranging the data into a
+  <l>JavaScript</l>
+  object for the
+  <c>&lt;Bar&gt;</c>
+  element to render as a chart
+</caption>
+
+<h>Outro</h>
+
+<p>
+  This was an interesting project to learn the basics of <l>React</l>. I also
+  had the chance to practice and learn more about <b>api requests</b> and
+  <b>responsive design</b> using <l>CSS</l>.
+</p>
