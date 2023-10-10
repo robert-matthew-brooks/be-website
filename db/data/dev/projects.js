@@ -931,6 +931,640 @@ const projectData = [
       { ip: '192.168.1.3', value: 1 },
     ],
   },
+  {
+    slug: 'counter-intelligence',
+    created_at: '2023-10-04T15:44:38.598Z',
+    title: 'Kata: Counter Intelligence',
+    description:
+      'A text processing algorithm that interprets encoded strings with an animated interface',
+    img_url: 'https://i.ibb.co/d2ynHWw/counter-intelligence.png',
+    img_alt: 'Secret text being decoded',
+    live_link:
+      'https://htmlpreview.github.io/?https://github.com/robert-matthew-brooks/counter-intelligence/blob/main/frontend/index.html',
+    github_link:
+      'https://github.com/robert-matthew-brooks/counter-intelligence',
+    body: `
+    <h>Intro</h>
+
+    <p>
+      Decode a message encoded with a
+      <a href="https://en.wikipedia.org/wiki/Caesar_cipher">Caesar cipher</a> - that
+      is, the letters of the message are
+      <b>displaced by a fixed number of positions</b> in the alphabet. For example,
+      <c>H E L L O</c>, if displaced one letter forward, would encode to
+      <c>I F M M P</c>.
+    </p>
+    
+    <p>
+      This kata will be solved in <l>JavaScript</l>, but I will also add a
+      <l>CSS</l> animation showing the cipher being used to decode the message.
+    </p>
+    
+    <h>The Kata</h>
+    
+    <quote>
+      For this kata, you need to write a function called <f>counterIntelligence</f>.
+      It takes an <b>encrypted string</b> as the argument and should
+      <b>return a decoded string.</b><br /><br />We've intercepted a channel of
+      communication between spies! The messages have been encrypted by shifting the
+      letters by a random number, but we know whoever has been sending them always
+      signs off with a kiss ('x'). Using the last letter, establish how the messages
+      have been shifted, and return the decoded string.<br /><br />
+      <b>Punctuation</b> is not encrypted and so can be ignored.<br /><br />The
+      messages should be returned in <b>uppercase</b>.
+    </quote>
+    
+    <p>
+      See the original kata
+      <a
+        href="https://l2c.northcoders.com/courses/be/be-katas-week-2#sectionId=counterIntelligence"
+        >here</a
+      >.
+    </p>
+    
+    <h>The Solution</h>
+    
+    <p>
+      I first made a <l>JavaScript</l> function to decode the strings, as well as a
+      <l>Jest</l> suite to test my function. The first part of the solution is to
+      make a <b>lookup table</b>:
+    </p>
+    
+    <!--code
+      function makeCipherLookup(encodedStr) {
+        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    
+        // get lastChar - this maps to X
+        const lastChar = encodedStr.charAt(encodedStr.length - 1).toUpperCase();
+    
+        let displacement = alphabet.indexOf(lastChar) - alphabet.indexOf('X');
+    
+        // make a lookup table of the displaced alphabets
+        const lookup = { in: [], out: [] };
+        for (const i in alphabet) {
+          let decodedLetterIndex = +i - displacement;
+    
+          // make sure new index doesn't exceed alphabet range
+          if (decodedLetterIndex < 0) decodedLetterIndex += alphabet.length;
+          if (decodedLetterIndex >= alphabet.length)
+            decodedLetterIndex -= alphabet.length;
+    
+          lookup.in.push(alphabet[i]);
+          lookup.out.push(alphabet[decodedLetterIndex]);
+        }
+    
+        return lookup;
+      }
+    code-->
+    <caption>
+      Make a cipher lookup table
+    </caption>
+    
+    <ul>
+      <li>
+        The first step is to get the indices of the <b>last letter</b> and <b>X</b>,
+        because these will map to each other. The <c>displacement</c> between these
+        two is the amount we need to <b>shift each letter</b> in the encoded string.
+      </li>
+    
+      <li>
+        Next I push the letters of the encoded alphabet (index <c>i</c>) and the
+        decoded alphabet (index <c>i + displacement</c>) into arrays, and this
+        lookup table will be used later.
+      </li>
+    </ul>
+    
+    <!--code
+      const lookup = {
+        in: ['A', 'B', 'C', /* etc */],
+        out: ['E', 'F', 'G', /* etc */],
+      };
+    code-->
+    <caption>
+      An example returned lookup table
+    </caption>
+    
+    <p>After making a lookup table, decoding the string is quite trivial:</p>
+    
+    <!--code
+    function counterIntelligence(encodedStr) {
+      let outputStr = '';
+      const lookup = makeCipherLookup(encodedStr);
+    
+      for (const i in encodedStr) {
+        const encodedChar = encodedStr[i].toUpperCase();
+        const lookupIndex = lookup.in.indexOf(encodedChar);
+    
+        const isChanged = lookupIndex !== -1;
+        const decodedChar = isChanged ? lookup.out[lookupIndex] : encodedChar;
+    
+        outputStr += decodedChar;
+      }
+    
+      return outputStr;
+    }
+    code-->
+    <caption>
+      The solution function
+    </caption>
+    
+    <ul>
+      <li>
+        Get the index of the encoded letter - we can use the <b>same index</b> in
+        the decoded alphabet to get the <b>decoded letter</b>.
+      </li>
+    
+      <li>
+        If the character doesn't have an index (returns <c>-1</c>), then it isn't an
+        A-Z letter - we <b>don't need to decode it</b>!
+      </li>
+    
+      <li>
+        Add all the decoded (and ignored) characters to a string and return it...
+      </li>
+    </ul>
+    
+    <p>
+      An <c>Array.prototype.map</c> function may have been a good choice here, but
+      it wasn't suitable here because I had to wait for <b>async</b> frontend
+      animations to complete.
+    </p>
+    
+    <p>
+      Here are links to the
+      <a
+        href="https://github.com/robert-matthew-brooks/counter-intelligence/blob/main/counter-intelligence.js"
+        >solution script</a
+      >, and the
+      <a
+        href="https://github.com/robert-matthew-brooks/counter-intelligence/blob/main/__tests__/counter-intelligence.test.js"
+        >test suite</a
+      >.
+    </p>
+    
+    <h>Frontend Features</h>
+    
+    <p>
+      I wanted to control the <b>colour of each letter</b>, for example red for
+      encoded and green for decoded. This wasn't immediately possible with a string
+      in <l>HTML</l>, so I used <l>JavaScript</l> to parse the string into a series
+      on <c>&lt;span&gt;</c> tags:
+    </p>
+    
+    <!--code
+      <p>STRING</p>
+    
+      &lt;!-- break each letter into a tag --&gt;
+    
+      <div>
+        <span>S</span>
+        <span>T</span>
+        <span>R</span>
+        <span>I</span>
+        <span>N</span>
+        <span>G</span>
+      </div>
+    code-->
+    <caption>
+      Break a string into letter elements
+    </caption>
+    
+    <p>
+      Now I can control the style of each letter by applying <l>CSS</l> rules to the
+      <c>span</c> tags. Also, by defining the width, I do not have to rely on
+      monospace fonts to arrange the letters into a grid.
+    </p>
+    
+    <p>
+      I also needed to move objects in the cipher by X amounts of letters (eg move
+      the bottom cipher across). I achieved this in <l>CSS</l> by defining the width
+      in a <c>:root{}</c> rule, then measuring the width in pixels in
+      <l>JavaScript</l> after it was rendered, using the
+      <c>element.offsetWidth</c> property.
+    </p>
+    
+    <h>Outro</h>
+    
+    <p>
+      This was a fun kata! The most challenging aspect was getting <l>HTML</l> DOM
+      elements to move correctly when the shapes and <b>positions are dynamic</b>.
+    </p>
+    `,
+    language_ids: [1, 6, 7, 4],
+    votes: [
+      { ip: '192.168.1.1', value: 1 },
+      { ip: '192.168.1.2', value: 1 },
+    ],
+  },
+  {
+    slug: 'supermarket-queue',
+    created_at: '2023-10-05T21:31:39.704Z',
+    title: 'Kata: Supermarket Queue',
+    description:
+      'A simulation of customers being served at tills, with the aim of calculating the total waiting time for a given state',
+    img_url: 'https://i.ibb.co/ZmLCJWQ/supermarket-queue.png',
+    img_alt: 'CLI output of Python3 script',
+    live_link: 'https://replit.com/@robertmatthewbrooks/supermarket-queue',
+    github_link: 'https://github.com/robert-matthew-brooks/supermarket-queue',
+    body: `
+    <h>Intro</h>
+
+    <p>
+      For a given array of <b>customer handling times</b>, and a set
+      <b>number of tills</b> that can serve the customers, calculate the
+      <b>time it takes</b> for all customers to be served.
+    </p>
+    
+    <p>
+      As I had a good idea of how to approach this problem, I attempted to use
+      <l>Python</l> to code the solution. I haven't used <l>Python</l> before, but
+      as I could imagine what steps the solution would take (eg loops, array
+      methods, math functions), I knew it would be a good excuse to look up known
+      methods in an <b>unfamiliar language</b>.
+    </p>
+    
+    <h>The Kata</h>
+    
+    <quote>
+      You are a middle manager in a large supermarket chain, tasked with overseeing
+      the checkout queue. Every once in a while, your boss radios you to ask how
+      long the current queues will take to process. You take this job seriously, so
+      you've decided to write a function called <f>queueTime</f> to solve the
+      problem. The function takes two arguments:
+    
+      <ul>
+        <li>
+          <b>customers</b>: an array of positive integers representing the queue.
+          Each integer represents a customer, and its value is the amount of time
+          they require to check out.
+        </li>
+        <li>
+          <b>checkouts</b>: a positive integer, the number of checkout tills. The
+          function should return the time required to process all the customers.
+        </li>
+      </ul>
+    
+      <ul>
+        <li>There is only ONE queue.</li>
+        <li>The order of the queue NEVER changes.</li>
+        <li>
+          Assume that the front person in the queue (i.e. the first element in the
+          array) proceeds to a till as soon as it becomes free.
+        </li>
+      </ul>
+    </quote>
+    
+    <p>
+      See the original kata
+      <a
+        href="https://l2c.northcoders.com/courses/be/be-katas-week-2#sectionId=queueTime"
+        >here</a
+      >.
+    </p>
+    
+    <h>The Solution</h>
+    
+    <p>
+      I'd never used <l>Python</l> before, but I had a good plan of how to approach
+      the problem. This was my thought process in <b>code agnostic</b> or
+      <b>pseudo code</b> form:
+    </p>
+    
+    <!--code
+      # 1) setup:
+      # make arrays for 'queue' (from argument), 'tills' (size from argument)
+      # make a 'timer' counter set to 0
+      # SHIFT the first elements of 'queue' into the empty 'tills'
+    
+      # 2) LOOP until all the 'tills' are empty AND the 'queue' is empty:
+      # IF a till is empty AND the 'queue' isn't empty...
+      # ...SHIFT next customer in the 'queue' into the empty 'till'
+      # reduce the waiting time of all the customers at a 'till' by one minute...
+      # ...and add one minute to the 'timer'
+    
+      # 3) when both arrays are empty:
+      # return the 'timer' value
+    code-->
+    <caption>
+      Pseudo code plan before approaching
+      <l>Python</l>
+    </caption>
+    
+    <p>
+      Next came a process of looking up each method I wanted to use. Fortunately,
+      <l>Python</l> is reasonably similar to other languages I have seen. Some
+      refactors were required, for example when I found out the function and
+      filename convention is <b>lower_case</b> not <b>camelCase</b>.
+    </p>
+    
+    <p>
+      <l>Python</l> doesn't feature a native <c>Array.shift</c> method - I wanted to
+      get the value of the first element of and remove (mutate) it from the array. I
+      was able to define my own utility method that could achieve this:
+    </p>
+    
+    <!--code
+      # start with array, eg [1, 2, 3, 4, 5]
+    
+      def shift(array):
+        array.reverse()   # [5, 4, 3, 2, 1]
+        el = array.pop()  # [5, 4, 3, 2]
+        array.reverse()   # [2, 3, 4, 5]
+        return el         # 1
+    code-->
+    <caption>
+      Flipped, popped, and flipped back
+    </caption>
+
+    <note>
+      Edit: I've since learned that unlike <l>JavaScript</l>, you can define the element to be popped, eg <c>Array.pop(0)</c>. Time for a refactor...
+    </note>
+    
+    <h>Running The Script</h>
+    
+    <p>
+      When it came to running the script, I found I already had
+      <b>Python 3</b> installed on Ubuntu. The main script was run from the CLI
+      using <c>python3 main.py</c>, similar to how <l>Node.js</l> runs .js files.
+    </p>
+    
+    <p>
+      Luckily, it is very easy to get user input in <l>Python</l> from the CLI. I
+      made a separate function which asks the user for the function arguments (or
+      generates a random initial state) before passing them into the solution
+      script.
+    </p>
+    
+    <p>
+      I couldn't easily host the files online in a way that could be run by others
+      (without cloning the Github repo), but I found an online host called
+      <a href="https://replit.com/@robertmatthewbrooks/supermarket-queue">Replit.com</a>
+      that can run <l>Python</l> scripts in a browser window.
+    </p>
+    
+    <h>Adding Graphics</h>
+    
+    <p>
+      Unlike <l>JavaScript</l>, I couldn't simply view my output via a
+      <l>HTML</l> webpage, so I was <b>limited to the CLI output</b>. It turned out
+      better that I expected; I used filled box characters to draw a bar to
+      represent the time values graphically, and I also used more CLI input commands
+      to allow the user to control each step of the program loop. This allowed the
+      state of the variables can be observed at each state of the solution.
+    </p>
+
+    <p>
+      The command line keeps adding output to the bottom of the screen. To keep a
+      consistent UI, I cleared the console between each frame using
+      <c>os.system('clear')</c>.
+    </p>
+    
+    <h>Testing</h>
+    
+    <p>
+      <l>Python</l> has a build in test suite called <c>unittest</c>. Again, writing
+      test felt familiar to test suites I've seen before, such as <l>Jest</l> or
+      <l>Flutter</l> / <l>Dart</l>.
+    </p>
+    
+    <p>
+      One issue I faced was that my solution script included a subroutine,
+      <c>report()</c>, to display information on the CLI. This function waits for
+      the user to press a key to continue, so every test waited for user input. I
+      solved this problem by creating a <b>mock</b> function to replace
+      <c>report()</c>. This was fine, as it didn't do any processing, it only
+      displayed information:
+    </p>
+    
+    <!--code
+      from unittest import mock
+    
+      class TestQueueTime(unittest.TestCase):
+        @mock.patch('queue_time.report')
+        def test_name(self, mocked):
+          self.assertEqual(value, same_value)
+    code-->
+    <caption>
+      Replacing a test hindering function with a blank mock function
+    </caption>
+    
+    <h>Outro</h>
+    
+    <p>
+      It was interesting to dip my toes into <l>Python</l>. While the problem
+      solving and functionality were certainly familiar, some aspects like
+      indentation instead of curly braces felt a bit alien! (although I have come
+      across <l>YAML</l> and <l>TOML</l> before) At least now, I'll feel more
+      confident if I need to use <l>Python</l> in future.
+    </p>
+    `,
+    language_ids: [8],
+    votes: [{ ip: '192.168.1.1', value: 1 }],
+  },
+  {
+    slug: 'cypress-login-test',
+    created_at: '2023-10-10T14:24:50.297Z',
+    title: 'Login Page Automation Test',
+    description:
+      'A test framework for a frontend login page, which performs a series of positive and negative tests to ensure the login page provides the desired user experience.',
+    img_url: 'https://i.ibb.co/Z82hXmD/cypress-login-test.png',
+    img_alt: 'Cypress running an automated test framework',
+    github_link: 'https://github.com/robert-matthew-brooks/cypress-login-test',
+    language_ids: [9],
+    body: `
+    <h>Intro</h>
+
+    <p>
+      This project aims to build an <b>end-to-end (E2E) test framework</b> for a
+      mock login page (at <a href="https://www.saucedemo.com/">SauceDemo</a>). I'll
+      be using <l>Cypress</l>, an E2E web testing framework built on
+      <l>Mocha</l> and <l>Chai</l>.
+    </p>
+    
+    <h>The Tests</h>
+    
+    <p>
+      The main test will be to command <l>Cypress</l> to log into the website, then
+      check where we are. Here I've done this by
+      <b>checking we got redirected</b> to the inventory page, and a
+      <b>logout link</b> exists:
+    </p>
+    
+    <!--code
+      it('should login', () => {
+        // load up the page
+        cy.visit('https://www.saucedemo.com/')
+    
+        // enter the correct login details
+        cy.get('#user-name').type('standard_user');
+        cy.get('#password').type('secret_sauce');
+        cy.get('#login-button').click();
+    
+        // check we got redirected
+        cy.url().should('eq', 'https://www.saucedemo.com/inventory.html');
+        // check there is a logout element
+        cy.get('#logout_sidebar_link');
+      });
+    code-->
+    <caption>
+      Checking login was successful
+    </caption>
+    
+    <p>
+      As well as <b>positive</b> testing, I also checked for
+      <b>negative</b> outcomes. For example, if we enter an incorrect username or
+      password, we need to confirm the login page <b>correctly fails</b> the login
+      procedure, and <b>doesn't</b> perform the expected login action. I put these
+      into two separate tests: incorrect username with correct password, and correct
+      username with incorrect password. This is so that if an error occurs, the
+      details of the test which fails will provide more insight into exactly what
+      condition caused the failure.
+    </p>
+    
+    <!--code
+      it('should prevent login with incorrect USERNAME', () => {
+        // ...
+      });
+      // if this fails, there is a problem with how 
+      // the FE/BE blocks invalid usernames...
+    
+      it('should prevent login with incorrect PASSWORD', () => {
+        // ...
+      });
+      // ... but if this fails, the problem is with
+      // how passwords are checked
+    code-->
+    <caption>
+      Depending on which test fails, we can go straight to fixing the relevant code
+    </caption>
+    
+    <p>
+      Access to pages behind a login page, the creation of session cookies etc.
+      represent security issues that need to be tested. But as well as this
+      functionality, we can test a website for non-critical aspects, such as
+      providing <b>visual user feedback</b> when the login fails, or if the entered
+      data doesn't meet <b>validation</b> requirements. <l>Cypress</l> can access
+      the DOM, so we can find error message containers and input boxes. Then we can
+      check their state to see if <b>styles and classes have been applied</b>, such
+      as red error borders.
+    </p>
+    
+    <!--code
+      // check the password box has the 'error' class
+      cy.get('#password').should('have.class', 'error');
+    code-->
+    <caption>
+      Checking a class exists in an elements
+      <l>CSS</l>
+      class list
+    </caption>
+    
+    <h>Red Green Refactor</h>
+    
+    <p>
+      This test framework is new to me, so while spiking it, I found it useful to
+      fail my tests before passing. For example, if I am testing for the existence
+      of element with id <c>#password</c>, I'll run the test first with
+      <c>#passwor</c> and see it fail. This way, I know the test will correctly flag
+      up the failure condition, if the time ever comes. When there are a lot of
+      tests, running the whole suite can take a long time, so it is useful to use
+      the <c>it.only()</c> method to isolate a single test while writing it.
+    </p>
+    
+    <h>CICD</h>
+    
+    <p>
+      So I have a test framework that will flag up any unexpected behaviour from my
+      project. Now I can implement it using <b>GitHub Actions</b> - I can request
+      GitHub to automatically run the test suite whenever a branch is pushed, so I
+      don't accidentally merge bugged code into the <b>production main</b> branch.
+    </p>
+    
+    <p>I add the following <b>GitHub workflow</b> file into my repo:</p>
+    
+    <!--code
+      name: Run Cypress tests on push
+    
+      # trigger when a branch is pushed to this repo
+      on: [push]
+    
+      jobs:
+        install:
+          # set up a ubuntu VM
+          runs-on: ubuntu-latest
+          steps:
+            # make repo available to github actions
+            - name: Checkout
+              uses: actions/checkout@v2
+    
+            # run all cypress scripts on chrome
+            - name: Cypress run
+              uses: cypress-io/github-action@v3
+              with:
+                project: ./
+                browser: chrome
+    code-->
+    <caption>
+      <c>.github/workflow/main.yaml</c>
+    </caption>
+    
+    <p>
+      These actions trigger on every push to the repo, and if the
+      <l>Cypress</l> tests fail, it will flag up on the pull request. For example,
+      if I add the following test to my <l>Cypress</l> script:
+    </p>
+    
+    <!--code
+      describe('This will fail', () => {
+        it('should confirm true is false', () => {
+          expect(true).to.equal(false)
+        });
+      });
+    code-->
+    <caption>
+      Test that will trigger a failure
+    </caption>
+    
+    <p>
+      If I try to push a branch to the repo once this change is in the repo, I will
+      be alerted when making the pull request. In a realistic scenario, some
+      frontend code would be uploaded to the repo. If any changes were made that
+      failed the test, we could use an <b>admission controller</b> like
+      <b>Gatekeeper</b> to stop those frontend changes reaching the main branch.
+      This is important if code is being pushed to a repo that is being used for
+      production.
+    </p>
+    
+    <img
+      src="https://i.ibb.co/Fs0mDv2/cypress-login-test-1.gif"
+      alt="GitHub Actions finding the failing test"
+    />
+    <caption>
+      GitHub Actions finding the failing test
+    </caption>
+    
+    <h>Outro</h>
+    
+    <p>
+      I have learned how to use <l>Cypress</l> to build a basic automated test
+      framework, and use CICD to simply alert me if a pull request fails those
+      tests. The language is similar to other test suites I have seen such as
+      <l>Jest</l>. What I found interesting with <l>Cypress</l> is how well the
+      <b>DOM</b> is integrated, and finding elements on a page works similarly to
+      <l>CSS</l> selectors, eg. by providing <c>#id</c>, <c>.class</c> or
+      <c>.parent > child</c> information.
+    </p>
+    
+    <p>
+      Testing can seem unnecessary on small sprints, but on larger projects, I've
+      seen how powerful unit tests are at preventing problems and quickly
+      pinpointing where new bugs occur. Now I've learned how to test the
+      <b>frontend</b> output as well as backend, I'll aim to get into the habit of
+      incorporating E2E testing in my projects going forward.
+    </p>
+    `,
+    votes: [],
+  },
 ];
 
 module.exports = { projectData };

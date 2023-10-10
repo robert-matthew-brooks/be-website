@@ -7,7 +7,7 @@ const languageData = [
   },
   {
     name: 'Express',
-    slug: 'express',
+    slug: 'ex',
     icon_url:
       'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
   },
@@ -40,6 +40,18 @@ const languageData = [
     slug: 'css',
     icon_url:
       'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
+  },
+  {
+    name: 'Python',
+    slug: 'py',
+    icon_url:
+      'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+  },
+  {
+    name: 'Cypress',
+    slug: 'cy',
+    icon_url:
+      'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mocha/mocha-plain.svg',
   },
 ];
 
