@@ -1,10 +1,11 @@
 const projectsModel = require('../models/projects-model');
 
 async function getProjects(req, res, next) {
-  const { language, limit, page, sort_by: sortBy, order } = req.query;
+  const { featured, language, limit, page, sort_by: sortBy, order } = req.query;
 
   try {
     const { projects, projectCount } = await projectsModel.getProjects(
+      featured,
       language,
       limit,
       page,

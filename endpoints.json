@@ -4,7 +4,14 @@
   },
   "GET /api/projects": {
     "description": "returns a paginated array of projects with details to populate the website portfolio list, and a total number of projects before pagination",
-    "allowedQueries": ["language", "limit", "page", "sort_by", "order"],
+    "allowedQueries": [
+      "featured",
+      "language",
+      "limit",
+      "page",
+      "sort_by",
+      "order"
+    ],
     "exampleResponse": {
       "project_count": 1,
       "projects": [
@@ -12,6 +19,7 @@
           "id": 1,
           "slug": "build-website-be",
           "created_at": "2023-06-30T18:11:01.487Z",
+          "is_featured": false,
           "title": "Building A Website Backend",
           "description": "An article about building a website backend",
           "img_url": "https://images.pexels.com/photos/1117452/pexels-photo-1117452.jpeg",

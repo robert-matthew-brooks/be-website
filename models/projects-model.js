@@ -12,12 +12,14 @@ const { parseVideoUrl } = require('./util/parse-video-url');
 
 // used for rendering a list of projects on frontend
 async function getProjects(
+  featured = false,
   language = '%',
   limit = 6,
   page = 1,
   sortBy = 'created_at',
   order = 'DESC'
 ) {
+  featured = featured ? "AND p.is_featured = 'true'" : '';
   language = language.toLowerCase();
   sortBy = sortBy.toLocaleLowerCase();
   if (sortBy === 'date') sortBy = 'created_at';
@@ -40,6 +42,7 @@ async function getProjects(
         p_pl.id,
         p_pl.slug,
         p_pl.created_at,
+        p_pl.is_featured,
         p_pl.title,
         p_pl.description,
         p_pl.img_url,
@@ -52,6 +55,7 @@ async function getProjects(
           p.id,
           p.slug,
           p.created_at,
+          p.is_featured,
           p.title,
           p.description,
           p.img_url,
@@ -64,6 +68,7 @@ async function getProjects(
         ON l.id = pl.language_id
         GROUP BY p.id
         HAVING BOOL_OR(LOWER(l.slug) LIKE '${language}') 
+        ${featured}
       ) p_pl
       
       INNER JOIN (
@@ -94,6 +99,7 @@ async function getProjects(
         LEFT JOIN languages l
         ON l.id = pl.language_id
         WHERE LOWER(l.slug) LIKE '${language}'
+        ${featured}
         GROUP BY p.id
       ) t;
     `

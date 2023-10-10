@@ -115,6 +115,14 @@ describe('GET /api/projects', () => {
         expect(foundLanguage).toBeTruthy();
       }
     });
+
+    it('200: should filter by featured projects', async () => {
+      const { body } = await request(app).get('/api/projects?featured=true');
+
+      for (const project of body.projects) {
+        expect(project.is_featured).toBeTruthy();
+      }
+    });
   });
 
   describe('sorting', () => {
