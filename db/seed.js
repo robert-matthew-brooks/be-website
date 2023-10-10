@@ -34,6 +34,7 @@ async function seed({
       id SERIAL PRIMARY KEY,
       slug VARCHAR UNIQUE NOT NULL,
       created_at TIMESTAMP DEFAULT NOW() NOT NULL,
+      is_featured BOOLEAN,
       title VARCHAR NOT NULL,
       description VARCHAR NOT NULL,
       live_link VARCHAR,
@@ -81,8 +82,9 @@ async function seed({
 
   const insertProjectsQueryStr = format(
     `INSERT INTO projects (
-      created_at,
       slug,
+      created_at,
+      is_featured,
       title,
       description,
       img_url,
@@ -94,15 +96,16 @@ async function seed({
     )
     VALUES %L;`,
     projectData.map((project) => [
-      project.created_at,
       project.slug,
+      project.createdAt,
+      project.isFeatured,
       project.title,
       project.description,
-      project.img_url,
-      project.img_alt,
-      project.video_url,
-      project.live_link,
-      project.github_link,
+      project.imgUrl,
+      project.imgAlt,
+      project.videoUrl,
+      project.liveLink,
+      project.githubLink,
       project.body,
     ])
   );
@@ -128,8 +131,8 @@ async function seed({
     )
     VALUES %L;`,
     projectLanguageData.map((junction) => [
-      junction.project_id,
-      junction.language_id,
+      junction.projectId,
+      junction.languageId,
     ])
   );
 
@@ -141,7 +144,7 @@ async function seed({
     )
     VALUES %L;`,
     projectVotesData.map((junction) => [
-      junction.project_id,
+      junction.projectId,
       junction.value,
       junction.ip,
     ])
