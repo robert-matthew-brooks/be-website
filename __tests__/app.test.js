@@ -50,7 +50,7 @@ describe('GET /api/projects', () => {
           id: expect.any(Number),
           name: expect.any(String),
           slug: expect.any(String),
-          icon_url: expect.any(String),
+          icon: expect.any(String),
         });
       }
     }
@@ -204,7 +204,7 @@ describe('GET /api/languages', () => {
         id: expect.any(Number),
         slug: expect.any(String),
         name: expect.any(String),
-        icon_url: expect.any(String),
+        icon: expect.any(String),
         project_count: expect.any(Number),
       });
     }
@@ -247,7 +247,7 @@ describe('GET /api/projects/:project_slug', () => {
         id: expect.any(Number),
         slug: expect.any(String),
         name: expect.any(String),
-        icon_url: expect.any(String),
+        icon: expect.any(String),
       });
     }
   });

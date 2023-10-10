@@ -2,52 +2,52 @@ const languageData = [
   {
     name: 'language_1',
     slug: 'l1',
-    icon_url: 'some_url.com/icon_1.jpg',
+    icon: '<svg id="icon_1"></svg>',
   },
   {
     name: 'language_2',
     slug: 'l2',
-    icon_url: 'some_url.com/icon_2.jpg',
+    icon: '<svg id="icon_2"></svg>',
   },
   {
     name: 'language_3',
     slug: 'l3',
-    icon_url: 'some_url.com/icon_3.jpg',
+    icon: '<svg id="icon_3"></svg>',
   },
   {
     name: 'language_4',
     slug: 'l4',
-    icon_url: 'some_url.com/icon_4.jpg',
+    icon: '<svg id="icon_4"></svg>',
   },
   {
     name: 'language_5',
     slug: 'l5',
-    icon_url: 'some_url.com/icon_5.jpg',
+    icon: '<svg id="icon_5"></svg>',
   },
   {
     name: 'language_6',
     slug: 'l6',
-    icon_url: 'some_url.com/icon_6.jpg',
+    icon: '<svg id="icon_6"></svg>',
   },
   {
     name: 'language_7',
     slug: 'l7',
-    icon_url: 'some_url.com/icon_7.jpg',
+    icon: '<svg id="icon_7"></svg>',
   },
   {
     name: 'language_8',
     slug: 'l8',
-    icon_url: 'some_url.com/icon_8.jpg',
+    icon: '<svg id="icon_8"></svg>',
   },
   {
     name: 'language_9',
     slug: 'l9',
-    icon_url: 'some_url.com/icon_9.jpg',
+    icon: '<svg id="icon_9"></svg>',
   },
   {
     name: 'language_10',
     slug: 'l10',
-    icon_url: 'some_url.com/icon_10.jpg',
+    icon: '<svg id="icon_10"></svg>',
   },
 ];
 

@@ -50,7 +50,7 @@ async function seed({
       id SERIAL PRIMARY KEY,
       slug VARCHAR NOT NULL,
       name VARCHAR NOT NULL,
-      icon_url VARCHAR NOT NULL
+      icon VARCHAR NOT NULL
     );
   `);
 
@@ -111,13 +111,13 @@ async function seed({
     `INSERT INTO languages (
       slug,
       name,
-      icon_url
+      icon
     )
     VALUES %L;`,
     languageData.map((language) => [
       language.slug,
       language.name,
-      language.icon_url,
+      language.icon,
     ])
   );
 
