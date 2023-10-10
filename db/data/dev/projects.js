@@ -1471,7 +1471,7 @@ const projectData = [
       the <c>it.only()</c> method to isolate a single test while writing it.
     </p>
     
-    <h>CICD</h>
+    <h>CI/CD</h>
     
     <p>
       So I have a test framework that will flag up any unexpected behaviour from my
@@ -1536,7 +1536,7 @@ const projectData = [
     </p>
     
     <img
-      src="https://i.ibb.co/Fs0mDv2/cypress-login-test-1.gif"
+      src="https://i.ibb.co/rbBD4rr/cypress-login-test-1.gif"
       alt="GitHub Actions finding the failing test"
     />
     <caption>
@@ -1547,7 +1547,7 @@ const projectData = [
     
     <p>
       I have learned how to use <l>Cypress</l> to build a basic automated test
-      framework, and use CICD to simply alert me if a pull request fails those
+      framework, and use CI/CD to simply alert me if a pull request fails those
       tests. The language is similar to other test suites I have seen such as
       <l>Jest</l>. What I found interesting with <l>Cypress</l> is how well the
       <b>DOM</b> is integrated, and finding elements on a page works similarly to
