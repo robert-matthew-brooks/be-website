@@ -1548,7 +1548,7 @@ const projectData = [
     <p>
       I have learned how to use <l>Cypress</l> to build a basic automated test
       framework, and use CI/CD to simply alert me if a pull request fails those
-      tests. The language is similar to other test suites I have seen such as
+      tests. The syntax is similar to other test suites I have seen such as
       <l>Jest</l>. What I found interesting with <l>Cypress</l> is how well the
       <b>DOM</b> is integrated, and finding elements on a page works similarly to
       <l>CSS</l> selectors, eg. by providing <c>#id</c>, <c>.class</c> or
