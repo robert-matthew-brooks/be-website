@@ -8,7 +8,7 @@ const projectData = [
     isFeatured: false,
     title: 'Carbon Intensity Data',
     description:
-      'A webpage that fetches data from an external api, and displays the results using a third party graph rendering module',
+      'A webpage that fetches data from an external api, and displays the results using a third party graph rendering module.',
     imgUrl: 'https://i.ibb.co/HXndgdh/carbon-intensity-data.png',
     imgAlt: 'Bar graph of actual and forecast carbon levels in the UK',
     liveLink: 'https://carbon-intensity-data.netlify.app/',
@@ -23,7 +23,7 @@ const projectData = [
     isFeatured: true,
     title: 'NC-News Backend API',
     description:
-      'An api which mimics a real world backend service for a news/blog website, which provides information to frontend architecture',
+      'An API that mimics a real world backend service for a news/blog website, which provides information to frontend architecture. The API is hosted online on a live production server, and the endpoints are thoroughly tested with Jest.',
     imgUrl: 'https://i.ibb.co/t2vHVnC/backend-nc-news.png',
     imgAlt: 'JSON object in Insomnia',
     liveLink: 'https://be-nc-news-nvms.onrender.com/api',
@@ -42,7 +42,7 @@ const projectData = [
     isFeatured: true,
     title: 'NC-News Frontend Website',
     description:
-      'A Reddit style social news hub featuring user-curated ratings and a comments',
+      'A Reddit style social news hub featuring user-curated ratings and a comments. The website is hosted online, and you can interact with the backend server by leaving likes and comments.',
     imgUrl: 'https://i.ibb.co/FBBwGy7/frontend-nc-news.jpg',
     imgAlt: 'NC-News website',
     liveLink: 'https://frontend-nc-news.netlify.app/',
@@ -62,7 +62,7 @@ const projectData = [
     isFeatured: false,
     title: 'Kata: Sum Consecutive Duplicates',
     description:
-      'A solution to an array manipulation problem featuring an animated CSS gui',
+      'A solution to an array manipulation problem featuring an animated CSS GUI.',
     imgUrl: 'https://i.ibb.co/7bysbQF/sum-consecutive-duplicates.jpg',
     imgAlt: 'VS code on screen',
     liveLink: 'https://sum-consecutive-duplicates.onrender.com/frontend/',
@@ -81,7 +81,7 @@ const projectData = [
     isFeatured: false,
     title: 'Kata: Counter Intelligence',
     description:
-      'A text processing algorithm that interprets encoded strings with an animated interface',
+      'A text processing algorithm that interprets encoded strings with an animated interface.',
     imgUrl: 'https://i.ibb.co/d2ynHWw/counter-intelligence.png',
     imgAlt: 'Secret text being decoded',
     liveLink:
@@ -99,7 +99,7 @@ const projectData = [
     isFeatured: false,
     title: 'Kata: Supermarket Queue',
     description:
-      'A simulation of customers being served at tills, with the aim of calculating the total waiting time for a given state',
+      'A simulation of customers being served at tills, with the aim of calculating the total waiting time for a given state.',
     imgUrl: 'https://i.ibb.co/ZmLCJWQ/supermarket-queue.png',
     imgAlt: 'CLI output of Python3 script',
     liveLink: 'https://replit.com/@robertmatthewbrooks/supermarket-queue',
@@ -118,7 +118,7 @@ const projectData = [
     imgAlt: 'Cypress running an automated test framework',
     githubLink: 'https://github.com/robert-matthew-brooks/cypress-login-test',
     languageIds: [9],
-    votes: [],
+    votes: [{ ip: '192.168.1.1', value: 1 }],
   },
 ];
 
