@@ -21,7 +21,8 @@ function psqlErrorHandler(err, req, res, next) {
 // catch-all
 
 function serverErrorHandler(err, req, res, next) {
-  res.status(500).send({ msg: `unhandled internal server error: ${err}` });
+  console.error(err);
+  res.status(500).send({ msg: `${err}` });
 }
 
 module.exports = { customErrorHandler, psqlErrorHandler, serverErrorHandler };
