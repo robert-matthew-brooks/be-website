@@ -24,7 +24,8 @@ const allowedUrls = [
 /*********************/
 
 const app = express();
-app.use(cors({ origin: allowedUrls }));
+//app.use(cors({ origin: allowedUrls }));
+app.use(cors());
 app.use(express.json());
 app.set('json spaces', 2);
 
